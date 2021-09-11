@@ -10,6 +10,8 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class CategoriesCollectionViewController: UICollectionViewController {
+    
+    let categories = ["Chatacters", "Locations", "Episodes"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,18 +52,22 @@ class CategoriesCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 3
+        return categories.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
-        cell.layer.cornerRadius = CGFloat(15)
-        cell.imageView.image = UIImage(named: String(indexPath.item))
-        
+        configureCell(cell, forCategoryAt: indexPath)
     
         // Configure the cell
     
         return cell
+    }
+    
+    func configureCell(_ cell: CategoryCollectionViewCell, forCategoryAt indexPath: IndexPath) {
+        cell.layer.cornerRadius = CGFloat(15)
+        cell.imageView.image = UIImage(named: String(indexPath.item))
+        cell.nameLabel.text = categories[indexPath.row]
     }
 
     // MARK: UICollectionViewDelegate

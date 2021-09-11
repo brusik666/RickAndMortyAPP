@@ -10,6 +10,7 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class CharactersCollectionViewController: UICollectionViewController {
+    var characters = [TheCharacter]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,8 +20,22 @@ class CharactersCollectionViewController: UICollectionViewController {
 
         // Register cell classes
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
-
+        ApiRequestsController.shared.fetchCharacters { (result) in
+            switch result {
+            case .success(let chatacters):
+                self.updateUI(with: chatacters)
+            case .failure(let error):
+                print(error)
+            }
+        }
         // Do any additional setup after loading the view.
+    }
+    
+    func updateUI(with characters: [TheCharacter]) {
+        DispatchQueue.main.async {
+            self.characters = characters
+            self.collectionView.reloadData()
+        }
     }
     
     private func generateLayout() -> UICollectionViewLayout {
@@ -54,18 +69,21 @@ class CharactersCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 20
+        return characters.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
+        self.confugireCell(cell, forCharacterAt: indexPath)
         // Configure the cell
-    
         return cell
     }
-
-    // MARK: UICollectionViewDelegate
+    
+    func confugireCell(_ cell: CharactersCollectionViewCell, forCharacterAt indexPath: IndexPath) {
+        let character = characters[indexPath.row]
+        cell.nameLabel.text = character.name
+    }
+   
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking

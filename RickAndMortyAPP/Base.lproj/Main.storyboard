@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Krz-uX-5bE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6hF-Xt-CzF">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -33,7 +33,7 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ndw-d4-Eiu">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="212"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Characters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hJ-9f-udg">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hJ-9f-udg">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="212"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                             <nil key="textColor"/>
@@ -106,7 +106,6 @@
         <!--Episodes Table View Controller-->
         <scene sceneID="Wg2-jf-fS1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nm4-gX-YOD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController id="bjM-le-YfS" customClass="EpisodesTableViewController" customModule="RickAndMortyAPP" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kp6-wV-u2C">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -129,8 +128,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="ZrC-em-LZO"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nm4-gX-YOD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1399" y="772"/>
+            <point key="canvasLocation" x="1399" y="731"/>
         </scene>
         <!--Characters Collection View Controller-->
         <scene sceneID="Zs5-1Z-qnc">
@@ -175,6 +175,10 @@
                                         <constraint firstAttribute="trailing" secondItem="xAU-W3-DpW" secondAttribute="trailing" id="wJB-jP-lGN"/>
                                     </constraints>
                                 </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="imageView" destination="6rh-86-DNX" id="5Of-sf-bsq"/>
+                                    <outlet property="nameLabel" destination="xAU-W3-DpW" id="WyH-GQ-eR5"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -186,7 +190,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iEm-zd-xvE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1400" y="-650"/>
+            <point key="canvasLocation" x="1399" y="-755"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ADG-ZK-RFo">
