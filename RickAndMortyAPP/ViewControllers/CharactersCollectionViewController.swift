@@ -94,7 +94,14 @@ class CharactersCollectionViewController: UICollectionViewController {
             }
         }
     }
-   
+
+    @IBSegueAction func showCharacter(_ coder: NSCoder, sender: Any?) -> DetailCharacterViewController? {
+        guard let cell = sender as? CharactersCollectionViewCell,
+              let indexPath = collectionView.indexPath(for: cell) else { return nil }
+        let character = characters[indexPath.row]
+        return DetailCharacterViewController(coder: coder, character: character)
+    }
+    
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking

@@ -23,6 +23,7 @@
 		EE9C6B0626EAD145001A27F6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C6B0526EAD145001A27F6 /* Location.swift */; };
 		EE9C6B0826EAD1E6001A27F6 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C6B0726EAD1E6001A27F6 /* Episode.swift */; };
 		EE9C6B0A26EAD439001A27F6 /* ResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C6B0926EAD439001A27F6 /* ResponseModels.swift */; };
+		EEA058FD26EE27BA00662F53 /* DetailCharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA058FC26EE27BA00662F53 /* DetailCharacterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		EE9C6B0526EAD145001A27F6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		EE9C6B0726EAD1E6001A27F6 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		EE9C6B0926EAD439001A27F6 /* ResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModels.swift; sourceTree = "<group>"; };
+		EEA058FC26EE27BA00662F53 /* DetailCharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCharacterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				EE92B6D526EA613000664CC2 /* CategoryCollectionViewCell.swift */,
 				EE92B6D726EA740D00664CC2 /* CharactersCollectionViewController.swift */,
 				EE92B6D926EA747500664CC2 /* CharactersCollectionViewCell.swift */,
+				EEA058FC26EE27BA00662F53 /* DetailCharacterViewController.swift */,
 				EE92B6DF26EA88B700664CC2 /* LocationsTableViewController.swift */,
 				EE92B6E126EA88C800664CC2 /* EpisodesTableViewController.swift */,
 			);
@@ -196,6 +199,7 @@
 				EE9C6B0A26EAD439001A27F6 /* ResponseModels.swift in Sources */,
 				EE9C6B0626EAD145001A27F6 /* Location.swift in Sources */,
 				EE92B6D426EA5DC800664CC2 /* CategoriesCollectionViewController.swift in Sources */,
+				EEA058FD26EE27BA00662F53 /* DetailCharacterViewController.swift in Sources */,
 				EE92B6BE26EA549400664CC2 /* SceneDelegate.swift in Sources */,
 				EE0E4EDC26EADA3900CDCC3F /* ApiRequestsController.swift in Sources */,
 				EE9C6B0826EAD1E6001A27F6 /* Episode.swift in Sources */,
