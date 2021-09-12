@@ -11,7 +11,7 @@ private let reuseIdentifier = "Cell"
 
 class CategoriesCollectionViewController: UICollectionViewController {
     
-    let categories = ["Chatacters", "Locations", "Episodes"]
+    let categories = ["Characters", "Locations", "Episodes"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +20,7 @@ class CategoriesCollectionViewController: UICollectionViewController {
 
         // Register cell classes
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
+        
 
         // Do any additional setup after loading the view.
     }
@@ -66,6 +67,7 @@ class CategoriesCollectionViewController: UICollectionViewController {
     
     func configureCell(_ cell: CategoryCollectionViewCell, forCategoryAt indexPath: IndexPath) {
         cell.layer.cornerRadius = CGFloat(15)
+        cell.layer.masksToBounds = true
         cell.imageView.image = UIImage(named: String(indexPath.item))
         cell.nameLabel.text = categories[indexPath.row]
     }

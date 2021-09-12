@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 class ApiRequestsController {
     static let shared = ApiRequestsController()
@@ -23,6 +24,25 @@ class ApiRequestsController {
         }
         task.resume()
     }
+    
+    enum ChatacterInfoError: Error, LocalizedError {
+        case imageDataMissing
+    }
+    
+    func fetchCharactersImage(withURL url: URL, completion: @escaping (Result<UIImage, Error>) -> Void) {
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data,
+               let image = UIImage(data: data) {
+                completion(.success(image))
+            } else if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.failure(ChatacterInfoError.imageDataMissing))
+            }
+        }
+        task.resume()
+    }
+    
     
     func fetchLocations(completion: @escaping (Result<[Location], Error>) -> Void) {
         let locationsURL = baseURL.appendingPathComponent("location")

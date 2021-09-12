@@ -20,6 +20,7 @@ class CharactersCollectionViewController: UICollectionViewController {
 
         // Register cell classes
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
+        navigationItem.backBarButtonItem?.tintColor = .green
         ApiRequestsController.shared.fetchCharacters { (result) in
             switch result {
             case .success(let chatacters):
@@ -43,7 +44,7 @@ class CharactersCollectionViewController: UICollectionViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(200))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(250))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
         group.interItemSpacing = .fixed(spacing)
         let section = NSCollectionLayoutSection(group: group)
@@ -80,8 +81,18 @@ class CharactersCollectionViewController: UICollectionViewController {
     }
     
     func confugireCell(_ cell: CharactersCollectionViewCell, forCharacterAt indexPath: IndexPath) {
-        let character = characters[indexPath.row]
+        let character = characters[indexPath.row]        
         cell.nameLabel.text = character.name
+        ApiRequestsController.shared.fetchCharactersImage(withURL: character.imageURL) { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let image):
+                    cell.imageView.image = image
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
    
 

@@ -4,12 +4,12 @@ struct TheCharacter: Codable {
     var id: Int
     var status: String
     var name: String
-    var imageURL: String
+    var imageURL: URL
     var species: String
     var gender: String
     var originLocation: [String: String]
     var lastKnownLocation: [String: String]
- //   var url: URL
+    var url: URL
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -20,6 +20,6 @@ struct TheCharacter: Codable {
         case gender
         case originLocation = "origin"
         case lastKnownLocation = "location"
-  //      case url
+        case url
     }
 }
