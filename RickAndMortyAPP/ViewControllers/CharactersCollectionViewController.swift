@@ -34,7 +34,7 @@ class CharactersCollectionViewController: UICollectionViewController {
     
     func updateUI(with characters: [TheCharacter]) {
         DispatchQueue.main.async {
-            self.characters = characters
+            self.characters += characters
             self.collectionView.reloadData()
         }
     }
@@ -83,14 +83,15 @@ class CharactersCollectionViewController: UICollectionViewController {
     func confugireCell(_ cell: CharactersCollectionViewCell, forCharacterAt indexPath: IndexPath) {
         let character = characters[indexPath.row]        
         cell.nameLabel.text = character.name
-        ApiRequestsController.shared.fetchCharactersImage(withURL: character.imageURL) { (result) in
+        ApiRequestsController.shared.fetchCharactersImage(withURL: character.imageURL) { (image) in
+            guard let image = image else { return }
             DispatchQueue.main.async {
-                switch result {
-                case .success(let image):
-                    cell.imageView.image = image
-                case .failure(let error):
-                    print(error)
+                if let currentIndexPath = self.collectionView.indexPath(for: cell),
+                   currentIndexPath != indexPath {
+                    return
                 }
+                cell.imageView.image = image
+                cell.setNeedsLayout()
             }
         }
     }
