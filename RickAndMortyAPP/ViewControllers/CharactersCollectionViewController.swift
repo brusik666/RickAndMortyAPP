@@ -6,7 +6,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     
     var characters = [TheCharacter]()
     let searchController = UISearchController()
-    lazy var filterdCharacters: [TheCharacter] = self.characters
+    lazy var filteredCharacters: [TheCharacter] = self.characters
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +29,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     func updateUI(with characters: [TheCharacter]) {
         DispatchQueue.main.async {
             self.characters += characters
+            self.filteredCharacters += characters
             self.collectionView.reloadData()
         }
 
@@ -52,7 +53,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
       //  print("numbersOfItemsInsSection")
-        return characters.count
+        return filteredCharacters.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -64,7 +65,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     }
     
     func confugireCell(_ cell: CharactersCollectionViewCell, forCharacterAt indexPath: IndexPath) {
-        let character = characters[indexPath.row]        
+        let character = filteredCharacters[indexPath.row]
         cell.nameLabel.text = character.name
         ApiRequestsController.shared.fetchCharactersImage(withURL: character.imageURL) { (image) in
             guard let image = image else { return }
@@ -81,13 +82,29 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     }
     
     func updateSearchResults(for searchController: UISearchController) {
+        if let searchingString = searchController.searchBar.text,
+           searchingString.isEmpty == false {
+            filteredCharacters = characters.filter { (character) -> Bool in
+                character.name.localizedCaseInsensitiveContains(searchingString)
+            }
+        } else {
+            filteredCharacters = characters
+        }
         
+        let charactersByInitialLetter = filteredCharacters.reduce([:]) { existing, element in
+            return existing.merging([element.name.first! : [element.name]]) { old, new in
+                return old + new
+            }
+        }
+        let initialLetters = charactersByInitialLetter.keys.sorted()
+        
+        collectionView.reloadData()
     }
 
     @IBSegueAction func showCharacter(_ coder: NSCoder, sender: Any?) -> DetailCharacterViewController? {
         guard let cell = sender as? CharactersCollectionViewCell,
               let indexPath = collectionView.indexPath(for: cell) else { return nil }
-        let character = characters[indexPath.row]
+        let character = filteredCharacters[indexPath.row]
         return DetailCharacterViewController(coder: coder, character: character)
     }
 }
