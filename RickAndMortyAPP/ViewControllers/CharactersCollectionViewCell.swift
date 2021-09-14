@@ -17,4 +17,9 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         self.layer.borderColor = UIColor.clear.cgColor
         self.layer.masksToBounds = true
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageView.image = .checkmark
+    }
 }

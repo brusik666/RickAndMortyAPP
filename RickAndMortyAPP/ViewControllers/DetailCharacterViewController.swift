@@ -34,14 +34,10 @@ class DetailCharacterViewController: UIViewController {
         genderDetailLabel.text = character.gender
         locationDetailLabel.text = character.originLocation["name"]
         lastLocationDetail.text = character.lastKnownLocation["name"]
-        ApiRequestsController.shared.fetchCharactersImage(withURL: character.imageURL) { (result) in
+        ApiRequestsController.shared.fetchCharactersImage(withURL: character.imageURL) { (image) in
+            guard let image = image else { return }
             DispatchQueue.main.async {
-                switch result {
-                case .success(let image):
-                    self.imageView.image = image
-                case .failure(let error):
-                    print(error)
-                }
+                self.imageView.image = image
             }
         }
     }

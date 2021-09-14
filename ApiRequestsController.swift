@@ -7,37 +7,36 @@ class ApiRequestsController {
     let baseURL = URL(string: "https://rickandmortyapi.com/api/")!
     
     func fetchCharacters(completion: @escaping (Result<[TheCharacter], Error>) -> Void) {
-        let charactersURL = baseURL.appendingPathComponent("character")
-        print(charactersURL)
-        let task = URLSession.shared.dataTask(with: charactersURL) { data, response, error in
-            if let data = data {
-                do {
-                    let jsonDecoder = JSONDecoder()
-                    let charactersResponse = try jsonDecoder.decode(CharactersResponse.self, from: data)
-                    completion(.success(charactersResponse.results))
-                } catch {
+        var charactersPageNumberQuery = 1
+        while charactersPageNumberQuery <= 34 { // 34 - because it's almost 34 pages in API
+            var urlComponents = URLComponents(url: baseURL.appendingPathComponent("character"), resolvingAgainstBaseURL: false)!
+            urlComponents.queryItems = ["page": String(charactersPageNumberQuery)].map {URLQueryItem(name: $0.key, value: $0.value)}
+            let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
+                if let data = data {
+                    do {
+                        let jsonDecoder = JSONDecoder()
+                        let charactersResponse = try jsonDecoder.decode(CharactersResponse.self, from: data)
+                        completion(.success(charactersResponse.results))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                } else if let error = error {
                     completion(.failure(error))
                 }
-            } else if let error = error {
-                completion(.failure(error))
             }
+            task.resume()
+            charactersPageNumberQuery += 1
         }
-        task.resume()
     }
-    
-    enum ChatacterInfoError: Error, LocalizedError {
-        case imageDataMissing
-    }
-    
-    func fetchCharactersImage(withURL url: URL, completion: @escaping (Result<UIImage, Error>) -> Void) {
+        
+
+    func fetchCharactersImage(withURL url: URL, completion: @escaping (UIImage?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data,
                let image = UIImage(data: data) {
-                completion(.success(image))
-            } else if let error = error {
-                completion(.failure(error))
+                completion(image)
             } else {
-                completion(.failure(ChatacterInfoError.imageDataMissing))
+                completion(nil)
             }
         }
         task.resume()
@@ -79,4 +78,5 @@ class ApiRequestsController {
         }
         task.resume()
     }
+    
 }
