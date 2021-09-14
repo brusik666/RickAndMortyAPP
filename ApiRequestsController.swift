@@ -7,9 +7,8 @@ class ApiRequestsController {
     let baseURL = URL(string: "https://rickandmortyapi.com/api/")!
     
     func fetchCharacters(completion: @escaping (Result<[TheCharacter], Error>) -> Void) {
- //       let charactersURL = baseURL.appendingPathComponent("character")
         var charactersPageNumberQuery = 1
-        while charactersPageNumberQuery <= 34 { // 34 - because
+        while charactersPageNumberQuery <= 34 { // 34 - because it's almost 34 pages in API
             var urlComponents = URLComponents(url: baseURL.appendingPathComponent("character"), resolvingAgainstBaseURL: false)!
             urlComponents.queryItems = ["page": String(charactersPageNumberQuery)].map {URLQueryItem(name: $0.key, value: $0.value)}
             let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
@@ -30,12 +29,6 @@ class ApiRequestsController {
         }
     }
         
-    
-    enum ChatacterInfoError: Error, LocalizedError {
-        case imageDataMissing
-    }
-    
-    
 
     func fetchCharactersImage(withURL url: URL, completion: @escaping (UIImage?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -85,4 +78,5 @@ class ApiRequestsController {
         }
         task.resume()
     }
+    
 }

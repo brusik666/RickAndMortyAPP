@@ -1,24 +1,19 @@
-//
-//  CharactersCollectionViewController.swift
-//  RickAndMortyAPP
-//
-//  Created by Brusik on 09.09.2021.
-//
-
 import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class CharactersCollectionViewController: UICollectionViewController {
+class CharactersCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
+    
     var characters = [TheCharacter]()
+    let searchController = UISearchController()
+    lazy var filterdCharacters: [TheCharacter] = self.characters
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
+        
+        navigationItem.searchController = searchController
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchResultsUpdater = self
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
         navigationItem.backBarButtonItem?.tintColor = .green
         ApiRequestsController.shared.fetchCharacters { (result) in
@@ -29,7 +24,6 @@ class CharactersCollectionViewController: UICollectionViewController {
                 print(error)
             }
         }
-        // Do any additional setup after loading the view.
     }
     
     func updateUI(with characters: [TheCharacter]) {
@@ -37,6 +31,7 @@ class CharactersCollectionViewController: UICollectionViewController {
             self.characters += characters
             self.collectionView.reloadData()
         }
+
     }
     
     private func generateLayout() -> UICollectionViewLayout {
@@ -50,32 +45,20 @@ class CharactersCollectionViewController: UICollectionViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
         let layout = UICollectionViewCompositionalLayout(section: section)
+       // print("generateLayout")
         return layout
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
-
-
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
+      //  print("numbersOfItemsInsSection")
         return characters.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
         self.confugireCell(cell, forCharacterAt: indexPath)
+     //   print("cellForRow")
         // Configure the cell
         return cell
     }
@@ -94,6 +77,11 @@ class CharactersCollectionViewController: UICollectionViewController {
                 cell.setNeedsLayout()
             }
         }
+    //    print("configureCell")
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
     }
 
     @IBSegueAction func showCharacter(_ coder: NSCoder, sender: Any?) -> DetailCharacterViewController? {
@@ -102,35 +90,4 @@ class CharactersCollectionViewController: UICollectionViewController {
         let character = characters[indexPath.row]
         return DetailCharacterViewController(coder: coder, character: character)
     }
-    
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }

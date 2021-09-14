@@ -73,34 +73,57 @@
             </objects>
             <point key="canvasLocation" x="522" y="-7"/>
         </scene>
-        <!--Locations Table View Controller-->
-        <scene sceneID="qyd-7N-6XL">
+        <!--Locations Collection View Controller-->
+        <scene sceneID="q8r-1I-nkk">
             <objects>
-                <tableViewController id="Nvi-fU-ARy" customClass="LocationsTableViewController" customModule="RickAndMortyAPP" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zIB-9h-60t">
+                <collectionViewController id="XT1-fj-ecR" customClass="LocationsCollectionViewController" customModule="RickAndMortyAPP" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="gyF-lY-nMf">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="p0S-i4-Ykc">
-                                <rect key="frame" x="0.0" y="24.333333969116211" width="428" height="43.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p0S-i4-Ykc" id="gf7-pp-cyF">
-                                    <rect key="frame" x="0.0" y="0.0" width="428" height="43.666667938232422"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IFd-r2-jN6">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="I4z-ao-dbG" customClass="LocationCollectionViewCell" customModule="RickAndMortyAPP" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="57.333333333333343" height="36.333333333333336"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Qpk-n2-llE">
+                                    <rect key="frame" x="0.0" y="0.0" width="57.333333333333343" height="36.333333333333336"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdS-yn-rRq">
+                                            <rect key="frame" x="8" y="7.9999999999999982" width="41.333333333333336" height="20.333333333333329"/>
+                                            <color key="backgroundColor" red="0.71372549019999998" green="0.97934550050000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="mdS-yn-rRq" firstAttribute="leading" secondItem="Qpk-n2-llE" secondAttribute="leading" constant="8" id="0Uh-xu-stg"/>
+                                        <constraint firstAttribute="bottom" secondItem="mdS-yn-rRq" secondAttribute="bottom" constant="8" id="5cO-F0-D9z"/>
+                                        <constraint firstItem="mdS-yn-rRq" firstAttribute="top" secondItem="Qpk-n2-llE" secondAttribute="top" constant="8" id="7ZD-tT-C5g"/>
+                                        <constraint firstAttribute="trailing" secondItem="mdS-yn-rRq" secondAttribute="trailing" constant="8" id="b10-Rp-73R"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="mdS-yn-rRq" id="ltD-W0-9JC"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
                         <connections>
-                            <outlet property="dataSource" destination="Nvi-fU-ARy" id="mcE-zl-ws2"/>
-                            <outlet property="delegate" destination="Nvi-fU-ARy" id="qYb-7y-Qwa"/>
+                            <outlet property="dataSource" destination="XT1-fj-ecR" id="Nqg-6i-y0E"/>
+                            <outlet property="delegate" destination="XT1-fj-ecR" id="47O-dy-BQ1"/>
                         </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="5Nz-4O-gKn"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GO8-sN-dg0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h86-dm-6Od" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1399" y="-7"/>
+            <point key="canvasLocation" x="1425.7009345794393" y="-1.2958963282937366"/>
         </scene>
         <!--Episodes Table View Controller-->
         <scene sceneID="Wg2-jf-fS1">
