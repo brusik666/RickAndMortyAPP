@@ -7,6 +7,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     var characters = [TheCharacter]()
     let searchController = UISearchController()
     lazy var filteredCharacters: [TheCharacter] = self.characters
+    var dataSource: UICollectionViewDiffableDataSource<Character, TheCharacter>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,7 +97,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
                 return old + new
             }
         }
-        let initialLetters = charactersByInitialLetter.keys.sorted()
+       // let initialLetters = charactersByInitialLetter.keys.sorted()
         
         collectionView.reloadData()
     }

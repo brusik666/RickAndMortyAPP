@@ -1,6 +1,6 @@
 import Foundation
 
-struct TheCharacter: Codable {
+struct TheCharacter: Codable, Hashable {
     var id: Int
     var status: String
     var name: String
@@ -18,7 +18,7 @@ struct TheCharacter: Codable {
         case imageURL = "image"
         case species
         case gender
-        case originLocation = "origin"
+        case originLocation = "or igin"
         case lastKnownLocation = "location"
         case url
     }

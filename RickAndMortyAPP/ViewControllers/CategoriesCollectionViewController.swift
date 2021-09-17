@@ -71,7 +71,17 @@ class CategoriesCollectionViewController: UICollectionViewController {
         cell.imageView.image = UIImage(named: String(indexPath.item))
         cell.nameLabel.text = categories[indexPath.row]
     }
-
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath {
+        case [0, 0]:
+            performSegue(withIdentifier: "characters", sender: nil)
+        case [0, 1]:
+            performSegue(withIdentifier: "locations", sender: nil)
+        default:
+            performSegue(withIdentifier: "episodes", sender: nil)
+        }
+    }
     // MARK: UICollectionViewDelegate
 
     /*
