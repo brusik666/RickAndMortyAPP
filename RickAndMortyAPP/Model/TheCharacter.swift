@@ -18,7 +18,7 @@ struct TheCharacter: Codable, Hashable {
         case imageURL = "image"
         case species
         case gender
-        case originLocation = "or igin"
+        case originLocation = "origin"
         case lastKnownLocation = "location"
         case url
     }

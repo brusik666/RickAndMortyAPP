@@ -7,11 +7,9 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     var characters = [TheCharacter]()
     let searchController = UISearchController()
     lazy var filteredCharacters: [TheCharacter] = self.characters
-    var dataSource: UICollectionViewDiffableDataSource<Character, TheCharacter>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.searchController = searchController
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self
@@ -41,29 +39,26 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(250))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(200))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
         group.interItemSpacing = .fixed(spacing)
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
         let layout = UICollectionViewCompositionalLayout(section: section)
-       // print("generateLayout")
         return layout
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      //  print("numbersOfItemsInsSection")
         return filteredCharacters.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
         self.confugireCell(cell, forCharacterAt: indexPath)
-     //   print("cellForRow")
-        // Configure the cell
         return cell
     }
+    
     
     func confugireCell(_ cell: CharactersCollectionViewCell, forCharacterAt indexPath: IndexPath) {
         let character = filteredCharacters[indexPath.row]
@@ -79,7 +74,6 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
                 cell.setNeedsLayout()
             }
         }
-    //    print("configureCell")
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -92,11 +86,6 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
             filteredCharacters = characters
         }
         
-        let charactersByInitialLetter = filteredCharacters.reduce([:]) { existing, element in
-            return existing.merging([element.name.first! : [element.name]]) { old, new in
-                return old + new
-            }
-        }
        // let initialLetters = charactersByInitialLetter.keys.sorted()
         
         collectionView.reloadData()

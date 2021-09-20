@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE08A24A26F606040058462E /* DetailLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE08A24926F606040058462E /* DetailLocationsViewController.swift */; };
 		EE0E4EDC26EADA3900CDCC3F /* ApiRequestsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E4EDB26EADA3900CDCC3F /* ApiRequestsController.swift */; };
+		EE41F55626F7FADC0001C31C /* EpisodesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41F55526F7FADC0001C31C /* EpisodesCollectionViewController.swift */; };
+		EE41F55826F7FC360001C31C /* EpisodesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41F55726F7FC360001C31C /* EpisodesCollectionViewCell.swift */; };
+		EE5DC3F026F8AA290051DD4F /* DetailEpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DC3EF26F8AA290051DD4F /* DetailEpisodeViewController.swift */; };
 		EE92B6BC26EA549400664CC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE92B6BB26EA549400664CC2 /* AppDelegate.swift */; };
 		EE92B6BE26EA549400664CC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE92B6BD26EA549400664CC2 /* SceneDelegate.swift */; };
 		EE92B6C326EA549400664CC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE92B6C126EA549400664CC2 /* Main.storyboard */; };
@@ -17,7 +21,6 @@
 		EE92B6D626EA613000664CC2 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE92B6D526EA613000664CC2 /* CategoryCollectionViewCell.swift */; };
 		EE92B6D826EA740D00664CC2 /* CharactersCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE92B6D726EA740D00664CC2 /* CharactersCollectionViewController.swift */; };
 		EE92B6DA26EA747500664CC2 /* CharactersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE92B6D926EA747500664CC2 /* CharactersCollectionViewCell.swift */; };
-		EE92B6E226EA88C800664CC2 /* EpisodesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE92B6E126EA88C800664CC2 /* EpisodesTableViewController.swift */; };
 		EE9C6B0426EAD0DC001A27F6 /* TheCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C6B0326EAD0DC001A27F6 /* TheCharacter.swift */; };
 		EE9C6B0626EAD145001A27F6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C6B0526EAD145001A27F6 /* Location.swift */; };
 		EE9C6B0826EAD1E6001A27F6 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C6B0726EAD1E6001A27F6 /* Episode.swift */; };
@@ -28,7 +31,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE08A24926F606040058462E /* DetailLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLocationsViewController.swift; sourceTree = "<group>"; };
 		EE0E4EDB26EADA3900CDCC3F /* ApiRequestsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequestsController.swift; sourceTree = "<group>"; };
+		EE41F55526F7FADC0001C31C /* EpisodesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesCollectionViewController.swift; sourceTree = "<group>"; };
+		EE41F55726F7FC360001C31C /* EpisodesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesCollectionViewCell.swift; sourceTree = "<group>"; };
+		EE5DC3EF26F8AA290051DD4F /* DetailEpisodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEpisodeViewController.swift; sourceTree = "<group>"; };
 		EE92B6B826EA549400664CC2 /* RickAndMortyAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE92B6BB26EA549400664CC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE92B6BD26EA549400664CC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,7 +47,6 @@
 		EE92B6D526EA613000664CC2 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		EE92B6D726EA740D00664CC2 /* CharactersCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionViewController.swift; sourceTree = "<group>"; };
 		EE92B6D926EA747500664CC2 /* CharactersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionViewCell.swift; sourceTree = "<group>"; };
-		EE92B6E126EA88C800664CC2 /* EpisodesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesTableViewController.swift; sourceTree = "<group>"; };
 		EE9C6B0326EAD0DC001A27F6 /* TheCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheCharacter.swift; sourceTree = "<group>"; };
 		EE9C6B0526EAD145001A27F6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		EE9C6B0726EAD1E6001A27F6 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
@@ -89,7 +95,12 @@
 				EE92B6D726EA740D00664CC2 /* CharactersCollectionViewController.swift */,
 				EE92B6D926EA747500664CC2 /* CharactersCollectionViewCell.swift */,
 				EEA058FC26EE27BA00662F53 /* DetailCharacterViewController.swift */,
-				EE92B6E126EA88C800664CC2 /* EpisodesTableViewController.swift */,
+				EEA8B7A326F10AE20008EB72 /* LocationCollectionViewCell.swift */,
+				EEA8B7A126F1023F0008EB72 /* LocationsCollectionViewController.swift */,
+				EE08A24926F606040058462E /* DetailLocationsViewController.swift */,
+				EE41F55526F7FADC0001C31C /* EpisodesCollectionViewController.swift */,
+				EE41F55726F7FC360001C31C /* EpisodesCollectionViewCell.swift */,
+				EE5DC3EF26F8AA290051DD4F /* DetailEpisodeViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -116,8 +127,6 @@
 			children = (
 				EE0E4ED826EAD77800CDCC3F /* App&SceneDelegate */,
 				EE92B6C126EA549400664CC2 /* Main.storyboard */,
-				EEA8B7A326F10AE20008EB72 /* LocationCollectionViewCell.swift */,
-				EEA8B7A126F1023F0008EB72 /* LocationsCollectionViewController.swift */,
 				EE0E4ED926EAD7AA00CDCC3F /* Model */,
 				EE0E4EDA26EAD7FE00CDCC3F /* ViewControllers */,
 				EE92B6C426EA549500664CC2 /* Assets.xcassets */,
@@ -201,15 +210,18 @@
 				EE92B6BC26EA549400664CC2 /* AppDelegate.swift in Sources */,
 				EEA8B7A426F10AE20008EB72 /* LocationCollectionViewCell.swift in Sources */,
 				EE9C6B0A26EAD439001A27F6 /* ResponseModels.swift in Sources */,
+				EE41F55826F7FC360001C31C /* EpisodesCollectionViewCell.swift in Sources */,
 				EE9C6B0626EAD145001A27F6 /* Location.swift in Sources */,
 				EE92B6D426EA5DC800664CC2 /* CategoriesCollectionViewController.swift in Sources */,
 				EEA058FD26EE27BA00662F53 /* DetailCharacterViewController.swift in Sources */,
 				EE92B6BE26EA549400664CC2 /* SceneDelegate.swift in Sources */,
+				EE5DC3F026F8AA290051DD4F /* DetailEpisodeViewController.swift in Sources */,
+				EE41F55626F7FADC0001C31C /* EpisodesCollectionViewController.swift in Sources */,
 				EE0E4EDC26EADA3900CDCC3F /* ApiRequestsController.swift in Sources */,
 				EE9C6B0826EAD1E6001A27F6 /* Episode.swift in Sources */,
 				EE9C6B0426EAD0DC001A27F6 /* TheCharacter.swift in Sources */,
 				EE92B6DA26EA747500664CC2 /* CharactersCollectionViewCell.swift in Sources */,
-				EE92B6E226EA88C800664CC2 /* EpisodesTableViewController.swift in Sources */,
+				EE08A24A26F606040058462E /* DetailLocationsViewController.swift in Sources */,
 				EE92B6D826EA740D00664CC2 /* CharactersCollectionViewController.swift in Sources */,
 				EEA8B7A226F1023F0008EB72 /* LocationsCollectionViewController.swift in Sources */,
 			);

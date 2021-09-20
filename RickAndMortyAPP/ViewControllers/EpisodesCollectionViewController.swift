@@ -1,16 +1,11 @@
-//
-//  LocationsCollectionViewController.swift
-//  RickAndMortyAPP
-//
-//  Created by Brusik on 14.09.2021.
-//
-
 import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class LocationsCollectionViewController: UICollectionViewController {
-    var locations = [Location]()
+class EpisodesCollectionViewController: UICollectionViewController {
+    
+    
+    var episodes = [Episode]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,32 +15,43 @@ class LocationsCollectionViewController: UICollectionViewController {
 
         // Register cell classes
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
-        ApiRequestsController.shared.fetchLocations { (result) in
+        ApiRequestsController.shared.fetchEpisodes { (result) in
             switch result {
-            case .success(let locations):
+            case .success(let episodes):
                 DispatchQueue.main.async {
-                    self.locations = locations
+                    self.episodes += episodes
                     self.collectionView.reloadData()
                 }
             case .failure(let error):
                 print(error)
             }
         }
-
         // Do any additional setup after loading the view.
     }
-
+    
     func generateLayout() -> UICollectionViewLayout {
         let spacing = CGFloat(10)
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute((100)))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
         let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
+ 
     }
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using [segue destinationViewController].
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+    // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -54,24 +60,23 @@ class LocationsCollectionViewController: UICollectionViewController {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return locations.count
+        // #warning Incomplete implementation, return the number of items
+        return episodes.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LocationCollectionViewCell
-        cell.nameLabel.text = locations[indexPath.row].name
-        cell.layer.cornerRadius = 15.0
-        cell.layer.borderWidth = 5.0
-        cell.layer.borderColor = UIColor.clear.cgColor
-        cell.layer.masksToBounds = true
-    
-        // Configure the cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! EpisodesCollectionViewCell
+        cell.update(with: episodes[indexPath.row])
     
         return cell
     }
-    
-    
 
+    @IBSegueAction func showEpisodeDetail(_ coder: NSCoder, sender: Any?) -> DetailEpisodeViewController? {
+        guard let cell = sender as? EpisodesCollectionViewCell,
+              let indexPath = collectionView.indexPath(for: cell) else { return nil }
+        let episode = episodes[indexPath.row]
+        return DetailEpisodeViewController(coder: coder, episode: episode)
+    }
     // MARK: UICollectionViewDelegate
 
     /*
