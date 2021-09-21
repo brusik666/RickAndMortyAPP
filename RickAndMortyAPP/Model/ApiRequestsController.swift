@@ -47,7 +47,9 @@ class ApiRequestsController {
         var locationsPageNumberQuery = 1
         let locationsURL = baseURL.appendingPathComponent("location")
         while locationsPageNumberQuery <= 8 {
-            let task = URLSession.shared.dataTask(with: locationsURL) { data, response, error in
+            var urlComponents = URLComponents(url: locationsURL, resolvingAgainstBaseURL: false)!
+            urlComponents.queryItems = ["page": String(locationsPageNumberQuery)].map {URLQueryItem(name: $0.key, value: $0.value)}
+            let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
                 if let data = data {
                     do {
                         let jsonDecoder = JSONDecoder()
@@ -70,7 +72,9 @@ class ApiRequestsController {
         var episodesPageNumberQuery = 1
         let episodesURL = baseURL.appendingPathComponent("episode")
         while episodesPageNumberQuery <= 3 {
-            let task = URLSession.shared.dataTask(with: episodesURL) { data, response, error in
+            var urlComponents = URLComponents(url: episodesURL, resolvingAgainstBaseURL: false)!
+            urlComponents.queryItems = ["page": String(episodesPageNumberQuery)].map {URLQueryItem(name: $0.key, value: $0.value)}
+            let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
                 if let data = data {
                     do {
                         let jsonDecoder = JSONDecoder()

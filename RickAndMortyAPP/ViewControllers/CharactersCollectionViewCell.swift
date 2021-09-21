@@ -20,6 +20,6 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.imageView.image = .checkmark
+        self.imageView.image = .add
     }
 }

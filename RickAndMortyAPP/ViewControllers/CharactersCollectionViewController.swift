@@ -85,9 +85,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
         } else {
             filteredCharacters = characters
         }
-        
-       // let initialLetters = charactersByInitialLetter.keys.sorted()
-        
+   
         collectionView.reloadData()
     }
 
