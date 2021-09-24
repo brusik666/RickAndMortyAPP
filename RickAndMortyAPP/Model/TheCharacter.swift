@@ -1,7 +1,7 @@
 import Foundation
 
-struct TheCharacter: Codable, Hashable {
-    var id: Int
+struct TheCharacter: Codable {
+    let uuid = UUID()
     var status: String
     var name: String
     var imageURL: URL
@@ -12,7 +12,6 @@ struct TheCharacter: Codable, Hashable {
     var url: URL
     
     enum CodingKeys: String, CodingKey {
-        case id
         case status
         case name
         case imageURL = "image"
@@ -22,4 +21,21 @@ struct TheCharacter: Codable, Hashable {
         case lastKnownLocation = "location"
         case url
     }
+}
+
+extension TheCharacter: Hashable {
+    
+    static func ==(lhs: TheCharacter, rhs: TheCharacter) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
+    
+    
+}
+
+enum Section: Hashable {
+    case main
 }

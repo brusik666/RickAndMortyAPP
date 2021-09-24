@@ -1,10 +1,3 @@
-//
-//  DetailLocationsViewController.swift
-//  RickAndMortyAPP
-//
-//  Created by Brusik on 18.09.2021.
-//
-
 import UIKit
 
 class DetailLocationViewController: UIViewController {

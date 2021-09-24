@@ -1,7 +1,7 @@
 import UIKit
 
 class FilterCharactersViewController: UIViewController {
-    let color = UIColor(cgColor: CGColor(red: 182, green: 226, blue: 14, alpha: 1))
+
     @IBOutlet weak var aliveButton: UIButton!
     @IBOutlet weak var deadButton: UIButton!
     @IBOutlet weak var unknownStatusButton: UIButton!
@@ -30,7 +30,5 @@ class FilterCharactersViewController: UIViewController {
     @IBAction func unknownGenderButtonTapped(_ sender: UIButton) {
     }
     @IBAction func applyFiltersButtonTapped(_ sender: UIButton) {
-        
     }
-    
 }

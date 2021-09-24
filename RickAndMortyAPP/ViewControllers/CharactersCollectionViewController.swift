@@ -7,18 +7,28 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     var characters = [TheCharacter]()
     let searchController = UISearchController()
     lazy var filteredCharacters: [TheCharacter] = self.characters
-
+    var charactersSnapshot: NSDiffableDataSourceSnapshot<Section, TheCharacter> {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, TheCharacter>()
+        snapshot.appendSections([Section.main])
+        snapshot.appendItems(filteredCharacters)
+        return snapshot
+    }
+    
+    var collectionViewDataSource: UICollectionViewDiffableDataSource<Section, TheCharacter>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.searchController = searchController
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self
+        searchController.automaticallyShowsSearchResultsController = true
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
         navigationItem.backBarButtonItem?.tintColor = .green
         ApiRequestsController.shared.fetchCharacters { (result) in
             switch result {
             case .success(let chatacters):
                 self.updateUI(with: chatacters)
+                self.collectionViewDataSource.apply(self.charactersSnapshot, animatingDifferences: true, completion: nil)
             case .failure(let error):
                 print(error)
             }
@@ -29,7 +39,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
         DispatchQueue.main.async {
             self.characters += characters
             self.filteredCharacters += characters
-            self.collectionView.reloadData()
+       //     self.collectionView.reloadData()
         }
 
     }
@@ -47,31 +57,22 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
+    
+    func configureCollectiobViewDataSource(_ collectionView: UICollectionView) {
+        collectionViewDataSource = UICollectionViewDiffableDataSource<Section, TheCharacter>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, character) -> UICollectionViewCell in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
+            self.confugireCell(cell, for: character)
+            return cell
+        })
 
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredCharacters.count
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
-        self.confugireCell(cell, forCharacterAt: indexPath)
-        return cell
     }
     
-    
-    func confugireCell(_ cell: CharactersCollectionViewCell, forCharacterAt indexPath: IndexPath) {
-        let character = filteredCharacters[indexPath.row]
+    func confugireCell(_ cell: CharactersCollectionViewCell, for character: TheCharacter) {
         cell.nameLabel.text = character.name
         ApiRequestsController.shared.fetchCharactersImage(withURL: character.imageURL) { (image) in
             guard let image = image else { return }
             DispatchQueue.main.async {
-                if let currentIndexPath = self.collectionView.indexPath(for: cell),
-                   currentIndexPath != indexPath {
-                    return
-                }
                 cell.imageView.image = image
-                cell.setNeedsLayout()
             }
         }
     }
@@ -85,8 +86,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
         } else {
             filteredCharacters = characters
         }
-   
-        collectionView.reloadData()
+        collectionViewDataSource.apply(charactersSnapshot, animatingDifferences: true)
     }
 
     @IBSegueAction func showCharacter(_ coder: NSCoder, sender: Any?) -> DetailCharacterViewController? {
