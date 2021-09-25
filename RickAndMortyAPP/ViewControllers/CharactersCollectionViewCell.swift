@@ -1,10 +1,3 @@
-//
-//  CharactersCollectionViewCell.swift
-//  RickAndMortyAPP
-//
-//  Created by Brusik on 09.09.2021.
-//
-
 import UIKit
 
 class CharactersCollectionViewCell: UICollectionViewCell {
@@ -12,6 +5,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     
     override func layoutSubviews() {
+
         self.layer.cornerRadius = 15.0
         self.layer.borderWidth = 5.0
         self.layer.borderColor = UIColor.clear.cgColor
@@ -20,6 +14,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.imageView.image = .checkmark
+        self.imageView.image = .add
     }
+    
 }

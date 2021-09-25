@@ -1,10 +1,3 @@
-//
-//  CategoryCollectionViewCell.swift
-//  RickAndMortyAPP
-//
-//  Created by Brusik on 09.09.2021.
-//
-
 import UIKit
 
 class CategoryCollectionViewCell: UICollectionViewCell {
