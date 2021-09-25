@@ -45,7 +45,20 @@ class CategoriesCollectionViewController: UICollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let charactersCollectionViewController = segue.destination as? CharactersCollectionViewController else { return }
+        ApiRequestsController.shared.fetchCharacters { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let characters):
+                    charactersCollectionViewController.characters += characters
+                    charactersCollectionViewController.filteredCharacters = charactersCollectionViewController.characters
+                    charactersCollectionViewController.collectionViewDataSource.apply(charactersCollectionViewController.charactersSnapshot, animatingDifferences: true)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
         charactersCollectionViewController.configureCollectiobViewDataSource(charactersCollectionViewController.collectionView)
+        print("congigure0")
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

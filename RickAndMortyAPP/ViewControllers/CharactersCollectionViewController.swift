@@ -6,7 +6,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     
     var characters = [TheCharacter]()
     let searchController = UISearchController()
-    lazy var filteredCharacters: [TheCharacter] = self.characters
+    lazy var filteredCharacters: [TheCharacter] = self.characters 
     var charactersSnapshot: NSDiffableDataSourceSnapshot<Section, TheCharacter> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, TheCharacter>()
         snapshot.appendSections([Section.main])
@@ -18,30 +18,17 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureSearchController()
+        collectionView.setCollectionViewLayout(generateLayout(), animated: true)
+    }
+    
+    func configureSearchController() {
         navigationItem.searchController = searchController
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self
         searchController.automaticallyShowsSearchResultsController = true
-        collectionView.setCollectionViewLayout(generateLayout(), animated: true)
         navigationItem.backBarButtonItem?.tintColor = .green
-        ApiRequestsController.shared.fetchCharacters { (result) in
-            switch result {
-            case .success(let chatacters):
-                self.updateUI(with: chatacters)
-                self.collectionViewDataSource.apply(self.charactersSnapshot, animatingDifferences: true, completion: nil)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    func updateUI(with characters: [TheCharacter]) {
-        DispatchQueue.main.async {
-            self.characters += characters
-            self.filteredCharacters += characters
-       //     self.collectionView.reloadData()
-        }
-
     }
     
     private func generateLayout() -> UICollectionViewLayout {
@@ -91,8 +78,11 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
 
     @IBSegueAction func showCharacter(_ coder: NSCoder, sender: Any?) -> DetailCharacterViewController? {
         guard let cell = sender as? CharactersCollectionViewCell,
-              let indexPath = collectionView.indexPath(for: cell) else { return nil }
-        let character = filteredCharacters[indexPath.row]
+              let indexPath = collectionView.indexPath(for: cell),
+              let character = collectionViewDataSource.itemIdentifier(for: indexPath) else { return nil }
         return DetailCharacterViewController(coder: coder, character: character)
     }
+    
+
+    
 }

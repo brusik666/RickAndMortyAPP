@@ -315,6 +315,9 @@
                                                 <state key="normal" title="Reset">
                                                     <color key="titleColor" systemColor="systemPinkColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="resetStatusButtonTapped:" destination="RqI-aS-aJo" eventType="touchUpInside" id="paE-8i-U78"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -369,6 +372,9 @@
                                                 <state key="normal" title="Reset">
                                                     <color key="titleColor" systemColor="systemPinkColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="resetGenderButtonTapped:" destination="RqI-aS-aJo" eventType="touchUpInside" id="fpf-6Z-0Zl"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -431,7 +437,7 @@
                                 </state>
                                 <connections>
                                     <action selector="applyFiltersButtonTapped:" destination="RqI-aS-aJo" eventType="touchUpInside" id="YHW-JV-yFo"/>
-                                    <segue destination="6hF-Xt-CzF" kind="show" identifier="filteredCharacters" id="Za1-0a-UGo"/>
+                                    <segue destination="6hF-Xt-CzF" kind="show" destinationCreationSelector="showCharacters:sender:" id="buR-uQ-9dM"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -822,7 +828,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Za1-0a-UGo"/>
+        <segue reference="buR-uQ-9dM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="circle.fill" catalog="system" width="128" height="121"/>

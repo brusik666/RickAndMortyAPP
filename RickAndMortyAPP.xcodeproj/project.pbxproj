@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EE063FD626F934D3005AA3BA /* customUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE063FD526F934D3005AA3BA /* customUIButton.swift */; };
 		EE08A24A26F606040058462E /* DetailLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE08A24926F606040058462E /* DetailLocationsViewController.swift */; };
 		EE0E4EDC26EADA3900CDCC3F /* ApiRequestsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E4EDB26EADA3900CDCC3F /* ApiRequestsController.swift */; };
 		EE41F55626F7FADC0001C31C /* EpisodesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41F55526F7FADC0001C31C /* EpisodesCollectionViewController.swift */; };
@@ -33,7 +32,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EE063FD526F934D3005AA3BA /* customUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customUIButton.swift; sourceTree = "<group>"; };
 		EE08A24926F606040058462E /* DetailLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLocationsViewController.swift; sourceTree = "<group>"; };
 		EE0E4EDB26EADA3900CDCC3F /* ApiRequestsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequestsController.swift; sourceTree = "<group>"; };
 		EE41F55526F7FADC0001C31C /* EpisodesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesCollectionViewController.swift; sourceTree = "<group>"; };
@@ -131,7 +129,6 @@
 			children = (
 				EE0E4ED826EAD77800CDCC3F /* App&SceneDelegate */,
 				EE92B6C126EA549400664CC2 /* Main.storyboard */,
-				EE063FD526F934D3005AA3BA /* customUIButton.swift */,
 				EE46817626F90DBB00B6DB6C /* FilterCharactersViewController.swift */,
 				EE0E4ED926EAD7AA00CDCC3F /* Model */,
 				EE0E4EDA26EAD7FE00CDCC3F /* ViewControllers */,
@@ -212,7 +209,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE063FD626F934D3005AA3BA /* customUIButton.swift in Sources */,
 				EE92B6D626EA613000664CC2 /* CategoryCollectionViewCell.swift in Sources */,
 				EE92B6BC26EA549400664CC2 /* AppDelegate.swift in Sources */,
 				EEA8B7A426F10AE20008EB72 /* LocationCollectionViewCell.swift in Sources */,
