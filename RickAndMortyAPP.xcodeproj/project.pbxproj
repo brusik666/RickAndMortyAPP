@@ -98,6 +98,7 @@
 				EE92B6D726EA740D00664CC2 /* CharactersCollectionViewController.swift */,
 				EE92B6D926EA747500664CC2 /* CharactersCollectionViewCell.swift */,
 				EEA058FC26EE27BA00662F53 /* DetailCharacterViewController.swift */,
+				EE46817626F90DBB00B6DB6C /* FilterCharactersViewController.swift */,
 				EEA8B7A326F10AE20008EB72 /* LocationCollectionViewCell.swift */,
 				EEA8B7A126F1023F0008EB72 /* LocationsCollectionViewController.swift */,
 				EE08A24926F606040058462E /* DetailLocationsViewController.swift */,
@@ -129,7 +130,6 @@
 			children = (
 				EE0E4ED826EAD77800CDCC3F /* App&SceneDelegate */,
 				EE92B6C126EA549400664CC2 /* Main.storyboard */,
-				EE46817626F90DBB00B6DB6C /* FilterCharactersViewController.swift */,
 				EE0E4ED926EAD7AA00CDCC3F /* Model */,
 				EE0E4EDA26EAD7FE00CDCC3F /* ViewControllers */,
 				EE92B6C426EA549500664CC2 /* Assets.xcassets */,

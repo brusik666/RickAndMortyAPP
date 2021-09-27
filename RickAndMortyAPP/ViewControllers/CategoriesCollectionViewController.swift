@@ -58,7 +58,6 @@ class CategoriesCollectionViewController: UICollectionViewController {
             }
         }
         charactersCollectionViewController.configureCollectiobViewDataSource(charactersCollectionViewController.collectionView)
-        print("congigure0")
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

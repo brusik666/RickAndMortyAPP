@@ -36,7 +36,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(200))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.25))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
         group.interItemSpacing = .fixed(spacing)
         let section = NSCollectionLayoutSection(group: group)
@@ -83,6 +83,9 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
         return DetailCharacterViewController(coder: coder, character: character)
     }
     
+    @IBAction func unwindToCharactersCollectionViewController(unwindSegue : UIStoryboardSegue) {
+        
+    }
 
     
 }

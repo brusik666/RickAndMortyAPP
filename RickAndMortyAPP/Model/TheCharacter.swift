@@ -33,7 +33,6 @@ extension TheCharacter: Hashable {
         hasher.combine(uuid)
     }
     
-    
 }
 
 enum Section: Hashable {
