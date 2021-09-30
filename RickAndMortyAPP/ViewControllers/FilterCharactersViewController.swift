@@ -15,7 +15,6 @@ class FilterCharactersViewController: UIViewController {
     var gender: String = ""
     let color = UIColor(red: 0.714, green: 0.886, blue: 0.055, alpha: 1.0)
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         applyButton.layer.cornerRadius = 5.0
@@ -33,11 +32,12 @@ class FilterCharactersViewController: UIViewController {
     
     @IBAction func aliveButtonTapped(_ sender: UIButton) {
         status = "alive"
-        deadButton.isSelected = false
         aliveButton.isSelected = true
+        deadButton.isSelected = false
         unknownStatusButton.isSelected = false
         configureButtonAnimation(sender: sender)
     }
+    
     @IBAction func deadButtonTapped(_ sender: UIButton) {
         status = "dead"
         aliveButton.isSelected = false
@@ -45,6 +45,7 @@ class FilterCharactersViewController: UIViewController {
         unknownStatusButton.isSelected = false
         configureButtonAnimation(sender: sender)
     }
+    
     @IBAction func unknownStatusButtonTapped(_ sender: UIButton) {
         status = "unknown"
         aliveButton.isSelected = false
@@ -52,6 +53,7 @@ class FilterCharactersViewController: UIViewController {
         unknownStatusButton.isSelected = true
         configureButtonAnimation(sender: sender)
     }
+    
     @IBAction func femaleButtonTapped(_ sender: UIButton) {
         gender = "female"
         femaleButton.isSelected = true
@@ -60,6 +62,7 @@ class FilterCharactersViewController: UIViewController {
         unknownGenderButton.isSelected = false
         configureButtonAnimation(sender: sender)
     }
+    
     @IBAction func maleButtonTapped(_ sender: UIButton) {
         gender = "male"
         femaleButton.isSelected = false
@@ -68,6 +71,7 @@ class FilterCharactersViewController: UIViewController {
         unknownGenderButton.isSelected = false
         configureButtonAnimation(sender: sender)
     }
+    
     @IBAction func genderlessButtonTapped(_ sender: UIButton) {
         gender = "genderless"
         femaleButton.isSelected = false
@@ -75,8 +79,8 @@ class FilterCharactersViewController: UIViewController {
         genderlessButton.isSelected = true
         unknownGenderButton.isSelected = false
         configureButtonAnimation(sender: sender)
-        
     }
+    
     @IBAction func unknownGenderButtonTapped(_ sender: UIButton) {
         gender = "unknown"
         femaleButton.isSelected = false
@@ -85,16 +89,24 @@ class FilterCharactersViewController: UIViewController {
         unknownGenderButton.isSelected = true
         configureButtonAnimation(sender: sender)
     }
+    
     @IBAction func applyFiltersButtonTapped(_ sender: UIButton) {
 
     }
    
     @IBAction func resetStatusButtonTapped(_ sender: UIButton) {
         status = ""
+        aliveButton.isSelected = false
+        deadButton.isSelected = false
+        unknownStatusButton.isSelected = false
         configureButtonAnimation(sender: sender)
     }
     @IBAction func resetGenderButtonTapped(_ sender: UIButton) {
         gender = ""
+        maleButton.isSelected = false
+        femaleButton.isSelected = false
+        genderlessButton.isSelected = false
+        unknownGenderButton.isSelected = false
         configureButtonAnimation(sender: sender)
     }
     

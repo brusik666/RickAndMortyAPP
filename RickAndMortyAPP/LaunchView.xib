@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="GJJ-QU-jW6">
+                    <rect key="frame" x="86" y="143" width="240" height="245"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="245" id="Zaq-V5-KEM"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RM" translatesAutoresizingMaskIntoConstraints="NO" id="fCB-6M-Gne">
+                    <rect key="frame" x="20" y="527" width="374" height="245"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="245" id="cV4-G1-OLX"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fCB-6M-Gne" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="EAJ-eT-sXy"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fCB-6M-Gne" secondAttribute="trailing" constant="20" id="FDZ-sx-IFC"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="GJJ-QU-jW6" secondAttribute="trailing" constant="88" id="GIn-yw-WCi"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="fCB-6M-Gne" secondAttribute="bottom" constant="90" id="K5M-fa-1WA"/>
+                <constraint firstItem="GJJ-QU-jW6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="86" id="aNr-FU-dFO"/>
+                <constraint firstItem="GJJ-QU-jW6" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="99" id="iQK-zH-PoU"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="86.383928571428569"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="RM" width="1280" height="544"/>
+        <image name="splash" width="605" height="800"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
