@@ -10,6 +10,8 @@ class FilterCharactersViewController: UIViewController {
     @IBOutlet weak var genderlessButton: UIButton!
     @IBOutlet weak var unknownGenderButton: UIButton!
     @IBOutlet weak var applyButton: UIButton!
+    @IBOutlet weak var resetStatusButton: UIButton!
+    @IBOutlet weak var resetGenderButton: UIButton!
     
     var status: String = ""
     var gender: String = ""

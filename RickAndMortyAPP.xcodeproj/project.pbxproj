@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EE08A24A26F606040058462E /* DetailLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE08A24926F606040058462E /* DetailLocationsViewController.swift */; };
 		EE0E4EDC26EADA3900CDCC3F /* ApiRequestsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E4EDB26EADA3900CDCC3F /* ApiRequestsController.swift */; };
+		EE210D7D2707C7E1004CDC6F /* ModelApiRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE210D7C2707C7E1004CDC6F /* ModelApiRequests.swift */; };
 		EE3D2B1F270528FC008F960D /* LaunchScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D2B1E270528FC008F960D /* LaunchScreenManager.swift */; };
 		EE41F55626F7FADC0001C31C /* EpisodesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41F55526F7FADC0001C31C /* EpisodesCollectionViewController.swift */; };
 		EE41F55826F7FC360001C31C /* EpisodesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41F55726F7FC360001C31C /* EpisodesCollectionViewCell.swift */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		EE08A24926F606040058462E /* DetailLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLocationsViewController.swift; sourceTree = "<group>"; };
 		EE0E4EDB26EADA3900CDCC3F /* ApiRequestsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequestsController.swift; sourceTree = "<group>"; };
+		EE210D7C2707C7E1004CDC6F /* ModelApiRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelApiRequests.swift; sourceTree = "<group>"; };
 		EE3D2B1E270528FC008F960D /* LaunchScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenManager.swift; sourceTree = "<group>"; };
 		EE41F55526F7FADC0001C31C /* EpisodesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesCollectionViewController.swift; sourceTree = "<group>"; };
 		EE41F55726F7FC360001C31C /* EpisodesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				EE9C6B0526EAD145001A27F6 /* Location.swift */,
 				EE9C6B0726EAD1E6001A27F6 /* Episode.swift */,
 				EE9C6B0926EAD439001A27F6 /* ResponseModels.swift */,
+				EE210D7C2707C7E1004CDC6F /* ModelApiRequests.swift */,
 				EE0E4EDB26EADA3900CDCC3F /* ApiRequestsController.swift */,
 			);
 			path = Model;
@@ -221,6 +224,7 @@
 				EE9C6B0626EAD145001A27F6 /* Location.swift in Sources */,
 				EE92B6D426EA5DC800664CC2 /* CategoriesCollectionViewController.swift in Sources */,
 				EEA058FD26EE27BA00662F53 /* DetailCharacterViewController.swift in Sources */,
+				EE210D7D2707C7E1004CDC6F /* ModelApiRequests.swift in Sources */,
 				EE92B6BE26EA549400664CC2 /* SceneDelegate.swift in Sources */,
 				EE5DC3F026F8AA290051DD4F /* DetailEpisodeViewController.swift in Sources */,
 				EE41F55626F7FADC0001C31C /* EpisodesCollectionViewController.swift in Sources */,

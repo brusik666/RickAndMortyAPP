@@ -6,6 +6,41 @@ class ApiRequestsController {
     
     let baseURL = URL(string: "https://rickandmortyapi.com/api/")!
     
+    static let charactersStringURL = "https://rickandmortyapi.com/api/character"
+    
+ /*   func sendRequest<Request: APIRequest>(_ request: Request, completion: @escaping (Result<Request.Response, Error>) -> Void) {
+        let task = URLSession.shared.dataTask(with: request.urlRequest) { (data, response, error) in
+            if let data = data {
+                do {
+                    let decodedResponse = try request.decodeResponse(data: data)
+                    completion(.success(decodedResponse))
+                } catch {
+                    completion(.failure(error))
+                }
+            } else if let error = error {
+                completion(.failure(error))
+            }
+        }
+        task.resume()
+    }
+   */
+    func fetchSingleCharacter(url: URL, completion: @escaping (Result<TheCharacter, Error>) -> Void) {
+        let task = URLSession.shared.dataTask(with: url) { data, reponse, error in
+            if let data = data {
+                do {
+                    let jsonDecoder = JSONDecoder()
+                    let character = try jsonDecoder.decode(TheCharacter.self, from: data)
+                    completion(.success(character))
+                } catch {
+                    completion(.failure(error))
+                }
+            } else if let error = error {
+                completion(.failure(error))
+            }
+        }
+        task.resume()
+    }
+    
     func fetchCharacters(completion: @escaping (Result<[TheCharacter], Error>) -> Void) {
         var charactersPageNumberQuery = 1
         while charactersPageNumberQuery <= 34 { // 34 - because it's almost 34 pages in API
