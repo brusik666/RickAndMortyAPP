@@ -5,3 +5,4 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
 }
+

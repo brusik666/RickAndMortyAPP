@@ -27,7 +27,6 @@ class FilterCharactersViewController: UIViewController {
         maleButton.setTitleColor(color, for: .selected)
         genderlessButton.setTitleColor(color, for: .selected)
         unknownGenderButton.setTitleColor(color, for: .selected)
-        
     }
     
     

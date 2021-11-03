@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		EE08A24A26F606040058462E /* DetailLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE08A24926F606040058462E /* DetailLocationsViewController.swift */; };
 		EE0E4EDC26EADA3900CDCC3F /* ApiRequestsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E4EDB26EADA3900CDCC3F /* ApiRequestsController.swift */; };
-		EE210D7D2707C7E1004CDC6F /* ModelApiRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE210D7C2707C7E1004CDC6F /* ModelApiRequests.swift */; };
+		EE26493C2725820E00763EC0 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26493B2725820E00763EC0 /* HeaderView.swift */; };
 		EE3D2B1F270528FC008F960D /* LaunchScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D2B1E270528FC008F960D /* LaunchScreenManager.swift */; };
 		EE41F55626F7FADC0001C31C /* EpisodesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41F55526F7FADC0001C31C /* EpisodesCollectionViewController.swift */; };
 		EE41F55826F7FC360001C31C /* EpisodesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41F55726F7FC360001C31C /* EpisodesCollectionViewCell.swift */; };
@@ -24,6 +24,7 @@
 		EE92B6D626EA613000664CC2 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE92B6D526EA613000664CC2 /* CategoryCollectionViewCell.swift */; };
 		EE92B6D826EA740D00664CC2 /* CharactersCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE92B6D726EA740D00664CC2 /* CharactersCollectionViewController.swift */; };
 		EE92B6DA26EA747500664CC2 /* CharactersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE92B6D926EA747500664CC2 /* CharactersCollectionViewCell.swift */; };
+		EE9B6A8D2713A3C4007A3843 /* ConfiguringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9B6A8C2713A3C4007A3843 /* ConfiguringCell.swift */; };
 		EE9C6B0426EAD0DC001A27F6 /* TheCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C6B0326EAD0DC001A27F6 /* TheCharacter.swift */; };
 		EE9C6B0626EAD145001A27F6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C6B0526EAD145001A27F6 /* Location.swift */; };
 		EE9C6B0826EAD1E6001A27F6 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C6B0726EAD1E6001A27F6 /* Episode.swift */; };
@@ -36,7 +37,7 @@
 /* Begin PBXFileReference section */
 		EE08A24926F606040058462E /* DetailLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLocationsViewController.swift; sourceTree = "<group>"; };
 		EE0E4EDB26EADA3900CDCC3F /* ApiRequestsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequestsController.swift; sourceTree = "<group>"; };
-		EE210D7C2707C7E1004CDC6F /* ModelApiRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelApiRequests.swift; sourceTree = "<group>"; };
+		EE26493B2725820E00763EC0 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EE3D2B1E270528FC008F960D /* LaunchScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenManager.swift; sourceTree = "<group>"; };
 		EE41F55526F7FADC0001C31C /* EpisodesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesCollectionViewController.swift; sourceTree = "<group>"; };
 		EE41F55726F7FC360001C31C /* EpisodesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -53,6 +54,7 @@
 		EE92B6D526EA613000664CC2 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		EE92B6D726EA740D00664CC2 /* CharactersCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionViewController.swift; sourceTree = "<group>"; };
 		EE92B6D926EA747500664CC2 /* CharactersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionViewCell.swift; sourceTree = "<group>"; };
+		EE9B6A8C2713A3C4007A3843 /* ConfiguringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguringCell.swift; sourceTree = "<group>"; };
 		EE9C6B0326EAD0DC001A27F6 /* TheCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheCharacter.swift; sourceTree = "<group>"; };
 		EE9C6B0526EAD145001A27F6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		EE9C6B0726EAD1E6001A27F6 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
@@ -89,7 +91,6 @@
 				EE9C6B0526EAD145001A27F6 /* Location.swift */,
 				EE9C6B0726EAD1E6001A27F6 /* Episode.swift */,
 				EE9C6B0926EAD439001A27F6 /* ResponseModels.swift */,
-				EE210D7C2707C7E1004CDC6F /* ModelApiRequests.swift */,
 				EE0E4EDB26EADA3900CDCC3F /* ApiRequestsController.swift */,
 			);
 			path = Model;
@@ -105,6 +106,7 @@
 				EEA058FC26EE27BA00662F53 /* DetailCharacterViewController.swift */,
 				EE46817626F90DBB00B6DB6C /* FilterCharactersViewController.swift */,
 				EEA8B7A326F10AE20008EB72 /* LocationCollectionViewCell.swift */,
+				EE9B6A8C2713A3C4007A3843 /* ConfiguringCell.swift */,
 				EEA8B7A126F1023F0008EB72 /* LocationsCollectionViewController.swift */,
 				EE08A24926F606040058462E /* DetailLocationsViewController.swift */,
 				EE41F55526F7FADC0001C31C /* EpisodesCollectionViewController.swift */,
@@ -141,6 +143,7 @@
 				EE0E4EDA26EAD7FE00CDCC3F /* ViewControllers */,
 				EE92B6C426EA549500664CC2 /* Assets.xcassets */,
 				EE92B6C926EA549500664CC2 /* Info.plist */,
+				EE26493B2725820E00763EC0 /* HeaderView.swift */,
 			);
 			path = RickAndMortyAPP;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE92B6D626EA613000664CC2 /* CategoryCollectionViewCell.swift in Sources */,
+				EE9B6A8D2713A3C4007A3843 /* ConfiguringCell.swift in Sources */,
 				EE92B6BC26EA549400664CC2 /* AppDelegate.swift in Sources */,
 				EEA8B7A426F10AE20008EB72 /* LocationCollectionViewCell.swift in Sources */,
 				EE46817726F90DBB00B6DB6C /* FilterCharactersViewController.swift in Sources */,
@@ -224,7 +228,6 @@
 				EE9C6B0626EAD145001A27F6 /* Location.swift in Sources */,
 				EE92B6D426EA5DC800664CC2 /* CategoriesCollectionViewController.swift in Sources */,
 				EEA058FD26EE27BA00662F53 /* DetailCharacterViewController.swift in Sources */,
-				EE210D7D2707C7E1004CDC6F /* ModelApiRequests.swift in Sources */,
 				EE92B6BE26EA549400664CC2 /* SceneDelegate.swift in Sources */,
 				EE5DC3F026F8AA290051DD4F /* DetailEpisodeViewController.swift in Sources */,
 				EE41F55626F7FADC0001C31C /* EpisodesCollectionViewController.swift in Sources */,
@@ -235,6 +238,7 @@
 				EE08A24A26F606040058462E /* DetailLocationsViewController.swift in Sources */,
 				EE92B6D826EA740D00664CC2 /* CharactersCollectionViewController.swift in Sources */,
 				EE3D2B1F270528FC008F960D /* LaunchScreenManager.swift in Sources */,
+				EE26493C2725820E00763EC0 /* HeaderView.swift in Sources */,
 				EEA8B7A226F1023F0008EB72 /* LocationsCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,6 +381,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83DGL53YN8;
 				INFOPLIST_FILE = RickAndMortyAPP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -396,6 +401,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83DGL53YN8;
 				INFOPLIST_FILE = RickAndMortyAPP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

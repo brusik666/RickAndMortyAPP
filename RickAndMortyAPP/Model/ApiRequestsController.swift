@@ -3,27 +3,10 @@ import UIKit
 
 class ApiRequestsController {
     static let shared = ApiRequestsController()
-    
+    static let charactersStringURL = "https://rickandmortyapi.com/api/character"
+
     let baseURL = URL(string: "https://rickandmortyapi.com/api/")!
     
-    static let charactersStringURL = "https://rickandmortyapi.com/api/character"
-    
- /*   func sendRequest<Request: APIRequest>(_ request: Request, completion: @escaping (Result<Request.Response, Error>) -> Void) {
-        let task = URLSession.shared.dataTask(with: request.urlRequest) { (data, response, error) in
-            if let data = data {
-                do {
-                    let decodedResponse = try request.decodeResponse(data: data)
-                    completion(.success(decodedResponse))
-                } catch {
-                    completion(.failure(error))
-                }
-            } else if let error = error {
-                completion(.failure(error))
-            }
-        }
-        task.resume()
-    }
-   */
     func fetchSingleCharacter(url: URL, completion: @escaping (Result<TheCharacter, Error>) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, reponse, error in
             if let data = data {
@@ -42,29 +25,28 @@ class ApiRequestsController {
     }
     
     func fetchCharacters(completion: @escaping (Result<[TheCharacter], Error>) -> Void) {
-        var charactersPageNumberQuery = 1
-        while charactersPageNumberQuery <= 34 { // 34 - because it's almost 34 pages in API
-            var urlComponents = URLComponents(url: baseURL.appendingPathComponent("character"), resolvingAgainstBaseURL: false)!
-            urlComponents.queryItems = ["page": String(charactersPageNumberQuery)].map { URLQueryItem(name: $0.key, value: $0.value)}
-            let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
-                if let data = data {
-                    do {
-                        let jsonDecoder = JSONDecoder()
-                        let charactersResponse = try jsonDecoder.decode(CharactersResponse.self, from: data)
-                        completion(.success(charactersResponse.results))
-                    } catch {
-                        completion(.failure(error))
-                    }
-                } else if let error = error {
-                    completion(.failure(error))
-                }
-            }
-            task.resume()
-            charactersPageNumberQuery += 1
-        }
-    }
+           var charactersPageNumberQuery = 1
+           while charactersPageNumberQuery <= 34 { // 34 - because it's almost 34 pages in API
+               var urlComponents = URLComponents(url: baseURL.appendingPathComponent("character"), resolvingAgainstBaseURL: false)!
+               urlComponents.queryItems = ["page": String(charactersPageNumberQuery)].map { URLQueryItem(name: $0.key, value: $0.value)}
+               let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
+                   if let data = data {
+                       do {
+                           let jsonDecoder = JSONDecoder()
+                           let charactersResponse = try jsonDecoder.decode(CharactersResponse.self, from: data)
+                           completion(.success(charactersResponse.results))
+                       } catch {
+                           completion(.failure(error))
+                       }
+                   } else if let error = error {
+                       completion(.failure(error))
+                   }
+               }
+               task.resume()
+               charactersPageNumberQuery += 1
+           }
+       }
         
-
     func fetchCharactersImage(withURL url: URL, completion: @escaping (UIImage?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data,
@@ -76,7 +58,6 @@ class ApiRequestsController {
         }
         task.resume()
     }
-    
     
     func fetchLocations(completion: @escaping (Result<[Location], Error>) -> Void) {
         var locationsPageNumberQuery = 1

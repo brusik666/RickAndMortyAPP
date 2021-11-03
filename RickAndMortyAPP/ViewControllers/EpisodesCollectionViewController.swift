@@ -4,24 +4,29 @@ private let reuseIdentifier = "Cell"
 
 class EpisodesCollectionViewController: UICollectionViewController {
     
+    var episodes: [Episode] = []
     
-    var episodes = [Episode]()
+    enum EpisodesSections: CaseIterable {
+        case s1, s2, s3, s4
+        
+        var title: String {
+            switch self {
+            case .s1: return "Season 1"
+            case .s2: return "Season 2"
+            case .s3: return "Season 3"
+            case .s4: return "Season 4"
+            }
+        }
+    }
+    
+    let sections: [EpisodesSections] = EpisodesSections.allCases
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
-        ApiRequestsController.shared.fetchEpisodes { (result) in
-            switch result {
-            case .success(let episodes):
-                DispatchQueue.main.async {
-                    self.episodes += episodes
-                    self.collectionView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
+        collectionView.register(CollectionViewSectionHeader.self, forSupplementaryViewOfKind: "Header", withReuseIdentifier: CollectionViewSectionHeader.reuseIdentifier)
+
     }
     
     func generateLayout() -> UICollectionViewLayout {
@@ -29,23 +34,40 @@ class EpisodesCollectionViewController: UICollectionViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.25))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
         let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(66))
+        let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: "Header", alignment: .top)
+        
+        section.boundarySupplementaryItems = [headerItem]
+        
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
  
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return sections.count
     }
-
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let section = sections[indexPath.section]
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: "Header", withReuseIdentifier: CollectionViewSectionHeader.reuseIdentifier, for: indexPath) as! CollectionViewSectionHeader
+        headerView.setTitle(title: section.title)
+        headerView.setupView()
+        
+        return headerView
+    }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
+        let episodes = episodes.filter { $0.episode.contains("S0\(section + 1)") }
         return episodes.count
     }
+    
+    
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! EpisodesCollectionViewCell

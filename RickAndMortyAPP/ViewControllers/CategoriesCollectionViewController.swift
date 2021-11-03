@@ -44,20 +44,48 @@ class CategoriesCollectionViewController: UICollectionViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let charactersCollectionViewController = segue.destination as? CharactersCollectionViewController else { return }
-        ApiRequestsController.shared.fetchCharacters { (result) in
-            DispatchQueue.main.async {
+        switch segue.destination {
+        case is CharactersCollectionViewController:
+            let charactersCollectionViewController = segue.destination as! CharactersCollectionViewController
+            ApiRequestsController.shared.fetchCharacters { (result) in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let characters):
+                        charactersCollectionViewController.characters += characters
+                        charactersCollectionViewController.filteredCharacters = charactersCollectionViewController.characters
+                        charactersCollectionViewController.collectionViewDataSource.apply(charactersCollectionViewController.charactersSnapshot, animatingDifferences: true)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            }
+            charactersCollectionViewController.configureCollectiobViewDataSource(charactersCollectionViewController.collectionView)
+        case is EpisodesCollectionViewController:
+            let episodesCollectionViewController = segue.destination as! EpisodesCollectionViewController
+            ApiRequestsController.shared.fetchEpisodes { (result) in
                 switch result {
-                case .success(let characters):
-                    charactersCollectionViewController.characters += characters
-                    charactersCollectionViewController.filteredCharacters = charactersCollectionViewController.characters
-                    charactersCollectionViewController.collectionViewDataSource.apply(charactersCollectionViewController.charactersSnapshot, animatingDifferences: true)
+                case .success(let episodes):
+                    DispatchQueue.main.async {
+                        episodesCollectionViewController.episodes += episodes
+                        episodesCollectionViewController.collectionView.reloadData()
+                    }
                 case .failure(let error):
                     print(error)
                 }
             }
+        case is LocationsCollectionViewController:
+            guard let locationsCollectionViewController = segue.destination as? LocationsCollectionViewController else { return }
+            ApiRequestsController.shared.fetchLocations { (result) in
+                switch result {
+                case .success(let locations):
+                    locationsCollectionViewController.locations += locations
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        default:
+            print("0")
         }
-        charactersCollectionViewController.configureCollectiobViewDataSource(charactersCollectionViewController.collectionView)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

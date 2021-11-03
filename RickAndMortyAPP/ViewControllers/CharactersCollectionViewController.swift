@@ -3,7 +3,7 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class CharactersCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
-    
+    // MARK: Variables
     var characters = [TheCharacter]()
     let searchController = UISearchController()
     lazy var filteredCharacters: [TheCharacter] = self.characters 
@@ -48,18 +48,23 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     func configureCollectiobViewDataSource(_ collectionView: UICollectionView) {
         collectionViewDataSource = UICollectionViewDiffableDataSource<Section, TheCharacter>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, character) -> UICollectionViewCell in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
-            self.confugireCell(cell, for: character)
+            cell.tag = indexPath.row
+            self.confugireCell(cell, for: character, with: indexPath)
             return cell
         })
 
     }
     
-    func confugireCell(_ cell: CharactersCollectionViewCell, for character: TheCharacter) {
+    func confugireCell(_ cell: CharactersCollectionViewCell, for character: TheCharacter, with indexPath: IndexPath) {
         cell.nameLabel.text = character.name
         ApiRequestsController.shared.fetchCharactersImage(withURL: character.imageURL) { (image) in
             guard let image = image else { return }
+
             DispatchQueue.main.async {
-                cell.imageView.image = image
+                if cell.tag == indexPath.row{
+                    cell.imageView.image = image
+                }
+                
             }
         }
     }

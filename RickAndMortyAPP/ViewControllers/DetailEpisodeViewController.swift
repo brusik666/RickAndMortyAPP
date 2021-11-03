@@ -24,14 +24,10 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Vdl")
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
         updateUI()
         collectionView.delegate = self
         collectionView.dataSource = self
-        print(episode.characters.count)
-
-        
     }
     
     func generateLayout() -> UICollectionViewLayout {
@@ -39,12 +35,12 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.5))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.5))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
         group.interItemSpacing = .fixed(spacing)
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
-      //  section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         let layout = UICollectionViewCompositionalLayout(section: section)
 
         return layout
@@ -59,7 +55,7 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? CharactersCollectionViewCell else { return UICollectionViewCell() }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
         ApiRequestsController.shared.fetchSingleCharacter(url: episode.characters[indexPath.row]) { (result) in
         
             switch result {
@@ -69,11 +65,9 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
                     ApiRequestsController.shared.fetchCharactersImage(withURL: character.imageURL) { (image) in
                         guard let image = image else { return }
                         DispatchQueue.main.async {
-
                             cell.imageView.image = image
                             cell.setNeedsLayout()
                             self.characters.append(character)
-
                         }
                     }
                 }
