@@ -32,7 +32,6 @@ extension TheCharacter: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(uuid)
     }
-    
 }
 
 enum Section: Hashable {

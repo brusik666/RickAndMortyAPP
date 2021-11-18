@@ -17,7 +17,7 @@ class CategoriesCollectionViewController: UICollectionViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(250))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(view.bounds.height/3.5))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
@@ -65,10 +65,11 @@ class CategoriesCollectionViewController: UICollectionViewController {
             ApiRequestsController.shared.fetchEpisodes { (result) in
                 switch result {
                 case .success(let episodes):
-                    DispatchQueue.main.async {
+                  //  DispatchQueue.main.async {
                         episodesCollectionViewController.episodes += episodes
-                        episodesCollectionViewController.collectionView.reloadData()
-                    }
+                    print(episodesCollectionViewController.episodes)
+                 //       episodesCollectionViewController.collectionView.reloadData()
+                  //  }
                 case .failure(let error):
                     print(error)
                 }

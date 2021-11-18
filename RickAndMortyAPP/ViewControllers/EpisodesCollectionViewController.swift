@@ -5,6 +5,27 @@ private let reuseIdentifier = "Cell"
 class EpisodesCollectionViewController: UICollectionViewController {
     
     var episodes: [Episode] = []
+    var episodesBySeasons: [[Episode]] {
+        var season1 = [Episode]()
+        var season2 = [Episode]()
+        var season3 = [Episode]()
+        var season4 = [Episode]()
+        
+        
+        episodes.map { episode in
+            if episode.episode.contains("S01") {
+                season1.append(episode)
+            } else if episode.episode.contains("S02") {
+                season2.append(episode)
+            } else if episode.episode.contains("S03") {
+                season3.append(episode)
+            } else {
+                season4.append(episode)
+            }
+        }
+        let allSeasons = [season1, season2, season3, season4]
+        return allSeasons
+    }
     
     enum EpisodesSections: CaseIterable {
         case s1, s2, s3, s4
@@ -34,13 +55,14 @@ class EpisodesCollectionViewController: UICollectionViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.25))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.15))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(66))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(38))
         let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: "Header", alignment: .top)
+        headerItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
         
         section.boundarySupplementaryItems = [headerItem]
         
@@ -68,10 +90,10 @@ class EpisodesCollectionViewController: UICollectionViewController {
     }
     
     
-
+//  PROBLEM HERE
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! EpisodesCollectionViewCell
-        cell.update(with: episodes[indexPath.row])
+        cell.update(with: episodesBySeasons[indexPath.section][indexPath.row])
     
         return cell
     }

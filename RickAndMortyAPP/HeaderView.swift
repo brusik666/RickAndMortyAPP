@@ -36,8 +36,8 @@ class CollectionViewSectionHeader: UICollectionReusableView {
     }
     
     func setupView() {
-        backgroundColor = .systemGray5
-        
+        backgroundColor = .myGreen
+        layer.cornerRadius = 15
         addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         

@@ -1,7 +1,7 @@
 import UIKit
 
 class FilterCharactersViewController: UIViewController {
-
+    //MARK: Outlets
     @IBOutlet weak var aliveButton: UIButton!
     @IBOutlet weak var deadButton: UIButton!
     @IBOutlet weak var unknownStatusButton: UIButton!
@@ -15,18 +15,17 @@ class FilterCharactersViewController: UIViewController {
     
     var status: String = ""
     var gender: String = ""
-    let color = UIColor(red: 0.714, green: 0.886, blue: 0.055, alpha: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         applyButton.layer.cornerRadius = 5.0
-        aliveButton.setTitleColor(color, for: .selected)
-        deadButton.setTitleColor(color, for: .selected)
-        unknownStatusButton.setTitleColor(color, for: .selected)
-        femaleButton.setTitleColor(color, for: .selected)
-        maleButton.setTitleColor(color, for: .selected)
-        genderlessButton.setTitleColor(color, for: .selected)
-        unknownGenderButton.setTitleColor(color, for: .selected)
+        aliveButton.setTitleColor(.myGreen, for: .selected)
+        deadButton.setTitleColor(.myGreen, for: .selected)
+        unknownStatusButton.setTitleColor(.myGreen, for: .selected)
+        femaleButton.setTitleColor(.myGreen, for: .selected)
+        maleButton.setTitleColor(.myGreen, for: .selected)
+        genderlessButton.setTitleColor(.myGreen, for: .selected)
+        unknownGenderButton.setTitleColor(.myGreen, for: .selected)
     }
     
     
@@ -121,7 +120,7 @@ class FilterCharactersViewController: UIViewController {
     func configureButtonTintColor(sender: UIButton) {
         switch sender.isSelected {
         case true:
-            sender.tintColor = color
+            sender.tintColor = .myGreen
         case false:
             sender.tintColor = .white
         }
@@ -134,7 +133,7 @@ class FilterCharactersViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let chracters):
-                    charactersViewController.characters += chracters
+                 //   charactersViewController.characters += chracters
                     let characters = charactersViewController.characters.filter { character in
                         return character.gender.lowercased() == self.gender.lowercased() && character.status.lowercased() == self.status.lowercased()
                     }
