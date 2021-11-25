@@ -10,6 +10,7 @@ import UIKit
 class EpisodesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var episodeLabel: UILabel!
     
     override class func awakeFromNib() {
         super.awakeFromNib()
@@ -24,5 +25,6 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
     
     func update(with episode: Episode) {
         nameLabel.text = episode.name
+        episodeLabel.text = episode.episode
     }
 }

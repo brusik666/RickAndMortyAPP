@@ -1,6 +1,7 @@
 import Foundation
 
 struct TheCharacter: Codable {
+    
     let uuid = UUID()
     var status: String
     var name: String
@@ -37,3 +38,8 @@ extension TheCharacter: Hashable {
 enum Section: Hashable {
     case main
 }
+
+
+
+
+

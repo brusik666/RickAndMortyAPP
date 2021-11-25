@@ -65,11 +65,11 @@ class CategoriesCollectionViewController: UICollectionViewController {
             ApiRequestsController.shared.fetchEpisodes { (result) in
                 switch result {
                 case .success(let episodes):
-                  //  DispatchQueue.main.async {
+                    DispatchQueue.main.async {
                         episodesCollectionViewController.episodes += episodes
                     print(episodesCollectionViewController.episodes)
-                 //       episodesCollectionViewController.collectionView.reloadData()
-                  //  }
+                        episodesCollectionViewController.collectionView.reloadData()
+                    }
                 case .failure(let error):
                     print(error)
                 }

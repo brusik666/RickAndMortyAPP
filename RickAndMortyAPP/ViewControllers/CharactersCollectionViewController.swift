@@ -18,7 +18,6 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("vdl")
         
         configureSearchController()
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
@@ -27,7 +26,6 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print("vda")
     }
     
     func configureSearchController() {

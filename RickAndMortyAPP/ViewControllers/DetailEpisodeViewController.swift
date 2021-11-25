@@ -1,4 +1,5 @@
 import UIKit
+import SafariServices
 
 class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -6,6 +7,8 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     let reuseIdentifier = "Cell"
     var images: [UIImage]!
     var characters = [TheCharacter]()
+    
+    @IBOutlet weak var watchEpisodeButton: UIButton!
     
     init?(coder: NSCoder, episode: Episode) {
         self.episode = episode
@@ -28,6 +31,7 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         updateUI()
         collectionView.delegate = self
         collectionView.dataSource = self
+
     }
     
     func generateLayout() -> UICollectionViewLayout {
@@ -35,12 +39,15 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.5))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
         group.interItemSpacing = .fixed(spacing)
+        
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
-        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        section.orthogonalScrollingBehavior = .groupPagingCentered
+        
         let layout = UICollectionViewCompositionalLayout(section: section)
 
         return layout
@@ -53,21 +60,24 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return episode.characters.count
     }
-    
+    // FetchSingleCharacter move to VDL
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
+        cell.tag = indexPath.row
         ApiRequestsController.shared.fetchSingleCharacter(url: episode.characters[indexPath.row]) { (result) in
         
             switch result {
             case .success(let character):
                 DispatchQueue.main.async {
                     cell.nameLabel.text = character.name
+                    self.characters.append(character)
                     ApiRequestsController.shared.fetchCharactersImage(withURL: character.imageURL) { (image) in
                         guard let image = image else { return }
                         DispatchQueue.main.async {
-                            cell.imageView.image = image
-                            cell.setNeedsLayout()
-                            self.characters.append(character)
+                            if cell.tag == indexPath.row {
+                                cell.imageView.image = image
+                                cell.setNeedsLayout()
+                            }
                         }
                     }
                 }
@@ -83,13 +93,20 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         airDateDetailLabel.text = episode.airDate
         episodeDetailLabel.text = episode.episode
         title = episode.name
+        watchEpisodeButton.layer.cornerRadius = 25
+  //      watchEpisodeButton.layer.masksToBounds = false
     }
     @IBSegueAction func showSingleCharacter(_ coder: NSCoder, sender: Any?) -> DetailCharacterViewController? {
         guard let cell = sender as? CharactersCollectionViewCell,
               let indexPath = collectionView.indexPath(for: cell) else { return nil }
         let character = characters[indexPath.row]
-        print(characters.count)
 
         return DetailCharacterViewController(coder: coder, character: character)
+    }
+    @IBAction func watchEpisodeButtonTapped(_ sender: UIButton) {
+        
+        guard let url = URL(string: Episode.episodesURLStrings["season1"]![0]) else { return }
+        let safariViewController = SFSafariViewController(url: url)
+        present(safariViewController, animated: true, completion: nil)
     }
 }

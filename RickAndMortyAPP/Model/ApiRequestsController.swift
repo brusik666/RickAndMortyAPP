@@ -4,7 +4,7 @@ import UIKit
 class ApiRequestsController {
     static let shared = ApiRequestsController()
     static let charactersStringURL = "https://rickandmortyapi.com/api/character"
-
+    
     let baseURL = URL(string: "https://rickandmortyapi.com/api/")!
     
     func fetchSingleCharacter(url: URL, completion: @escaping (Result<TheCharacter, Error>) -> Void) {
@@ -23,9 +23,10 @@ class ApiRequestsController {
         }
         task.resume()
     }
-    
+ 
     func fetchCharacters(completion: @escaping (Result<[TheCharacter], Error>) -> Void) {
            var charactersPageNumberQuery = 1
+        
            while charactersPageNumberQuery <= 34 { // 34 - because it's almost 34 pages in API
                var urlComponents = URLComponents(url: baseURL.appendingPathComponent("character"), resolvingAgainstBaseURL: false)!
                urlComponents.queryItems = ["page": String(charactersPageNumberQuery)].map { URLQueryItem(name: $0.key, value: $0.value)}
