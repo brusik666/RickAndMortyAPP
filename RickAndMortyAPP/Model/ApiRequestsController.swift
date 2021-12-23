@@ -1,18 +1,18 @@
 import Foundation
 import UIKit
 
-class ApiRequestsController {
+class ApiRequestsController: DataBaseAvailable {
     static let shared = ApiRequestsController()
     static let charactersStringURL = "https://rickandmortyapi.com/api/character"
     
     let baseURL = URL(string: "https://rickandmortyapi.com/api/")!
+    let jsonDecoder = JSONDecoder()
     
     func fetchSingleCharacter(url: URL, completion: @escaping (Result<TheCharacter, Error>) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, reponse, error in
             if let data = data {
                 do {
-                    let jsonDecoder = JSONDecoder()
-                    let character = try jsonDecoder.decode(TheCharacter.self, from: data)
+                    let character = try self.jsonDecoder.decode(TheCharacter.self, from: data)
                     completion(.success(character))
                 } catch {
                     completion(.failure(error))
@@ -25,28 +25,29 @@ class ApiRequestsController {
     }
  
     func fetchCharacters(completion: @escaping (Result<[TheCharacter], Error>) -> Void) {
-           var charactersPageNumberQuery = 1
+        var charactersPageNumberQuery = 1
+        var charactersData = Data()
+        while charactersPageNumberQuery <= 34 {
+            var urlComponents = URLComponents(url: baseURL.appendingPathComponent("character"), resolvingAgainstBaseURL: false)!
+            urlComponents.queryItems = ["page": String(charactersPageNumberQuery)].map { URLQueryItem(name: $0.key, value: $0.value)}
+            let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
+                if let data = data {
+                    do {
+                        charactersData.append(data)
+                        let charactersResponse = try self.jsonDecoder.decode(CharactersResponse.self, from: data)
+                        completion(.success(charactersResponse.results))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                } else if let error = error {
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+            charactersPageNumberQuery += 1
+        }
         
-           while charactersPageNumberQuery <= 34 { // 34 - because it's almost 34 pages in API
-               var urlComponents = URLComponents(url: baseURL.appendingPathComponent("character"), resolvingAgainstBaseURL: false)!
-               urlComponents.queryItems = ["page": String(charactersPageNumberQuery)].map { URLQueryItem(name: $0.key, value: $0.value)}
-               let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
-                   if let data = data {
-                       do {
-                           let jsonDecoder = JSONDecoder()
-                           let charactersResponse = try jsonDecoder.decode(CharactersResponse.self, from: data)
-                           completion(.success(charactersResponse.results))
-                       } catch {
-                           completion(.failure(error))
-                       }
-                   } else if let error = error {
-                       completion(.failure(error))
-                   }
-               }
-               task.resume()
-               charactersPageNumberQuery += 1
-           }
-       }
+    }
         
     func fetchCharactersImage(withURL url: URL, completion: @escaping (UIImage?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -69,8 +70,8 @@ class ApiRequestsController {
             let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
                 if let data = data {
                     do {
-                        let jsonDecoder = JSONDecoder()
-                        let locationsResponse = try jsonDecoder.decode(LocationsResponse.self, from: data)
+                        self.dataBase?.saveElements(elements: [data])
+                        let locationsResponse = try self.jsonDecoder.decode(LocationsResponse.self, from: data)
                         completion(.success(locationsResponse.results))
                     } catch {
                         completion(.failure(error))
@@ -94,8 +95,8 @@ class ApiRequestsController {
             let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
                 if let data = data {
                     do {
-                        let jsonDecoder = JSONDecoder()
-                        let episodesResponse = try jsonDecoder.decode(EpisodesResponse.self, from: data)
+                        self.dataBase?.saveElements(elements: [data])
+                        let episodesResponse = try self.jsonDecoder.decode(EpisodesResponse.self, from: data)
                         completion(.success(episodesResponse.results))
                     } catch {
                         completion(.failure(error))

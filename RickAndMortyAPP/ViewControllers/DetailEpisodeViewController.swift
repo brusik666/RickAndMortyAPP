@@ -3,12 +3,10 @@ import SafariServices
 
 class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var episode: Episode
     let reuseIdentifier = "Cell"
-    var images: [UIImage]!
-    var characters = [TheCharacter]()
     
-    @IBOutlet weak var watchEpisodeButton: UIButton!
+    var episode: Episode
+    var characters = [TheCharacter]()
     
     init?(coder: NSCoder, episode: Episode) {
         self.episode = episode
@@ -18,7 +16,7 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    @IBOutlet weak var watchEpisodeButton: UIButton!
     @IBOutlet weak var nameDetailLabel: UILabel!
     @IBOutlet weak var airDateDetailLabel: UILabel!
     @IBOutlet weak var episodeDetailLabel: UILabel!
@@ -27,11 +25,12 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
-        updateUI()
         collectionView.delegate = self
         collectionView.dataSource = self
-
+        
+        updateUI()
     }
     
     func generateLayout() -> UICollectionViewLayout {
@@ -64,6 +63,8 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
         cell.tag = indexPath.row
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.gray.cgColor
         ApiRequestsController.shared.fetchSingleCharacter(url: episode.characters[indexPath.row]) { (result) in
         
             switch result {
@@ -93,9 +94,12 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         airDateDetailLabel.text = episode.airDate
         episodeDetailLabel.text = episode.episode
         title = episode.name
-        watchEpisodeButton.layer.cornerRadius = 25
-  //      watchEpisodeButton.layer.masksToBounds = false
+        watchEpisodeButton.layer.cornerRadius = 15
+        watchEpisodeButton.layer.borderWidth = 1
+        watchEpisodeButton.layer.borderColor = UIColor.myGreen.cgColor
+        watchEpisodeButton.layer.backgroundColor = self.view.backgroundColor?.cgColor
     }
+    
     @IBSegueAction func showSingleCharacter(_ coder: NSCoder, sender: Any?) -> DetailCharacterViewController? {
         guard let cell = sender as? CharactersCollectionViewCell,
               let indexPath = collectionView.indexPath(for: cell) else { return nil }
@@ -108,5 +112,7 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         guard let url = URL(string: Episode.episodesURLStrings["season1"]![0]) else { return }
         let safariViewController = SFSafariViewController(url: url)
         present(safariViewController, animated: true, completion: nil)
+        
     }
 }
+

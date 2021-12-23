@@ -2,7 +2,7 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class CharactersCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
+class CharactersCollectionViewController: UICollectionViewController, UISearchResultsUpdating, DataBaseAvailable {
     // MARK: Variables
     var characters = [TheCharacter]()
     let searchController = UISearchController()
@@ -10,7 +10,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     var charactersSnapshot: NSDiffableDataSourceSnapshot<Section, TheCharacter> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, TheCharacter>()
         snapshot.appendSections([Section.main])
-        snapshot.appendItems(filteredCharacters)
+        snapshot.appendItems(filteredCharacters.sorted(by: <))
         return snapshot
     }
     
@@ -18,17 +18,13 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let chara = self.dataBase?.getAllCharacters()
+        print(chara?.count)
         configureSearchController()
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
-    
-    func configureSearchController() {
+    private func configureSearchController() {
         navigationItem.searchController = searchController
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self

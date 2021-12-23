@@ -17,9 +17,10 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
+        self.backgroundColor = .systemOrange
         self.layer.cornerRadius = 15.0
-        self.layer.borderWidth = 5.0
-        self.layer.borderColor = UIColor.clear.cgColor
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.gray.cgColor
         self.layer.masksToBounds = true
     }
     

@@ -8,3 +8,10 @@ struct Location: Codable {
     var residents: [URL]
     var url: URL
 }
+
+extension Location: Comparable {
+    
+    static func <(lhs: Location, rhs: Location) -> Bool {
+        return lhs.id < rhs.id
+    }
+}

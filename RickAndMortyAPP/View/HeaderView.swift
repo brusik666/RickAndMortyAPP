@@ -14,9 +14,9 @@ class CollectionViewSectionHeader: UICollectionReusableView {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
+        label.textColor = .systemOrange
         label.font = UIFont.boldSystemFont(ofSize: 17)
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
         
     }()
@@ -36,14 +36,15 @@ class CollectionViewSectionHeader: UICollectionReusableView {
     }
     
     func setupView() {
-        backgroundColor = .systemGray5
+        
+        backgroundColor = UIColor(red: 0.128, green: 0.128, blue: 0.128, alpha: 1)
         layer.cornerRadius = 15
         addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 2),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 2),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 2),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 2)
         ])

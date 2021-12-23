@@ -11,8 +11,7 @@ class EpisodesCollectionViewController: UICollectionViewController {
         var season3 = [Episode]()
         var season4 = [Episode]()
         
-        
-        episodes.map { episode in
+        episodes.forEach { episode in
             if episode.episode.contains("S01") {
                 season1.append(episode)
             } else if episode.episode.contains("S02") {
@@ -60,7 +59,7 @@ class EpisodesCollectionViewController: UICollectionViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(38))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/3), heightDimension: .absolute(38))
         let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: "Header", alignment: .top)
         headerItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
         

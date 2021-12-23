@@ -2,7 +2,6 @@ import Foundation
 
 struct CharactersResponse: Codable {
     var results: [TheCharacter]
-    
 }
 
 struct LocationsResponse: Codable {
@@ -13,7 +12,3 @@ struct EpisodesResponse: Codable {
     var results: [Episode]
 }
 
-/*struct JSONResponse: Codable, ApiRequest {
-    var results: Codable
-    
-}*/

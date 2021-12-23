@@ -148,7 +148,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="Kw9-gF-sGp" customClass="EpisodesCollectionViewCell" customModule="RickAndMortyAPP" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="center" reuseIdentifier="Cell" id="Kw9-gF-sGp" customClass="EpisodesCollectionViewCell" customModule="RickAndMortyAPP" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="112" height="117"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kdp-Km-xzl">
@@ -180,7 +180,7 @@
                                         <constraint firstItem="Oae-JB-XiQ" firstAttribute="leading" secondItem="kdp-Km-xzl" secondAttribute="leading" id="r0R-tu-0Ub"/>
                                     </constraints>
                                 </collectionViewCellContentView>
-                                <color key="backgroundColor" red="0.71372549019999998" green="0.8862745098" blue="0.054901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGray2Color"/>
                                 <size key="customSize" width="112" height="117"/>
                                 <connections>
                                     <outlet property="episodeLabel" destination="Oae-JB-XiQ" id="enW-XH-Hku"/>
@@ -343,6 +343,7 @@
                                         <state key="normal" title="     Alive" image="circle.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default" weight="ultraLight"/>
                                         </state>
+                                        <state key="selected" image="circle.fill" catalog="system"/>
                                         <connections>
                                             <action selector="aliveButtonTapped:" destination="RqI-aS-aJo" eventType="touchUpInside" id="zar-DS-mcg"/>
                                         </connections>
@@ -446,7 +447,7 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqO-OF-C1w">
                                 <rect key="frame" x="16" y="787" width="396" height="35"/>
-                                <color key="backgroundColor" white="0.49359138479999998" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.1707817599" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <state key="normal" title="Apply filters">
                                     <color key="titleColor" red="0.71372549019999998" green="0.8862745098" blue="0.054901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -862,21 +863,15 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lVc-2Z-7mE">
-                                <rect key="frame" x="85.666666666666657" y="784" width="256.66666666666674" height="76"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <rect key="frame" x="21.333333333333343" y="828" width="385.33333333333326" height="32"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="76" id="IMb-Ec-njX"/>
+                                    <constraint firstAttribute="height" constant="32" id="IMb-Ec-njX"/>
                                 </constraints>
                                 <color key="tintColor" red="0.71372549019999998" green="0.8862745098" blue="0.054901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Watch Episode">
-                                            <attributes>
-                                                <font key="NSFont" size="36" name="BodoniSvtyTwoSCITCTT-Book"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                <buttonConfiguration key="configuration" style="plain" title="Watch Episode">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="19"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="watchEpisodeButtonTapped:" destination="s7r-Er-H3m" eventType="touchUpInside" id="1Bq-fu-dBL"/>
@@ -887,7 +882,7 @@
                         <color key="backgroundColor" white="0.1707817599" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="lVc-2Z-7mE" firstAttribute="centerX" secondItem="pHw-Cc-Jee" secondAttribute="centerX" id="5MQ-jA-MLs"/>
-                            <constraint firstItem="lVc-2Z-7mE" firstAttribute="width" secondItem="pHw-Cc-Jee" secondAttribute="width" multiplier="0.6" id="5q0-t2-zyJ"/>
+                            <constraint firstItem="lVc-2Z-7mE" firstAttribute="width" secondItem="pHw-Cc-Jee" secondAttribute="width" multiplier="0.9" id="5q0-t2-zyJ"/>
                             <constraint firstItem="qSV-vp-VOi" firstAttribute="trailing" secondItem="46G-qa-v2d" secondAttribute="trailing" constant="16" id="Pxy-P2-LmA"/>
                             <constraint firstAttribute="trailing" secondItem="3p0-na-0eK" secondAttribute="trailing" constant="16" id="XHQ-eP-rCb"/>
                             <constraint firstItem="3p0-na-0eK" firstAttribute="top" secondItem="46G-qa-v2d" secondAttribute="bottom" constant="45" id="XJt-uP-16c"/>
@@ -927,11 +922,11 @@
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -3,6 +3,7 @@ import Foundation
 struct TheCharacter: Codable {
     
     let uuid = UUID()
+    var id: Int
     var status: String
     var name: String
     var imageURL: URL
@@ -13,6 +14,7 @@ struct TheCharacter: Codable {
     var url: URL
     
     enum CodingKeys: String, CodingKey {
+        case id
         case status
         case name
         case imageURL = "image"
@@ -32,6 +34,12 @@ extension TheCharacter: Hashable {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(uuid)
+    }
+}
+
+extension TheCharacter: Comparable {
+    static func <(lhs: TheCharacter, rhs: TheCharacter) -> Bool {
+        return lhs.id < rhs.id
     }
 }
 

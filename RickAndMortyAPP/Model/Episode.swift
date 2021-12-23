@@ -29,3 +29,9 @@ extension Episode {
         "season4": ["https://rick-i-morty.online/episodes/4sez-1seriya168/", "https://rick-i-morty.online/episodes/4sez-2seriya158/", "https://rick-i-morty.online/episodes/4sez-3seriya118/", "https://rick-i-morty.online/episodes/4sez-4seriya115/", "https://rick-i-morty.online/episodes/4sez-5seriya124/", "https://rick-i-morty.online/episodes/4sez-6seriya113/", "https://rick-i-morty.online/episodes/4sez-7seriya115/", "https://rick-i-morty.online/episodes/4sez-8seriya120/", "https://rick-i-morty.online/episodes/4sez-9seriya114/", "https://rick-i-morty.online/episodes/4sez-10seriya114/"]
     ]
 }
+
+extension Episode: Comparable {
+    static func <(rhs: Episode, lhs: Episode) -> Bool {
+        return rhs.id < lhs.id
+    }
+}

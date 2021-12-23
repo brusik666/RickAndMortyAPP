@@ -1,6 +1,6 @@
 import UIKit
 
-class FilterCharactersViewController: UIViewController {
+class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     //MARK: Outlets
     @IBOutlet weak var aliveButton: UIButton!
     @IBOutlet weak var deadButton: UIButton!
@@ -16,9 +16,14 @@ class FilterCharactersViewController: UIViewController {
     var status: String = ""
     var gender: String = ""
     
+    //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        applyButton.layer.cornerRadius = 5.0
+        configureTitleColorForAllButtons()
+        configureApplyButtonLayer()
+    }
+    //MARK: Functions
+    private func configureTitleColorForAllButtons() {
         aliveButton.setTitleColor(.myGreen, for: .selected)
         deadButton.setTitleColor(.myGreen, for: .selected)
         unknownStatusButton.setTitleColor(.myGreen, for: .selected)
@@ -28,7 +33,11 @@ class FilterCharactersViewController: UIViewController {
         unknownGenderButton.setTitleColor(.myGreen, for: .selected)
     }
     
-    
+    private func configureApplyButtonLayer(){
+        applyButton.layer.cornerRadius = 12
+        applyButton.layer.borderWidth = 1
+        applyButton.layer.borderColor = UIColor.myGreen.cgColor
+    }
     
     @IBAction func aliveButtonTapped(_ sender: UIButton) {
         status = "alive"
@@ -133,7 +142,6 @@ class FilterCharactersViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let chracters):
-                 //   charactersViewController.characters += chracters
                     let characters = charactersViewController.characters.filter { character in
                         return character.gender.lowercased() == self.gender.lowercased() && character.status.lowercased() == self.status.lowercased()
                     }
@@ -149,6 +157,8 @@ class FilterCharactersViewController: UIViewController {
             }
         }
         charactersViewController.configureCollectiobViewDataSource(charactersViewController.collectionView)
+     
+
     }
     
 }

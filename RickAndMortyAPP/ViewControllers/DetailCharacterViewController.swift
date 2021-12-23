@@ -28,7 +28,9 @@ class DetailCharacterViewController: UIViewController {
     }
     
     func updateUI() {
-        imageView.layer.cornerRadius = 15
+        imageView.layer.cornerRadius = 22
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = UIColor.gray.cgColor
         nameDetailLabel.text = character.name
         statusDetailLabel.text = character.status
         speciesDetailLabel.text = character.species

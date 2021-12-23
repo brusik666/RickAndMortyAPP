@@ -2,9 +2,9 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class CategoriesCollectionViewController: UICollectionViewController {
+class CategoriesCollectionViewController: UICollectionViewController, DataBaseAvailable {
     
-    let categories = ["Characters", "Locations", "Episodes"]
+    private let categories = ["Characters", "Locations", "Episodes"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +39,8 @@ class CategoriesCollectionViewController: UICollectionViewController {
     func configureCell(_ cell: CategoryCollectionViewCell, forCategoryAt indexPath: IndexPath) {
         cell.layer.cornerRadius = CGFloat(15)
         cell.layer.masksToBounds = true
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.gray.cgColor
         cell.imageView.image = UIImage(named: String(indexPath.item))
         cell.nameLabel.text = categories[indexPath.row]
     }
@@ -47,6 +49,7 @@ class CategoriesCollectionViewController: UICollectionViewController {
         switch segue.destination {
         case is CharactersCollectionViewController:
             let charactersCollectionViewController = segue.destination as! CharactersCollectionViewController
+            self.present(LoadingViewController(), animated: true, completion: nil)
             ApiRequestsController.shared.fetchCharacters { (result) in
                 DispatchQueue.main.async {
                     switch result {
@@ -67,7 +70,6 @@ class CategoriesCollectionViewController: UICollectionViewController {
                 case .success(let episodes):
                     DispatchQueue.main.async {
                         episodesCollectionViewController.episodes += episodes
-                    print(episodesCollectionViewController.episodes)
                         episodesCollectionViewController.collectionView.reloadData()
                     }
                 case .failure(let error):
@@ -85,7 +87,7 @@ class CategoriesCollectionViewController: UICollectionViewController {
                 }
             }
         default:
-            print("0")
+            break
         }
     }
     
