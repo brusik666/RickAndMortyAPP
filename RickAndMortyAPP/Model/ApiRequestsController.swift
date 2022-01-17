@@ -26,16 +26,15 @@ class ApiRequestsController: DataBaseAvailable {
  
     func fetchCharacters(completion: @escaping (Result<[TheCharacter], Error>) -> Void) {
         var charactersPageNumberQuery = 1
-        var charactersData = Data()
-        while charactersPageNumberQuery <= 34 {
+        while charactersPageNumberQuery <= 42 {
             var urlComponents = URLComponents(url: baseURL.appendingPathComponent("character"), resolvingAgainstBaseURL: false)!
             urlComponents.queryItems = ["page": String(charactersPageNumberQuery)].map { URLQueryItem(name: $0.key, value: $0.value)}
             let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
                 if let data = data {
                     do {
-                        charactersData.append(data)
                         let charactersResponse = try self.jsonDecoder.decode(CharactersResponse.self, from: data)
                         completion(.success(charactersResponse.results))
+                        
                     } catch {
                         completion(.failure(error))
                     }
@@ -46,7 +45,6 @@ class ApiRequestsController: DataBaseAvailable {
             task.resume()
             charactersPageNumberQuery += 1
         }
-        
     }
         
     func fetchCharactersImage(withURL url: URL, completion: @escaping (UIImage?) -> Void) {
@@ -62,7 +60,7 @@ class ApiRequestsController: DataBaseAvailable {
     }
     
     func fetchLocations(completion: @escaping (Result<[Location], Error>) -> Void) {
-        var locationsPageNumberQuery = 1
+        var locationsPageNumberQuery = 0
         let locationsURL = baseURL.appendingPathComponent("location")
         while locationsPageNumberQuery <= 8 {
             var urlComponents = URLComponents(url: locationsURL, resolvingAgainstBaseURL: false)!
@@ -70,7 +68,6 @@ class ApiRequestsController: DataBaseAvailable {
             let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
                 if let data = data {
                     do {
-                        self.dataBase?.saveElements(elements: [data])
                         let locationsResponse = try self.jsonDecoder.decode(LocationsResponse.self, from: data)
                         completion(.success(locationsResponse.results))
                     } catch {
@@ -95,7 +92,6 @@ class ApiRequestsController: DataBaseAvailable {
             let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
                 if let data = data {
                     do {
-                        self.dataBase?.saveElements(elements: [data])
                         let episodesResponse = try self.jsonDecoder.decode(EpisodesResponse.self, from: data)
                         completion(.success(episodesResponse.results))
                     } catch {

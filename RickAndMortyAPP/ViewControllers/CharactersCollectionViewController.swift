@@ -2,15 +2,13 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class CharactersCollectionViewController: UICollectionViewController, UISearchResultsUpdating, DataBaseAvailable {
+class CharactersCollectionViewController: UICollectionViewController, UISearchResultsUpdating, DataBaseAvailable, NetworkManagerAvailable {
     // MARK: Variables
-    var characters = [TheCharacter]()
     let searchController = UISearchController()
-    lazy var filteredCharacters: [TheCharacter] = self.characters 
     var charactersSnapshot: NSDiffableDataSourceSnapshot<Section, TheCharacter> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, TheCharacter>()
         snapshot.appendSections([Section.main])
-        snapshot.appendItems(filteredCharacters.sorted(by: <))
+        snapshot.appendItems(dataBase!.filteredCharacters.sorted())
         return snapshot
     }
     
@@ -18,10 +16,11 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let chara = self.dataBase?.getAllCharacters()
-        print(chara?.count)
         configureSearchController()
+        configureCollectiobViewDataSource(collectionView)
+        collectionViewDataSource.apply(charactersSnapshot, animatingDifferences: true, completion: nil)
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
+        
     }
     
     private func configureSearchController() {
@@ -43,11 +42,13 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
         let layout = UICollectionViewCompositionalLayout(section: section)
+        
         return layout
     }
     
     func configureCollectiobViewDataSource(_ collectionView: UICollectionView) {
         collectionViewDataSource = UICollectionViewDiffableDataSource<Section, TheCharacter>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, character) -> UICollectionViewCell in
+            print("ConfigureDataSource")
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
             cell.tag = indexPath.row
             self.confugireCell(cell, for: character, with: indexPath)
@@ -58,14 +59,12 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     
     func confugireCell(_ cell: CharactersCollectionViewCell, for character: TheCharacter, with indexPath: IndexPath) {
         cell.nameLabel.text = character.name
-        ApiRequestsController.shared.fetchCharactersImage(withURL: character.imageURL) { (image) in
+        networkManager?.fetchCharactersImage(withURL: character.imageURL) { (image) in
             guard let image = image else { return }
-
             DispatchQueue.main.async {
                 if cell.tag == indexPath.row{
                     cell.imageView.image = image
                 }
-                
             }
         }
     }
@@ -73,11 +72,11 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     func updateSearchResults(for searchController: UISearchController) {
         if let searchingString = searchController.searchBar.text,
            searchingString.isEmpty == false {
-            filteredCharacters = characters.filter { (character) -> Bool in
+            dataBase?.filteredCharacters = (dataBase?.allCharacters.filter { (character) -> Bool in
                 character.name.localizedCaseInsensitiveContains(searchingString)
-            }
+            })!
         } else {
-            filteredCharacters = characters
+            dataBase?.filteredCharacters = (dataBase?.allCharacters)!
         }
         collectionViewDataSource.apply(charactersSnapshot, animatingDifferences: true)
     }
@@ -92,6 +91,5 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     @IBAction func unwindToCharactersCollectionViewController(unwindSegue : UIStoryboardSegue) {
         
     }
-
-    
 }
+

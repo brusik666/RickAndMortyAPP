@@ -24,7 +24,6 @@ class DetailCharacterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        
     }
     
     func updateUI() {

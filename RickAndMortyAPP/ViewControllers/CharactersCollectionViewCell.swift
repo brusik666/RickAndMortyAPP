@@ -15,7 +15,5 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.imageView.image = UIImage(named: "spinner")
-
     }
-    
 }

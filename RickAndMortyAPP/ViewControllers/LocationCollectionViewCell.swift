@@ -9,6 +9,5 @@ class LocationCollectionViewCell: UICollectionViewCell {
         self.layer.borderWidth = 1.0
         self.layer.borderColor = UIColor.myGreen.cgColor
         self.layer.masksToBounds = true
-        
     }
 }

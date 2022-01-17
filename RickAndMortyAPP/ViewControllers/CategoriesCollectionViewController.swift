@@ -45,52 +45,6 @@ class CategoriesCollectionViewController: UICollectionViewController, DataBaseAv
         cell.nameLabel.text = categories[indexPath.row]
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.destination {
-        case is CharactersCollectionViewController:
-            let charactersCollectionViewController = segue.destination as! CharactersCollectionViewController
-            self.present(LoadingViewController(), animated: true, completion: nil)
-            ApiRequestsController.shared.fetchCharacters { (result) in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let characters):
-                        charactersCollectionViewController.characters += characters
-                        charactersCollectionViewController.filteredCharacters = charactersCollectionViewController.characters
-                        charactersCollectionViewController.collectionViewDataSource.apply(charactersCollectionViewController.charactersSnapshot, animatingDifferences: true)
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-            }
-            charactersCollectionViewController.configureCollectiobViewDataSource(charactersCollectionViewController.collectionView)
-        case is EpisodesCollectionViewController:
-            let episodesCollectionViewController = segue.destination as! EpisodesCollectionViewController
-            ApiRequestsController.shared.fetchEpisodes { (result) in
-                switch result {
-                case .success(let episodes):
-                    DispatchQueue.main.async {
-                        episodesCollectionViewController.episodes += episodes
-                        episodesCollectionViewController.collectionView.reloadData()
-                    }
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        case is LocationsCollectionViewController:
-            guard let locationsCollectionViewController = segue.destination as? LocationsCollectionViewController else { return }
-            ApiRequestsController.shared.fetchLocations { (result) in
-                switch result {
-                case .success(let locations):
-                    locationsCollectionViewController.locations += locations
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        default:
-            break
-        }
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath {
         case [0, 0]:

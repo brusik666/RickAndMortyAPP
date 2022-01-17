@@ -13,10 +13,12 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     @IBOutlet weak var resetStatusButton: UIButton!
     @IBOutlet weak var resetGenderButton: UIButton!
     
+    //MARK: Variables
     var status: String = ""
     var gender: String = ""
     
     //MARK: ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTitleColorForAllButtons()
@@ -100,7 +102,6 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     }
     
     @IBAction func applyFiltersButtonTapped(_ sender: UIButton) {
-
     }
    
     @IBAction func resetStatusButtonTapped(_ sender: UIButton) {
@@ -138,27 +139,15 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let charactersViewController = segue.destination as? CharactersCollectionViewController,
               status != "" || gender != "" else { return }
-        ApiRequestsController.shared.fetchCharacters { (result) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let chracters):
-                    let characters = charactersViewController.characters.filter { character in
-                        return character.gender.lowercased() == self.gender.lowercased() && character.status.lowercased() == self.status.lowercased()
-                    }
-                    charactersViewController.characters = characters
-                    var snapshot = NSDiffableDataSourceSnapshot<Section, TheCharacter>()
-                    snapshot.appendSections([Section.main])
-                    snapshot.appendItems(characters)
-                    
-                    charactersViewController.collectionViewDataSource.apply(snapshot, animatingDifferences: true, completion: nil)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
+        dataBase?.filteredCharacters = (dataBase?.allCharacters.filter { character in
+            return character.gender.lowercased() == self.gender.lowercased() && character.status.lowercased() == self.status.lowercased()
+        })!
+        var snapshot = NSDiffableDataSourceSnapshot<Section, TheCharacter>()
+        snapshot.appendSections([Section.main])
+        snapshot.appendItems((dataBase?.filteredCharacters)!)
+        
         charactersViewController.configureCollectiobViewDataSource(charactersViewController.collectionView)
-     
-
+        charactersViewController.collectionViewDataSource.apply(snapshot, animatingDifferences: true, completion: nil)
+        
     }
-    
 }

@@ -45,7 +45,7 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
-        section.orthogonalScrollingBehavior = .groupPagingCentered
+     //   section.orthogonalScrollingBehavior = .groupPagingCentered
         
         let layout = UICollectionViewCompositionalLayout(section: section)
 
@@ -92,7 +92,7 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     func updateUI() {
         nameDetailLabel.text = episode.name
         airDateDetailLabel.text = episode.airDate
-        episodeDetailLabel.text = episode.episode
+        episodeDetailLabel.text = episode.episodeSerialName
         title = episode.name
         watchEpisodeButton.layer.cornerRadius = 15
         watchEpisodeButton.layer.borderWidth = 1

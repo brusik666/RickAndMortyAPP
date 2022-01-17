@@ -17,15 +17,16 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
-        self.backgroundColor = .systemOrange
+        self.backgroundColor = .quaternarySystemFill
         self.layer.cornerRadius = 15.0
         self.layer.borderWidth = 1.0
         self.layer.borderColor = UIColor.gray.cgColor
         self.layer.masksToBounds = true
     }
     
-    func update(with episode: Episode) {
+    func update(with episode: Episode, indexPath: IndexPath) {
+        guard self.tag == indexPath.row else { return }
         nameLabel.text = episode.name
-        episodeLabel.text = episode.episode
+        episodeLabel.text = episode.episodeSerialName
     }
 }

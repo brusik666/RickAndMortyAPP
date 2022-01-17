@@ -2,24 +2,12 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class LocationsCollectionViewController: UICollectionViewController {
-    var locations = [Location]()
+class LocationsCollectionViewController: UICollectionViewController, DataBaseAvailable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
-        ApiRequestsController.shared.fetchLocations { (result) in
-            switch result {
-            case .success(let locations):
-                DispatchQueue.main.async {
-                    self.locations += locations
-                    self.collectionView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
     }
 
     func generateLayout() -> UICollectionViewLayout {
@@ -38,14 +26,13 @@ class LocationsCollectionViewController: UICollectionViewController {
         return 1
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return locations.count
+        return (dataBase?.allLocations.count)!
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LocationCollectionViewCell
-        cell.nameLabel.text = locations[indexPath.row].name
+        cell.nameLabel.text = dataBase?.allLocations[indexPath.row].name
         cell.layer.cornerRadius = 15.0
         cell.layer.borderWidth = 5.0
         cell.layer.borderColor = UIColor.clear.cgColor
@@ -56,8 +43,8 @@ class LocationsCollectionViewController: UICollectionViewController {
     
     @IBSegueAction func showLocation(_ coder: NSCoder, sender: Any?) -> DetailLocationViewController? {
         guard let cell = sender as? UICollectionViewCell,
-              let indexPath = collectionView.indexPath(for: cell) else { return nil }
-        let location = locations[indexPath.row]
+              let indexPath = collectionView.indexPath(for: cell),
+              let location = dataBase?.allLocations[indexPath.row] else { return nil }
         return DetailLocationViewController(coder: coder, location: location)
     }
 }

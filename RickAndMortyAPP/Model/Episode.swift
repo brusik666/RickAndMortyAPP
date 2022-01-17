@@ -4,7 +4,7 @@ struct Episode: Codable {
     var id: Int
     var name: String
     var airDate: String
-    var episode: String
+    var episodeSerialName: String
     var characters: [URL]
     var url: URL
     
@@ -12,7 +12,7 @@ struct Episode: Codable {
         case id
         case name
         case airDate = "air_date"
-        case episode
+        case episodeSerialName = "episode"
         case characters
         case url
     }

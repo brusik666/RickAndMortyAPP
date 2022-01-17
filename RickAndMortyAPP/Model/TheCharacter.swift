@@ -26,7 +26,7 @@ struct TheCharacter: Codable {
     }
 }
 
-extension TheCharacter: Hashable {
+extension TheCharacter: Hashable, Equatable {
     
     static func ==(lhs: TheCharacter, rhs: TheCharacter) -> Bool {
         return lhs.uuid == rhs.uuid

@@ -15,3 +15,4 @@ protocol ConfiguringCell {
     
     func configure()
 }
+
