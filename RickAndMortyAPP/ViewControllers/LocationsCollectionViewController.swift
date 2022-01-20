@@ -27,12 +27,12 @@ class LocationsCollectionViewController: UICollectionViewController, DataBaseAva
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (dataBase?.allLocations.count)!
+        return dataBase.allLocations.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LocationCollectionViewCell
-        cell.nameLabel.text = dataBase?.allLocations[indexPath.row].name
+        cell.nameLabel.text = dataBase.allLocations[indexPath.row].name
         cell.layer.cornerRadius = 15.0
         cell.layer.borderWidth = 5.0
         cell.layer.borderColor = UIColor.clear.cgColor
@@ -43,8 +43,8 @@ class LocationsCollectionViewController: UICollectionViewController, DataBaseAva
     
     @IBSegueAction func showLocation(_ coder: NSCoder, sender: Any?) -> DetailLocationViewController? {
         guard let cell = sender as? UICollectionViewCell,
-              let indexPath = collectionView.indexPath(for: cell),
-              let location = dataBase?.allLocations[indexPath.row] else { return nil }
+              let indexPath = collectionView.indexPath(for: cell) else { return nil }
+        let location = dataBase.allLocations[indexPath.row]
         return DetailLocationViewController(coder: coder, location: location)
     }
 }

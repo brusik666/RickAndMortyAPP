@@ -4,11 +4,11 @@ private let reuseIdentifier = "Cell"
 
 class CharactersCollectionViewController: UICollectionViewController, UISearchResultsUpdating, DataBaseAvailable, NetworkManagerAvailable {
     // MARK: Variables
-    let searchController = UISearchController()
+    private lazy var searchController = UISearchController()
     var charactersSnapshot: NSDiffableDataSourceSnapshot<Section, TheCharacter> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, TheCharacter>()
         snapshot.appendSections([Section.main])
-        snapshot.appendItems(dataBase!.filteredCharacters.sorted())
+        snapshot.appendItems(dataBase.filteredCharacters.sorted())
         return snapshot
     }
     
@@ -48,13 +48,12 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     
     func configureCollectiobViewDataSource(_ collectionView: UICollectionView) {
         collectionViewDataSource = UICollectionViewDiffableDataSource<Section, TheCharacter>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, character) -> UICollectionViewCell in
-            print("ConfigureDataSource")
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
             cell.tag = indexPath.row
             self.confugireCell(cell, for: character, with: indexPath)
             return cell
         })
-
+        print("Data SOurce")
     }
     
     func confugireCell(_ cell: CharactersCollectionViewCell, for character: TheCharacter, with indexPath: IndexPath) {
@@ -72,13 +71,14 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     func updateSearchResults(for searchController: UISearchController) {
         if let searchingString = searchController.searchBar.text,
            searchingString.isEmpty == false {
-            dataBase?.filteredCharacters = (dataBase?.allCharacters.filter { (character) -> Bool in
+            dataBase.filteredCharacters = dataBase.allCharacters.filter { (character) -> Bool in
                 character.name.localizedCaseInsensitiveContains(searchingString)
-            })!
+            }
         } else {
-            dataBase?.filteredCharacters = (dataBase?.allCharacters)!
+            dataBase.filteredCharacters = dataBase.allCharacters
         }
         collectionViewDataSource.apply(charactersSnapshot, animatingDifferences: true)
+        print("searchUpdate")
     }
 
     @IBSegueAction func showCharacter(_ coder: NSCoder, sender: Any?) -> DetailCharacterViewController? {

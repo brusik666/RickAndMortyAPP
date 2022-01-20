@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 
 protocol DataBaseAvailable {
-    var dataBase: DataBase? { get }
+    var dataBase: DataBase { get }
 }
 
 extension DataBaseAvailable {
-    var dataBase: DataBase? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
+    var dataBase: DataBase {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.dataBase
     }
 }

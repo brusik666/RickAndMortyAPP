@@ -139,14 +139,13 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let charactersViewController = segue.destination as? CharactersCollectionViewController,
               status != "" || gender != "" else { return }
-        dataBase?.filteredCharacters = (dataBase?.allCharacters.filter { character in
+        dataBase.filteredCharacters = dataBase.allCharacters.filter { character in
             return character.gender.lowercased() == self.gender.lowercased() && character.status.lowercased() == self.status.lowercased()
-        })!
+        }
         var snapshot = NSDiffableDataSourceSnapshot<Section, TheCharacter>()
         snapshot.appendSections([Section.main])
-        snapshot.appendItems((dataBase?.filteredCharacters)!)
+        snapshot.appendItems(dataBase.filteredCharacters)
         
-        charactersViewController.configureCollectiobViewDataSource(charactersViewController.collectionView)
         charactersViewController.collectionViewDataSource.apply(snapshot, animatingDifferences: true, completion: nil)
         
     }

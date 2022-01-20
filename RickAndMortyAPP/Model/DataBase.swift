@@ -19,6 +19,8 @@ class DataBase: NetworkManagerAvailable {
         var season2 = [Episode]()
         var season3 = [Episode]()
         var season4 = [Episode]()
+        var season5 = [Episode]()
+
         
         allEpisodes.forEach { episode in
             if episode.episodeSerialName.contains("S01") {
@@ -29,38 +31,14 @@ class DataBase: NetworkManagerAvailable {
                 season3.append(episode)
             } else if episode.episodeSerialName.contains("S04"){
                 season4.append(episode)
+            } else if episode.episodeSerialName.contains("S05"){
+                season5.append(episode)
             }
         }
-        let allSeasons = [season1, season2, season3, season4]
+        let allSeasons = [season1, season2, season3, season4, season5]
         return allSeasons
     }()
   //  lazy var charactersImages: [String: UIImage]
-    
- /*   init() {
-        getAllcharacters()
-        getAllLocations()
-        getAllEpisodes()
-        self.episodesBySeasons = {
-            var season1 = [Episode]()
-            var season2 = [Episode]()
-            var season3 = [Episode]()
-            var season4 = [Episode]()
-            
-            allEpisodes.forEach { episode in
-                if episode.episodeSerialName.contains("S01") {
-                    season1.append(episode)
-                } else if episode.episodeSerialName.contains("S02") {
-                    season2.append(episode)
-                } else if episode.episodeSerialName.contains("S03") {
-                    season3.append(episode)
-                } else if episode.episodeSerialName.contains("S04"){
-                    season4.append(episode)
-                }
-            }
-            let allSeasons = [season1, season2, season3, season4]
-            return allSeasons
-        }()
-    } */
     
     func loadAllData() {
         getAllcharacters()
@@ -104,5 +82,13 @@ class DataBase: NetworkManagerAvailable {
                 print(error)
             }
         })
+    }
+    
+    func returnCharactersWithAppropriateUrls(urls: [URL]) -> [TheCharacter] {
+        var characters = self.allCharacters.filter { character in
+            return urls.contains(character.url)
+        }
+        characters.sort()
+        return characters
     }
 }

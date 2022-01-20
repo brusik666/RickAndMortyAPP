@@ -1,7 +1,7 @@
 import UIKit
 import SafariServices
 
-class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, DataBaseAvailable, NetworkManagerAvailable {
     
     let reuseIdentifier = "Cell"
     
@@ -45,7 +45,6 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
-     //   section.orthogonalScrollingBehavior = .groupPagingCentered
         
         let layout = UICollectionViewCompositionalLayout(section: section)
 
@@ -62,11 +61,27 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     // FetchSingleCharacter move to VDL
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
-        cell.tag = indexPath.row
+        let index = indexPath.row
+        cell.tag = index
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.gray.cgColor
-        ApiRequestsController.shared.fetchSingleCharacter(url: episode.characters[indexPath.row]) { (result) in
         
+        characters = dataBase.returnCharactersWithAppropriateUrls(urls: episode.characters)
+        print(characters.count)
+        
+        cell.nameLabel.text = characters[index].name
+        networkManager?.fetchCharactersImage(withURL: characters[index].url, completion: { image in
+            guard let image = image else { return }
+            DispatchQueue.main.async {
+                cell.imageView.image = image
+                cell.setNeedsLayout()
+            }
+        })
+        
+        
+
+        
+     /*   ApiRequestsController.shared.fetchSingleCharacter(url: episode.characters[indexPath.row]) { (result) in
             switch result {
             case .success(let character):
                 DispatchQueue.main.async {
@@ -85,15 +100,17 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
             case .failure(let error):
                 print(error)
             }
-        }
+        } */
         return cell
     }
     
     func updateUI() {
+        
         nameDetailLabel.text = episode.name
         airDateDetailLabel.text = episode.airDate
         episodeDetailLabel.text = episode.episodeSerialName
         title = episode.name
+        
         watchEpisodeButton.layer.cornerRadius = 15
         watchEpisodeButton.layer.borderWidth = 1
         watchEpisodeButton.layer.borderColor = UIColor.myGreen.cgColor
