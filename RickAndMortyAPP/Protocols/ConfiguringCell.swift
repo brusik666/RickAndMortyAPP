@@ -8,11 +8,21 @@
 import Foundation
 import UIKit
 
-protocol ConfiguringCell {
-    
-    var imageView: UIImage? {get set}
+protocol ConfiguringCell: NetworkManagerAvailable {
+
+    var imageView: UIImageView {get set}
     var nameLabel: UILabel {get set}
-    
-    func configure()
+}
+
+extension ConfiguringCell {
+    func configure(with name: String, and url: URL) {
+        nameLabel.text = name
+        networkManager?.fetchCharactersImage(withURL: url, completion: { image in
+            guard let image = image else { return }
+            DispatchQueue.main.async {
+                imageView.image = image
+            }
+        })
+    }
 }
 

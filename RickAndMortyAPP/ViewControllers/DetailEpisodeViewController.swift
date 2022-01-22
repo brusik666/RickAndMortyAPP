@@ -6,7 +6,6 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     let reuseIdentifier = "Cell"
     
     var episode: Episode
-    var characters = [TheCharacter]()
     
     init?(coder: NSCoder, episode: Episode) {
         self.episode = episode
@@ -16,6 +15,7 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     @IBOutlet weak var watchEpisodeButton: UIButton!
     @IBOutlet weak var nameDetailLabel: UILabel!
     @IBOutlet weak var airDateDetailLabel: UILabel!
@@ -58,7 +58,7 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return episode.characters.count
     }
-    // FetchSingleCharacter move to VDL
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
         let index = indexPath.row
@@ -66,41 +66,18 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.gray.cgColor
         
-        characters = dataBase.returnCharactersWithAppropriateUrls(urls: episode.characters)
-        print(characters.count)
+        let characters = dataBase.findCharactersWithAppropriateUrls(urls: episode.characters)
         
         cell.nameLabel.text = characters[index].name
-        networkManager?.fetchCharactersImage(withURL: characters[index].url, completion: { image in
-            guard let image = image else { return }
+        networkManager?.fetchCharactersImage(withURL: characters[index].imageURL, completion: { image in
+            
             DispatchQueue.main.async {
+                guard let image = image,
+                      cell.tag == index else { return }
                 cell.imageView.image = image
-                cell.setNeedsLayout()
             }
         })
         
-        
-
-        
-     /*   ApiRequestsController.shared.fetchSingleCharacter(url: episode.characters[indexPath.row]) { (result) in
-            switch result {
-            case .success(let character):
-                DispatchQueue.main.async {
-                    cell.nameLabel.text = character.name
-                    self.characters.append(character)
-                    ApiRequestsController.shared.fetchCharactersImage(withURL: character.imageURL) { (image) in
-                        guard let image = image else { return }
-                        DispatchQueue.main.async {
-                            if cell.tag == indexPath.row {
-                                cell.imageView.image = image
-                                cell.setNeedsLayout()
-                            }
-                        }
-                    }
-                }
-            case .failure(let error):
-                print(error)
-            }
-        } */
         return cell
     }
     
@@ -120,7 +97,7 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     @IBSegueAction func showSingleCharacter(_ coder: NSCoder, sender: Any?) -> DetailCharacterViewController? {
         guard let cell = sender as? CharactersCollectionViewCell,
               let indexPath = collectionView.indexPath(for: cell) else { return nil }
-        let character = characters[indexPath.row]
+        let character = dataBase.findCharactersWithAppropriateUrls(urls: episode.characters)[indexPath.row]
 
         return DetailCharacterViewController(coder: coder, character: character)
     }
@@ -129,7 +106,6 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         guard let url = URL(string: Episode.episodesURLStrings["season1"]![0]) else { return }
         let safariViewController = SFSafariViewController(url: url)
         present(safariViewController, animated: true, completion: nil)
-        
     }
 }
 

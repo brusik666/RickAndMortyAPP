@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Krz-uX-5bE">
-    <device id="retina6_7" orientation="portrait" appearance="dark"/>
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -265,36 +265,82 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NSv-ye-TjX">
                                         <rect key="frame" x="0.0" y="117" width="388" height="23"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Residents:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZr-LP-mte">
-                                                <rect key="frame" x="0.0" y="0.0" width="184" height="23"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Residents:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZr-LP-mte">
+                                                <rect key="frame" x="0.0" y="0.0" width="388" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                                 <color key="textColor" red="0.71372549019999998" green="0.8862745098" blue="0.054901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBF-vd-7ut">
-                                                <rect key="frame" x="204" y="0.0" width="184" height="23"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                <color key="textColor" systemColor="systemGray5Color"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NrQ-23-wxq">
+                                <rect key="frame" x="20" y="309" width="388" height="510"/>
+                                <color key="backgroundColor" white="0.1707817599" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CP6-mi-ajH">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="neu-ot-7Wd" customClass="CharactersCollectionViewCell" customModule="RickAndMortyAPP" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="51.333333333333343" height="92"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9EI-Gn-ypU">
+                                            <rect key="frame" x="0.0" y="0.0" width="51.333333333333343" height="92"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gey-ME-DGh">
+                                                    <rect key="frame" x="0.0" y="0.0" width="51.333333333333336" height="92"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Rk-xL-20e" userLabel="Name Label">
+                                                    <rect key="frame" x="0.0" y="69" width="51.333333333333336" height="23"/>
+                                                    <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                    <color key="tintColor" systemColor="linkColor"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="19"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Gey-ME-DGh" firstAttribute="top" secondItem="9EI-Gn-ypU" secondAttribute="top" id="D8f-g5-0XQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="8Rk-xL-20e" secondAttribute="bottom" id="IJP-jp-lVu"/>
+                                                <constraint firstItem="Gey-ME-DGh" firstAttribute="leading" secondItem="9EI-Gn-ypU" secondAttribute="leading" id="JxM-d7-VFs"/>
+                                                <constraint firstItem="8Rk-xL-20e" firstAttribute="leading" secondItem="9EI-Gn-ypU" secondAttribute="leading" id="LUT-t4-O5W"/>
+                                                <constraint firstItem="8Rk-xL-20e" firstAttribute="height" secondItem="Gey-ME-DGh" secondAttribute="height" multiplier="0.25" id="dzn-sA-ZFe"/>
+                                                <constraint firstAttribute="bottom" secondItem="Gey-ME-DGh" secondAttribute="bottom" id="egI-u2-jus"/>
+                                                <constraint firstAttribute="trailing" secondItem="Gey-ME-DGh" secondAttribute="trailing" id="lep-Fk-lhM"/>
+                                                <constraint firstAttribute="trailing" secondItem="8Rk-xL-20e" secondAttribute="trailing" id="pSD-3c-yCn"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageView" destination="Gey-ME-DGh" id="Cpd-bD-ANT"/>
+                                            <outlet property="nameLabel" destination="8Rk-xL-20e" id="oAh-uh-uRZ"/>
+                                            <segue destination="Kqk-TD-J6g" kind="show" destinationCreationSelector="showSingleCharacter:sender:" id="Qt7-DP-rCg"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PZ0-mg-MsJ"/>
                         <color key="backgroundColor" white="0.1707817599" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="XLd-lX-KKq" firstAttribute="top" secondItem="PZ0-mg-MsJ" secondAttribute="top" constant="73" id="21H-vN-Ur8"/>
+                            <constraint firstItem="NrQ-23-wxq" firstAttribute="top" secondItem="XLd-lX-KKq" secondAttribute="bottom" constant="8" id="gDX-Rg-e2S"/>
+                            <constraint firstItem="NrQ-23-wxq" firstAttribute="leading" secondItem="PZ0-mg-MsJ" secondAttribute="leading" constant="20" id="kka-XU-5ea"/>
+                            <constraint firstItem="PZ0-mg-MsJ" firstAttribute="trailing" secondItem="NrQ-23-wxq" secondAttribute="trailing" constant="20" id="qaA-YG-EVS"/>
                             <constraint firstItem="PZ0-mg-MsJ" firstAttribute="trailing" secondItem="XLd-lX-KKq" secondAttribute="trailing" constant="20" id="s3Q-po-k9e"/>
                             <constraint firstItem="XLd-lX-KKq" firstAttribute="leading" secondItem="PZ0-mg-MsJ" secondAttribute="leading" constant="20" id="sAY-NB-KFS"/>
+                            <constraint firstItem="PZ0-mg-MsJ" firstAttribute="bottom" secondItem="NrQ-23-wxq" secondAttribute="bottom" constant="73" id="tTD-Xb-PLO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="m9W-Qc-gqC"/>
                     <connections>
+                        <outlet property="collectionView" destination="NrQ-23-wxq" id="aY1-8m-vnG"/>
                         <outlet property="dimensionDetailLabel" destination="6pH-fQ-V1N" id="8Cv-1W-ioW"/>
                         <outlet property="nameDetailLabel" destination="t2w-eP-Vat" id="fDL-HW-yJa"/>
-                        <outlet property="residentsDetailLabel" destination="dBF-vd-7ut" id="7Z3-9I-UaW"/>
                         <outlet property="typeDetailLabel" destination="9yf-BU-aAi" id="MHq-dS-Hbc"/>
                     </connections>
                 </viewController>
@@ -908,7 +954,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bgU-ue-cG3"/>
+        <segue reference="Qt7-DP-rCg"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="circle.fill" catalog="system" width="128" height="121"/>

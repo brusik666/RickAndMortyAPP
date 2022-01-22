@@ -30,6 +30,7 @@ class DetailCharacterViewController: UIViewController {
         imageView.layer.cornerRadius = 22
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.gray.cgColor
+        title = character.name.uppercased()
         nameDetailLabel.text = character.name
         statusDetailLabel.text = character.status
         speciesDetailLabel.text = character.species

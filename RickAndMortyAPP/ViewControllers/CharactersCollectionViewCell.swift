@@ -1,6 +1,9 @@
 import UIKit
 
 class CharactersCollectionViewCell: UICollectionViewCell {
+    
+    static let reuseIdentifier = "Cell"
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     

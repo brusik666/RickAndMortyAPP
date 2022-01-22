@@ -84,7 +84,7 @@ class DataBase: NetworkManagerAvailable {
         })
     }
     
-    func returnCharactersWithAppropriateUrls(urls: [URL]) -> [TheCharacter] {
+    func findCharactersWithAppropriateUrls(urls: [URL]) -> [TheCharacter] {
         var characters = self.allCharacters.filter { character in
             return urls.contains(character.url)
         }

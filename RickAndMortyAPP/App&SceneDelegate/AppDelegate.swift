@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         dataBase.loadAllData()
         
-        
         return true
     }
 
