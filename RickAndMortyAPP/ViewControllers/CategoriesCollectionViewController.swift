@@ -1,6 +1,6 @@
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "CategoryCell"
 
 class CategoriesCollectionViewController: UICollectionViewController, DataBaseAvailable {
     
@@ -31,18 +31,9 @@ class CategoriesCollectionViewController: UICollectionViewController, DataBaseAv
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
-        configureCell(cell, forCategoryAt: indexPath)
+        cell.configure(forCategoryAt: indexPath, categories)
     
         return cell
-    }
-    
-    func configureCell(_ cell: CategoryCollectionViewCell, forCategoryAt indexPath: IndexPath) {
-        cell.layer.cornerRadius = CGFloat(15)
-        cell.layer.masksToBounds = true
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.gray.cgColor
-        cell.imageView.image = UIImage(named: String(indexPath.item))
-        cell.nameLabel.text = categories[indexPath.row]
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

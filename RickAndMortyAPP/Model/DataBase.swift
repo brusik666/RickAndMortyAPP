@@ -74,6 +74,9 @@ class DataBase: NetworkManagerAvailable {
     
     private func getAllLocations() {
         allLocations = [Location]()
+        defer {
+            allLocations.sort()
+        }
         networkManager?.fetchLocations(completion: { result in
             switch result {
             case .success(let locations):

@@ -68,11 +68,9 @@ class EpisodesCollectionViewController: UICollectionViewController, DataBaseAvai
     }
     
     
-//  PROBLEM HERE
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! EpisodesCollectionViewCell
-        cell.tag = indexPath.row
-        cell.update(with: dataBase.episodesBySeasons[indexPath.section][indexPath.row], indexPath: indexPath)
+        cell.update(with: dataBase.episodesBySeasons[indexPath.section][indexPath.row])
         return cell
     }
 

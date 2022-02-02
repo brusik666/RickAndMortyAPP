@@ -16,6 +16,7 @@ class DetailLocationViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var nameDetailLabel: UILabel!
     @IBOutlet weak var typeDetailLabel: UILabel!
     @IBOutlet weak var dimensionDetailLabel: UILabel!
+    @IBOutlet weak var residentsLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -34,6 +35,11 @@ class DetailLocationViewController: UIViewController, UICollectionViewDelegate, 
         typeDetailLabel.text = location.type
         dimensionDetailLabel.text = location.dimension
         navigationItem.title = location.name
+        if location.residents.count > 0 {
+            residentsLabel.isHidden = false
+        } else {
+            residentsLabel.isHidden = true
+        }
     }
     
     func generateLayout() -> UICollectionViewLayout {
@@ -66,13 +72,7 @@ class DetailLocationViewController: UIViewController, UICollectionViewDelegate, 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
         let characters = dataBase.findCharactersWithAppropriateUrls(urls: location.residents)
         let character = characters[indexPath.row]
-        cell.nameLabel.text = character.name
-        networkManager?.fetchCharactersImage(withURL: character.imageURL, completion: { image in
-            guard let image = image else { return }
-            DispatchQueue.main.async {
-                cell.imageView.image = image
-            }
-        })
+        cell.configure(characterName: character.name, characterImageUrl: character.imageURL, indexPath: indexPath)
         return cell
     }
     @IBSegueAction func showSingleCharacter(_ coder: NSCoder, sender: Any?) -> DetailCharacterViewController? {

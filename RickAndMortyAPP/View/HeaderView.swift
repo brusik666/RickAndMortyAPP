@@ -14,7 +14,7 @@ class CollectionViewSectionHeader: UICollectionReusableView {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemOrange
+        label.textColor = .myGreen
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.textAlignment = .center
         label.backgroundColor = UIColor(red: 0.128, green: 0.128, blue: 0.128, alpha: 1)

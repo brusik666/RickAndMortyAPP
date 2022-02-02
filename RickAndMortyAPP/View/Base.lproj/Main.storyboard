@@ -25,7 +25,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="Cell" id="QEu-hQ-wtw" customClass="CategoryCollectionViewCell" customModule="RickAndMortyAPP" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="CategoryCell" id="QEu-hQ-wtw" customClass="CategoryCollectionViewCell" customModule="RickAndMortyAPP" customModuleProvider="target">
                                 <rect key="frame" x="7" y="0.0" width="414" height="212"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Fz4-eD-aYd">
@@ -276,7 +276,7 @@
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NrQ-23-wxq">
-                                <rect key="frame" x="20" y="309" width="388" height="510"/>
+                                <rect key="frame" x="20" y="309" width="388" height="583"/>
                                 <color key="backgroundColor" white="0.1707817599" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CP6-mi-ajH">
                                     <size key="itemSize" width="128" height="128"/>
@@ -333,7 +333,7 @@
                             <constraint firstItem="PZ0-mg-MsJ" firstAttribute="trailing" secondItem="NrQ-23-wxq" secondAttribute="trailing" constant="20" id="qaA-YG-EVS"/>
                             <constraint firstItem="PZ0-mg-MsJ" firstAttribute="trailing" secondItem="XLd-lX-KKq" secondAttribute="trailing" constant="20" id="s3Q-po-k9e"/>
                             <constraint firstItem="XLd-lX-KKq" firstAttribute="leading" secondItem="PZ0-mg-MsJ" secondAttribute="leading" constant="20" id="sAY-NB-KFS"/>
-                            <constraint firstItem="PZ0-mg-MsJ" firstAttribute="bottom" secondItem="NrQ-23-wxq" secondAttribute="bottom" constant="73" id="tTD-Xb-PLO"/>
+                            <constraint firstItem="PZ0-mg-MsJ" firstAttribute="bottom" secondItem="NrQ-23-wxq" secondAttribute="bottom" id="tTD-Xb-PLO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="m9W-Qc-gqC"/>
@@ -341,6 +341,7 @@
                         <outlet property="collectionView" destination="NrQ-23-wxq" id="aY1-8m-vnG"/>
                         <outlet property="dimensionDetailLabel" destination="6pH-fQ-V1N" id="8Cv-1W-ioW"/>
                         <outlet property="nameDetailLabel" destination="t2w-eP-Vat" id="fDL-HW-yJa"/>
+                        <outlet property="residentsLabel" destination="yZr-LP-mte" id="UVW-tF-R8C"/>
                         <outlet property="typeDetailLabel" destination="9yf-BU-aAi" id="MHq-dS-Hbc"/>
                     </connections>
                 </viewController>
@@ -914,11 +915,10 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="IMb-Ec-njX"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <color key="tintColor" red="0.71372549019999998" green="0.8862745098" blue="0.054901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Watch Episode">
-                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="19"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Watch Episode"/>
                                 <connections>
                                     <action selector="watchEpisodeButtonTapped:" destination="s7r-Er-H3m" eventType="touchUpInside" id="1Bq-fu-dBL"/>
                                 </connections>

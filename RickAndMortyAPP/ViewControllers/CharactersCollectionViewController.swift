@@ -1,10 +1,9 @@
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class CharactersCollectionViewController: UICollectionViewController, UISearchResultsUpdating, DataBaseAvailable, NetworkManagerAvailable {
     // MARK: Variables
-    private lazy var searchController = UISearchController()
+    private let searchController = UISearchController()
+    
     var charactersSnapshot: NSDiffableDataSourceSnapshot<Section, TheCharacter> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, TheCharacter>()
         snapshot.appendSections([Section.main])
@@ -20,9 +19,12 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
         configureCollectiobViewDataSource(collectionView)
         collectionViewDataSource.apply(charactersSnapshot, animatingDifferences: true, completion: nil)
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
+      /*  let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .myGreen
         
+        navigationController?.navigationBar.standardAppearance = appearance */
     }
-    
+
     private func configureSearchController() {
         navigationItem.searchController = searchController
         searchController.obscuresBackgroundDuringPresentation = false
@@ -48,12 +50,11 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     
     func configureCollectiobViewDataSource(_ collectionView: UICollectionView) {
         collectionViewDataSource = UICollectionViewDiffableDataSource<Section, TheCharacter>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, character) -> UICollectionViewCell in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
             cell.tag = indexPath.row
-            self.confugireCell(cell, for: character, with: indexPath)
+            cell.configure(characterName: character.name, characterImageUrl: character.imageURL, indexPath: indexPath)
             return cell
         })
-        print("Data SOurce")
     }
     
     func confugireCell(_ cell: CharactersCollectionViewCell, for character: TheCharacter, with indexPath: IndexPath) {
@@ -61,9 +62,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
         networkManager?.fetchCharactersImage(withURL: character.imageURL) { (image) in
             guard let image = image else { return }
             DispatchQueue.main.async {
-                if cell.tag == indexPath.row{
-                    cell.imageView.image = image
-                }
+                cell.imageView.image = image
             }
         }
     }
@@ -78,8 +77,19 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
             dataBase.filteredCharacters = dataBase.allCharacters
         }
         collectionViewDataSource.apply(charactersSnapshot, animatingDifferences: true)
-        print("searchUpdate")
     }
+    
+/*    func updateSearchResults(for searchController: UISearchController) {
+        if let searchingString = searchController.searchBar.text,
+           searchingString.isEmpty == false {
+            filteredCharacters = characters.filter { (character) -> Bool in
+                character.name.localizedCaseInsensitiveContains(searchingString)
+            }
+        } else {
+            filteredCharacters = characters
+        }
+        collectionViewDataSource.apply(charactersSnapshot, animatingDifferences: true)
+    } */
 
     @IBSegueAction func showCharacter(_ coder: NSCoder, sender: Any?) -> DetailCharacterViewController? {
         guard let cell = sender as? CharactersCollectionViewCell,

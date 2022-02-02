@@ -24,7 +24,6 @@
 		EE92B6D626EA613000664CC2 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE92B6D526EA613000664CC2 /* CategoryCollectionViewCell.swift */; };
 		EE92B6D826EA740D00664CC2 /* CharactersCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE92B6D726EA740D00664CC2 /* CharactersCollectionViewController.swift */; };
 		EE92B6DA26EA747500664CC2 /* CharactersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE92B6D926EA747500664CC2 /* CharactersCollectionViewCell.swift */; };
-		EE9B6A8D2713A3C4007A3843 /* ConfiguringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9B6A8C2713A3C4007A3843 /* ConfiguringCell.swift */; };
 		EE9C6B0426EAD0DC001A27F6 /* TheCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C6B0326EAD0DC001A27F6 /* TheCharacter.swift */; };
 		EE9C6B0626EAD145001A27F6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C6B0526EAD145001A27F6 /* Location.swift */; };
 		EE9C6B0826EAD1E6001A27F6 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C6B0726EAD1E6001A27F6 /* Episode.swift */; };
@@ -32,6 +31,7 @@
 		EEA058FD26EE27BA00662F53 /* DetailCharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA058FC26EE27BA00662F53 /* DetailCharacterViewController.swift */; };
 		EEA8B7A226F1023F0008EB72 /* LocationsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8B7A126F1023F0008EB72 /* LocationsCollectionViewController.swift */; };
 		EEA8B7A426F10AE20008EB72 /* LocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8B7A326F10AE20008EB72 /* LocationCollectionViewCell.swift */; };
+		EEAA62AF27A20ADC008B0AB5 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAA62AE27A20ADC008B0AB5 /* Cancellable.swift */; };
 		EEBF6EEC27725D9100C0EAE8 /* DataBaseAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBF6EEB27725D9100C0EAE8 /* DataBaseAvailable.swift */; };
 		EEBF6EEE27725F4900C0EAE8 /* NetworkManagerAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBF6EED27725F4900C0EAE8 /* NetworkManagerAvailable.swift */; };
 		EEDC0CC427452496006032E0 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC0CC327452496006032E0 /* ExtensionUIColor.swift */; };
@@ -58,7 +58,6 @@
 		EE92B6D526EA613000664CC2 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		EE92B6D726EA740D00664CC2 /* CharactersCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionViewController.swift; sourceTree = "<group>"; };
 		EE92B6D926EA747500664CC2 /* CharactersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionViewCell.swift; sourceTree = "<group>"; };
-		EE9B6A8C2713A3C4007A3843 /* ConfiguringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguringCell.swift; sourceTree = "<group>"; };
 		EE9C6B0326EAD0DC001A27F6 /* TheCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheCharacter.swift; sourceTree = "<group>"; };
 		EE9C6B0526EAD145001A27F6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		EE9C6B0726EAD1E6001A27F6 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
@@ -66,6 +65,7 @@
 		EEA058FC26EE27BA00662F53 /* DetailCharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCharacterViewController.swift; sourceTree = "<group>"; };
 		EEA8B7A126F1023F0008EB72 /* LocationsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsCollectionViewController.swift; sourceTree = "<group>"; };
 		EEA8B7A326F10AE20008EB72 /* LocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCollectionViewCell.swift; sourceTree = "<group>"; };
+		EEAA62AE27A20ADC008B0AB5 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		EEBF6EEB27725D9100C0EAE8 /* DataBaseAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAvailable.swift; sourceTree = "<group>"; };
 		EEBF6EED27725F4900C0EAE8 /* NetworkManagerAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerAvailable.swift; sourceTree = "<group>"; };
 		EEDC0CC327452496006032E0 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
@@ -169,9 +169,9 @@
 		EEBF6EEF27725FEB00C0EAE8 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				EE9B6A8C2713A3C4007A3843 /* ConfiguringCell.swift */,
 				EEBF6EEB27725D9100C0EAE8 /* DataBaseAvailable.swift */,
 				EEBF6EED27725F4900C0EAE8 /* NetworkManagerAvailable.swift */,
+				EEAA62AE27A20ADC008B0AB5 /* Cancellable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -247,7 +247,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE92B6D626EA613000664CC2 /* CategoryCollectionViewCell.swift in Sources */,
-				EE9B6A8D2713A3C4007A3843 /* ConfiguringCell.swift in Sources */,
 				EE92B6BC26EA549400664CC2 /* AppDelegate.swift in Sources */,
 				EEA8B7A426F10AE20008EB72 /* LocationCollectionViewCell.swift in Sources */,
 				EEDC0CC427452496006032E0 /* ExtensionUIColor.swift in Sources */,
@@ -255,6 +254,7 @@
 				EEBF6EEE27725F4900C0EAE8 /* NetworkManagerAvailable.swift in Sources */,
 				EE9C6B0A26EAD439001A27F6 /* ResponseModels.swift in Sources */,
 				EE41F55826F7FC360001C31C /* EpisodesCollectionViewCell.swift in Sources */,
+				EEAA62AF27A20ADC008B0AB5 /* Cancellable.swift in Sources */,
 				EE9C6B0626EAD145001A27F6 /* Location.swift in Sources */,
 				EE92B6D426EA5DC800664CC2 /* CategoriesCollectionViewController.swift in Sources */,
 				EEA058FD26EE27BA00662F53 /* DetailCharacterViewController.swift in Sources */,

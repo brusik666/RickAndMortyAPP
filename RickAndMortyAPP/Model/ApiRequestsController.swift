@@ -34,7 +34,6 @@ class ApiRequestsController: DataBaseAvailable {
                     do {
                         let charactersResponse = try self.jsonDecoder.decode(CharactersResponse.self, from: data)
                         completion(.success(charactersResponse.results))
-                        
                     } catch {
                         completion(.failure(error))
                     }
@@ -47,7 +46,7 @@ class ApiRequestsController: DataBaseAvailable {
         }
     }
         
-    func fetchCharactersImage(withURL url: URL, completion: @escaping (UIImage?) -> Void) {
+    func fetchCharactersImage(withURL url: URL, completion: @escaping (UIImage?) -> Void) -> Cancellable {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data,
                let image = UIImage(data: data) {
@@ -57,6 +56,7 @@ class ApiRequestsController: DataBaseAvailable {
             }
         }
         task.resume()
+        return task
     }
     
     func fetchLocations(completion: @escaping (Result<[Location], Error>) -> Void) {

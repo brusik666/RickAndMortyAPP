@@ -24,8 +24,7 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
         self.layer.masksToBounds = true
     }
     
-    func update(with episode: Episode, indexPath: IndexPath) {
-        guard self.tag == indexPath.row else { return }
+    func update(with episode: Episode) {
         nameLabel.text = episode.name
         episodeLabel.text = episode.episodeSerialName
     }

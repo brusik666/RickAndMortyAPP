@@ -13,6 +13,11 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     @IBOutlet weak var resetStatusButton: UIButton!
     @IBOutlet weak var resetGenderButton: UIButton!
     
+    enum FilterType: String {
+        case gender
+        case status
+    }
+    
     //MARK: Variables
     var status: String = ""
     var gender: String = ""
@@ -23,6 +28,7 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
         super.viewDidLoad()
         configureTitleColorForAllButtons()
         configureApplyButtonLayer()
+        
     }
     //MARK: Functions
     private func configureTitleColorForAllButtons() {
@@ -139,14 +145,14 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let charactersViewController = segue.destination as? CharactersCollectionViewController,
               status != "" || gender != "" else { return }
-        dataBase.filteredCharacters = dataBase.allCharacters.filter { character in
+        
+        let characters = dataBase.allCharacters.filter { character in
             return character.gender.lowercased() == self.gender.lowercased() && character.status.lowercased() == self.status.lowercased()
         }
         var snapshot = NSDiffableDataSourceSnapshot<Section, TheCharacter>()
         snapshot.appendSections([Section.main])
-        snapshot.appendItems(dataBase.filteredCharacters)
+        snapshot.appendItems(characters)
         
         charactersViewController.collectionViewDataSource.apply(snapshot, animatingDifferences: true, completion: nil)
-        
     }
 }

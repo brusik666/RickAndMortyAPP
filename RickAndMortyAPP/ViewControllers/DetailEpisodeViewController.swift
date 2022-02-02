@@ -2,9 +2,7 @@ import UIKit
 import SafariServices
 
 class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, DataBaseAvailable, NetworkManagerAvailable {
-    
-    let reuseIdentifier = "Cell"
-    
+
     var episode: Episode
     
     init?(coder: NSCoder, episode: Episode) {
@@ -60,23 +58,13 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
         let index = indexPath.row
-        cell.tag = index
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.gray.cgColor
         
         let characters = dataBase.findCharactersWithAppropriateUrls(urls: episode.characters)
+        let character = characters[index]
         
-        cell.nameLabel.text = characters[index].name
-        networkManager?.fetchCharactersImage(withURL: characters[index].imageURL, completion: { image in
-            
-            DispatchQueue.main.async {
-                guard let image = image,
-                      cell.tag == index else { return }
-                cell.imageView.image = image
-            }
-        })
+        cell.configure(characterName: character.name, characterImageUrl: character.imageURL, indexPath: indexPath)
         
         return cell
     }
