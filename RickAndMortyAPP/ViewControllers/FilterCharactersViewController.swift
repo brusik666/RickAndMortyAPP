@@ -1,4 +1,5 @@
 import UIKit
+import Network
 
 class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     //MARK: Outlets
@@ -13,33 +14,31 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     @IBOutlet weak var resetStatusButton: UIButton!
     @IBOutlet weak var resetGenderButton: UIButton!
     
-    enum FilterType: String {
-        case gender
-        case status
+    enum Gender: String {
+        case male = "male"
+        case female = "female"
+        case genderless = "genderless"
     }
+    
+    enum Status: String {
+        case alive = "alive"
+        case dead = "dead"
+        case unknown = "unknown"
+    }
+ 
     
     //MARK: Variables
     var status: String = ""
     var gender: String = ""
+
     
     //MARK: ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTitleColorForAllButtons()
         configureApplyButtonLayer()
-        
     }
     //MARK: Functions
-    private func configureTitleColorForAllButtons() {
-        aliveButton.setTitleColor(.myGreen, for: .selected)
-        deadButton.setTitleColor(.myGreen, for: .selected)
-        unknownStatusButton.setTitleColor(.myGreen, for: .selected)
-        femaleButton.setTitleColor(.myGreen, for: .selected)
-        maleButton.setTitleColor(.myGreen, for: .selected)
-        genderlessButton.setTitleColor(.myGreen, for: .selected)
-        unknownGenderButton.setTitleColor(.myGreen, for: .selected)
-    }
     
     private func configureApplyButtonLayer(){
         applyButton.layer.cornerRadius = 12
@@ -49,62 +48,51 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     
     @IBAction func aliveButtonTapped(_ sender: UIButton) {
         status = "alive"
-        aliveButton.isSelected = true
-        deadButton.isSelected = false
-        unknownStatusButton.isSelected = false
+        toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
+        configureButtonsColor(sender: [sender])
     }
     
     @IBAction func deadButtonTapped(_ sender: UIButton) {
         status = "dead"
-        aliveButton.isSelected = false
-        deadButton.isSelected = true
-        unknownStatusButton.isSelected = false
+        toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
+        configureButtonsColor(sender: [sender])
     }
     
     @IBAction func unknownStatusButtonTapped(_ sender: UIButton) {
         status = "unknown"
-        aliveButton.isSelected = false
-        deadButton.isSelected = false
-        unknownStatusButton.isSelected = true
+        toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
+        configureButtonsColor(sender: [sender])
     }
     
     @IBAction func femaleButtonTapped(_ sender: UIButton) {
         gender = "female"
-        femaleButton.isSelected = true
-        maleButton.isSelected = false
-        genderlessButton.isSelected = false
-        unknownGenderButton.isSelected = false
+        toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
+        configureButtonsColor(sender: [sender])
     }
     
     @IBAction func maleButtonTapped(_ sender: UIButton) {
         gender = "male"
-        femaleButton.isSelected = false
-        maleButton.isSelected = true
-        genderlessButton.isSelected = false
-        unknownGenderButton.isSelected = false
+        toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
+        configureButtonsColor(sender: [sender])
     }
     
     @IBAction func genderlessButtonTapped(_ sender: UIButton) {
         gender = "genderless"
-        femaleButton.isSelected = false
-        maleButton.isSelected = false
-        genderlessButton.isSelected = true
-        unknownGenderButton.isSelected = false
+        toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
+        configureButtonsColor(sender: [sender])
     }
     
     @IBAction func unknownGenderButtonTapped(_ sender: UIButton) {
         gender = "unknown"
-        femaleButton.isSelected = false
-        maleButton.isSelected = false
-        genderlessButton.isSelected = false
-        unknownGenderButton.isSelected = true
+        toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
+        configureButtonsColor(sender: [sender])
     }
     
     @IBAction func applyFiltersButtonTapped(_ sender: UIButton) {
@@ -112,17 +100,15 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
    
     @IBAction func resetStatusButtonTapped(_ sender: UIButton) {
         status = ""
-        aliveButton.isSelected = false
-        deadButton.isSelected = false
-        unknownStatusButton.isSelected = false
+        deselectAllStatusButtons()
+        configureButtonsColor(sender: [aliveButton, deadButton, unknownStatusButton])
         configureButtonAnimation(sender: sender)
+        
     }
     @IBAction func resetGenderButtonTapped(_ sender: UIButton) {
         gender = ""
-        maleButton.isSelected = false
-        femaleButton.isSelected = false
-        genderlessButton.isSelected = false
-        unknownGenderButton.isSelected = false
+        deselectAllGenderButtons()
+        configureButtonsColor(sender: [femaleButton, maleButton, genderlessButton, unknownGenderButton])
         configureButtonAnimation(sender: sender)
     }
     
@@ -133,12 +119,37 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
         }, completion: nil)
     }
     
-    func configureButtonTintColor(sender: UIButton) {
-        switch sender.isSelected {
-        case true:
-            sender.tintColor = .myGreen
-        case false:
-            sender.tintColor = .white
+    func toggleButtonSelection(sender: UIButton) {
+        if sender.isSelected == true {
+            sender.isSelected = false
+        } else {
+            sender.isSelected = true
+        }
+    }
+    
+    func deselectAllStatusButtons() {
+        aliveButton.isSelected = false
+        deadButton.isSelected = false
+        unknownStatusButton.isSelected = false
+    }
+    
+    func deselectAllGenderButtons() {
+        femaleButton.isSelected = false
+        maleButton.isSelected = false
+        genderlessButton.isSelected = false
+        unknownGenderButton.isSelected = false
+    }
+    
+    func configureButtonsColor(sender: [UIButton]) {
+        sender.forEach { button in
+            switch button.isSelected {
+            case true:
+                button.tintColor = .myGreen
+                button.setTitleColor(.myGreen, for: .selected)
+            case false:
+                button.tintColor = .white
+                button.setTitleColor(.white, for: .normal)
+            }
         }
     }
     

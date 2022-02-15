@@ -50,6 +50,7 @@ class ApiRequestsController: DataBaseAvailable {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data,
                let image = UIImage(data: data) {
+                self.dataBase.saveImage(name: url.absoluteString, image: image)
                 completion(image)
             } else {
                 completion(nil)

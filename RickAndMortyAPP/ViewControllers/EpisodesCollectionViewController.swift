@@ -78,7 +78,7 @@ class EpisodesCollectionViewController: UICollectionViewController, DataBaseAvai
         guard let cell = sender as? EpisodesCollectionViewCell,
               let indexPath = collectionView.indexPath(for: cell) else { return nil }
         let episode = dataBase.episodesBySeasons[indexPath.section][indexPath.row]
-        return DetailEpisodeViewController(coder: coder, episode: episode)
+        return DetailEpisodeViewController(coder: coder, episode: episode, indexPathOfEpisode: indexPath)
     }
   
 

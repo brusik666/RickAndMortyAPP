@@ -26,7 +26,18 @@ extension Episode {
         
         "season3": ["https://rick-i-morty.online/episodes/3sez-1seriya161/", "https://rick-i-morty.online/episodes/3sez-2seriya158/", "https://rick-i-morty.online/episodes/3sez-3seriya119/", "https://rick-i-morty.online/episodes/3sez-4seriya137/", "https://rick-i-morty.online/episodes/3sez-5seriya118/", "https://rick-i-morty.online/episodes/3sez-6seriya113/", "https://rick-i-morty.online/episodes/3sez-7seriya115/", "https://rick-i-morty.online/episodes/3sez-8seriya115/", "https://rick-i-morty.online/episodes/3sez-9seriya113/", "https://rick-i-morty.online/episodes/3sez-10seriya113/"],
         
-        "season4": ["https://rick-i-morty.online/episodes/4sez-1seriya168/", "https://rick-i-morty.online/episodes/4sez-2seriya158/", "https://rick-i-morty.online/episodes/4sez-3seriya118/", "https://rick-i-morty.online/episodes/4sez-4seriya115/", "https://rick-i-morty.online/episodes/4sez-5seriya124/", "https://rick-i-morty.online/episodes/4sez-6seriya113/", "https://rick-i-morty.online/episodes/4sez-7seriya115/", "https://rick-i-morty.online/episodes/4sez-8seriya120/", "https://rick-i-morty.online/episodes/4sez-9seriya114/", "https://rick-i-morty.online/episodes/4sez-10seriya114/"]
+        "season4": ["https://rick-i-morty.online/episodes/4sez-1seriya168/", "https://rick-i-morty.online/episodes/4sez-2seriya158/", "https://rick-i-morty.online/episodes/4sez-3seriya118/", "https://rick-i-morty.online/episodes/4sez-4seriya115/", "https://rick-i-morty.online/episodes/4sez-5seriya124/", "https://rick-i-morty.online/episodes/4sez-6seriya113/", "https://rick-i-morty.online/episodes/4sez-7seriya115/", "https://rick-i-morty.online/episodes/4sez-8seriya120/", "https://rick-i-morty.online/episodes/4sez-9seriya114/", "https://rick-i-morty.online/episodes/4sez-10seriya114/"],
+        
+        "season5": ["https://rick-i-morty.online/episodes/5sez-1seriya118/",
+                    "https://rick-i-morty.online/episodes/5sez-2seriya8/",
+                    "https://rick-i-morty.online/episodes/5sez-3seriya47/",
+                    "https://rick-i-morty.online/episodes/5sez-4seriya41/",
+                    "https://rick-i-morty.online/episodes/5sez-5seriya52/",
+                    "https://rick-i-morty.online/episodes/5sez-6seriya53/",
+                    "https://rick-i-morty.online/episodes/5sez-7seriya59/",
+                    "https://rick-i-morty.online/episodes/5sez-8seriya53/",
+                    "https://rick-i-morty.online/episodes/5sez-9-seriya36/",
+                    "https://rick-i-morty.online/episodes/5sez-10-seriya15/"]
     ]
 }
 

@@ -1,4 +1,5 @@
 import UIKit
+import Network
 
 class CharactersCollectionViewController: UICollectionViewController, UISearchResultsUpdating, DataBaseAvailable, NetworkManagerAvailable {
     // MARK: Variables
@@ -15,6 +16,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureSearchController()
         configureCollectiobViewDataSource(collectionView)
         collectionViewDataSource.apply(charactersSnapshot, animatingDifferences: true, completion: nil)
@@ -52,19 +54,9 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
         collectionViewDataSource = UICollectionViewDiffableDataSource<Section, TheCharacter>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, character) -> UICollectionViewCell in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
             cell.tag = indexPath.row
-            cell.configure(characterName: character.name, characterImageUrl: character.imageURL, indexPath: indexPath)
+            cell.configure(characterName: character.name, characterImageUrl: character.imageURL)
             return cell
         })
-    }
-    
-    func confugireCell(_ cell: CharactersCollectionViewCell, for character: TheCharacter, with indexPath: IndexPath) {
-        cell.nameLabel.text = character.name
-        networkManager?.fetchCharactersImage(withURL: character.imageURL) { (image) in
-            guard let image = image else { return }
-            DispatchQueue.main.async {
-                cell.imageView.image = image
-            }
-        }
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -78,18 +70,6 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
         }
         collectionViewDataSource.apply(charactersSnapshot, animatingDifferences: true)
     }
-    
-/*    func updateSearchResults(for searchController: UISearchController) {
-        if let searchingString = searchController.searchBar.text,
-           searchingString.isEmpty == false {
-            filteredCharacters = characters.filter { (character) -> Bool in
-                character.name.localizedCaseInsensitiveContains(searchingString)
-            }
-        } else {
-            filteredCharacters = characters
-        }
-        collectionViewDataSource.apply(charactersSnapshot, animatingDifferences: true)
-    } */
 
     @IBSegueAction func showCharacter(_ coder: NSCoder, sender: Any?) -> DetailCharacterViewController? {
         guard let cell = sender as? CharactersCollectionViewCell,

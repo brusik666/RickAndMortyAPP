@@ -44,7 +44,7 @@ class CharactersCollectionViewCell: UICollectionViewCell, NetworkManagerAvailabl
         imageRequest?.cancel()
     }
     
-    func configure(characterName: String, characterImageUrl: URL, indexPath: IndexPath) {
+    func configure(characterName: String, characterImageUrl: URL) {
         loadingActivityIndicator.startAnimating()
         nameLabel.text = characterName
         imageRequest = networkManager?.fetchCharactersImage(withURL: characterImageUrl, completion: { image in
@@ -52,7 +52,6 @@ class CharactersCollectionViewCell: UICollectionViewCell, NetworkManagerAvailabl
             DispatchQueue.main.async {
                 self.imageView.image = image
                 self.loadingActivityIndicator.stopAnimating()
-            //    self.loadingActivityIndicator.hidesWhenStopped = true
             }
         })
     }

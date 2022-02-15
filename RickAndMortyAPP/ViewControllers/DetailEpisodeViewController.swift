@@ -4,9 +4,11 @@ import SafariServices
 class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, DataBaseAvailable, NetworkManagerAvailable {
 
     var episode: Episode
+    var indexPathOfEpisode: IndexPath
     
-    init?(coder: NSCoder, episode: Episode) {
+    init?(coder: NSCoder, episode: Episode, indexPathOfEpisode: IndexPath) {
         self.episode = episode
+        self.indexPathOfEpisode = indexPathOfEpisode
         super.init(coder: coder)
     }
     
@@ -35,14 +37,14 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         let spacing = CGFloat(10.0)
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: 0, bottom: 0, trailing: 0)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.5))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
         group.interItemSpacing = .fixed(spacing)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = spacing
+        //section.interGroupSpacing = 0
         
         let layout = UICollectionViewCompositionalLayout(section: section)
 
@@ -64,7 +66,7 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         let characters = dataBase.findCharactersWithAppropriateUrls(urls: episode.characters)
         let character = characters[index]
         
-        cell.configure(characterName: character.name, characterImageUrl: character.imageURL, indexPath: indexPath)
+        cell.configure(characterName: character.name, characterImageUrl: character.imageURL)
         
         return cell
     }
@@ -74,8 +76,11 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         nameDetailLabel.text = episode.name
         airDateDetailLabel.text = episode.airDate
         episodeDetailLabel.text = episode.episodeSerialName
-        title = episode.name
-        
+        charactersDetailLabel.text = "\(episode.characters.count)"
+        configureWatchEpisodeButtonLayer()
+    }
+    
+    func configureWatchEpisodeButtonLayer() {
         watchEpisodeButton.layer.cornerRadius = 15
         watchEpisodeButton.layer.borderWidth = 1
         watchEpisodeButton.layer.borderColor = UIColor.myGreen.cgColor
@@ -90,8 +95,7 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         return DetailCharacterViewController(coder: coder, character: character)
     }
     @IBAction func watchEpisodeButtonTapped(_ sender: UIButton) {
-        
-        guard let url = URL(string: Episode.episodesURLStrings["season1"]![0]) else { return }
+        guard let url = URL(string: Episode.episodesURLStrings["season\(indexPathOfEpisode.section + 1)"]![indexPathOfEpisode.row]) else { return }
         let safariViewController = SFSafariViewController(url: url)
         present(safariViewController, animated: true, completion: nil)
     }

@@ -34,7 +34,6 @@ class DetailLocationViewController: UIViewController, UICollectionViewDelegate, 
         nameDetailLabel.text = location.name
         typeDetailLabel.text = location.type
         dimensionDetailLabel.text = location.dimension
-        navigationItem.title = location.name
         if location.residents.count > 0 {
             residentsLabel.isHidden = false
         } else {
@@ -46,7 +45,7 @@ class DetailLocationViewController: UIViewController, UICollectionViewDelegate, 
         let spacing = CGFloat(10.0)
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: 0, bottom: spacing, trailing: 0)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.5))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
@@ -72,7 +71,7 @@ class DetailLocationViewController: UIViewController, UICollectionViewDelegate, 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
         let characters = dataBase.findCharactersWithAppropriateUrls(urls: location.residents)
         let character = characters[indexPath.row]
-        cell.configure(characterName: character.name, characterImageUrl: character.imageURL, indexPath: indexPath)
+        cell.configure(characterName: character.name, characterImageUrl: character.imageURL)
         return cell
     }
     @IBSegueAction func showSingleCharacter(_ coder: NSCoder, sender: Any?) -> DetailCharacterViewController? {

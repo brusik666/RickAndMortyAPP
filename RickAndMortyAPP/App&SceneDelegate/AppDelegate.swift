@@ -8,10 +8,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let temporaryDirectory = NSTemporaryDirectory()
-        let urlCache = URLCache(memoryCapacity: 50_000_000, diskCapacity: 100_000_000, diskPath: temporaryDirectory)
-        URLCache.shared = urlCache
-        
         dataBase.loadAllData()
         
         return true
