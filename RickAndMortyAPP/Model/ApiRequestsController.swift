@@ -50,7 +50,9 @@ class ApiRequestsController: DataBaseAvailable {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data,
                let image = UIImage(data: data) {
-                self.dataBase.saveImage(name: url.absoluteString, image: image)
+                DispatchQueue.main.async {
+                    self.dataBase.addImageData(withName: url.absoluteString, imageData: data)
+                }
                 completion(image)
             } else {
                 completion(nil)
@@ -59,6 +61,8 @@ class ApiRequestsController: DataBaseAvailable {
         task.resume()
         return task
     }
+    
+    
     
     func fetchLocations(completion: @escaping (Result<[Location], Error>) -> Void) {
         var locationsPageNumberQuery = 0

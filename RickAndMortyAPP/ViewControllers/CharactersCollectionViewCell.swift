@@ -1,6 +1,6 @@
 import UIKit
 
-class CharactersCollectionViewCell: UICollectionViewCell, NetworkManagerAvailable {
+class CharactersCollectionViewCell: UICollectionViewCell, NetworkManagerAvailable, DataBaseAvailable {
     
     static let reuseIdentifier = "Cell"
     
@@ -47,12 +47,17 @@ class CharactersCollectionViewCell: UICollectionViewCell, NetworkManagerAvailabl
     func configure(characterName: String, characterImageUrl: URL) {
         loadingActivityIndicator.startAnimating()
         nameLabel.text = characterName
-        imageRequest = networkManager?.fetchCharactersImage(withURL: characterImageUrl, completion: { image in
-            guard let image = image else { return }
-            DispatchQueue.main.async {
-                self.imageView.image = image
-                self.loadingActivityIndicator.stopAnimating()
-            }
-        })
+        if let characterImageData = dataBase.allImages?[characterImageUrl.absoluteString] {
+            //checking if imageData available in memory
+            self.imageView.image = UIImage(data: characterImageData)
+        } else {
+            imageRequest = networkManager?.fetchCharactersImage(withURL: characterImageUrl, completion: { image in
+                guard let image = image else { return }
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                }
+            })
+        }
+        self.loadingActivityIndicator.stopAnimating()
     }
 }

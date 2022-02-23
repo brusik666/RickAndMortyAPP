@@ -53,7 +53,6 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
     func configureCollectiobViewDataSource(_ collectionView: UICollectionView) {
         collectionViewDataSource = UICollectionViewDiffableDataSource<Section, TheCharacter>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, character) -> UICollectionViewCell in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.reuseIdentifier, for: indexPath) as! CharactersCollectionViewCell
-            cell.tag = indexPath.row
             cell.configure(characterName: character.name, characterImageUrl: character.imageURL)
             return cell
         })

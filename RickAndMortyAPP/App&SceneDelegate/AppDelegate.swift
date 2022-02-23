@@ -8,6 +8,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        /*
+         guard let allImgs = databasr.asllimgs,
+            let characters = asd,
+            let locations = asd,
+            let episodes = asdf else { database.loadalldata }
+         
+         */
         dataBase.loadAllData()
         
         return true

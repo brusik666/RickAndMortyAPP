@@ -25,11 +25,23 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
         case dead = "dead"
         case unknown = "unknown"
     }
+    
+    var status1: [Status] = [] {
+        willSet {
+            
+        }
+    }
+    
+    var gender1: [Gender] = [] {
+        willSet {
+            
+        }
+    }
  
     
     //MARK: Variables
-    var status: String = ""
-    var gender: String = ""
+    var status: [Status] = []
+    var gender: [Gender] = []
 
     
     //MARK: ViewDidLoad
@@ -47,49 +59,50 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     }
     
     @IBAction func aliveButtonTapped(_ sender: UIButton) {
-        status = "alive"
+        manageStatus(filterType: Status.alive)
         toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
         configureButtonsColor(sender: [sender])
     }
     
     @IBAction func deadButtonTapped(_ sender: UIButton) {
-        status = "dead"
+        manageStatus(filterType: Status.dead)
         toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
         configureButtonsColor(sender: [sender])
     }
     
     @IBAction func unknownStatusButtonTapped(_ sender: UIButton) {
-        status = "unknown"
+        manageStatus(filterType: Status.unknown)
         toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
         configureButtonsColor(sender: [sender])
     }
     
     @IBAction func femaleButtonTapped(_ sender: UIButton) {
-        gender = "female"
+        manageGender(filterType: Gender.female)
         toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
         configureButtonsColor(sender: [sender])
     }
     
     @IBAction func maleButtonTapped(_ sender: UIButton) {
-        gender = "male"
+        manageGender(filterType: Gender.male)
         toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
         configureButtonsColor(sender: [sender])
     }
     
     @IBAction func genderlessButtonTapped(_ sender: UIButton) {
-        gender = "genderless"
+        manageGender(filterType: Gender.genderless)
         toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
         configureButtonsColor(sender: [sender])
     }
+
     
     @IBAction func unknownGenderButtonTapped(_ sender: UIButton) {
-        gender = "unknown"
+        manageGender(filterType: Gender.genderless)
         toggleButtonSelection(sender: sender)
         configureButtonAnimation(sender: sender)
         configureButtonsColor(sender: [sender])
@@ -99,17 +112,29 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     }
    
     @IBAction func resetStatusButtonTapped(_ sender: UIButton) {
-        status = ""
+        status = []
         deselectAllStatusButtons()
         configureButtonsColor(sender: [aliveButton, deadButton, unknownStatusButton])
         configureButtonAnimation(sender: sender)
         
     }
     @IBAction func resetGenderButtonTapped(_ sender: UIButton) {
-        gender = ""
+        gender = []
         deselectAllGenderButtons()
         configureButtonsColor(sender: [femaleButton, maleButton, genderlessButton, unknownGenderButton])
         configureButtonAnimation(sender: sender)
+    }
+    
+    func manageStatus(filterType: Status) {
+        if let index = status.firstIndex(of: filterType) {
+            status.remove(at: index)
+        } else { status.append(filterType) }
+    }
+    
+    func manageGender(filterType: Gender) {
+        if let index = gender.firstIndex(of: filterType) {
+            gender.remove(at: index)
+        } else { gender.append(filterType) }
     }
     
     func configureButtonAnimation(sender: UIButton) {
@@ -155,15 +180,17 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let charactersViewController = segue.destination as? CharactersCollectionViewController,
-              status != "" || gender != "" else { return }
-        
-        let characters = dataBase.allCharacters.filter { character in
-            return character.gender.lowercased() == self.gender.lowercased() && character.status.lowercased() == self.status.lowercased()
+              !status.isEmpty && !gender.isEmpty else { return }
+        var characterz: [TheCharacter] = []
+        if !status.isEmpty {
+            
         }
+        
         var snapshot = NSDiffableDataSourceSnapshot<Section, TheCharacter>()
         snapshot.appendSections([Section.main])
-        snapshot.appendItems(characters)
+        snapshot.appendItems(characterz)
         
         charactersViewController.collectionViewDataSource.apply(snapshot, animatingDifferences: true, completion: nil)
     }
+    
 }
