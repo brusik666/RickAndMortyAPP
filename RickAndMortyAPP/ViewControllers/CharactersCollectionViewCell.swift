@@ -24,7 +24,7 @@ class CharactersCollectionViewCell: UICollectionViewCell, NetworkManagerAvailabl
         
         return activityIndicator
     }()
-    
+
     override func layoutSubviews() {
         
         self.layer.cornerRadius = 15.0
@@ -35,7 +35,6 @@ class CharactersCollectionViewCell: UICollectionViewCell, NetworkManagerAvailabl
         loadingActivityIndicator.center = CGPoint(x: imageView.bounds.midX, y: imageView.bounds.midY)
         loadingActivityIndicator.style = .large
         self.addSubview(loadingActivityIndicator)
-        
     }
     
     override func prepareForReuse() {
@@ -50,14 +49,15 @@ class CharactersCollectionViewCell: UICollectionViewCell, NetworkManagerAvailabl
         if let characterImageData = dataBase.allImages?[characterImageUrl.absoluteString] {
             //checking if imageData available in memory
             self.imageView.image = UIImage(data: characterImageData)
+            self.loadingActivityIndicator.stopAnimating()
         } else {
             imageRequest = networkManager?.fetchCharactersImage(withURL: characterImageUrl, completion: { image in
                 guard let image = image else { return }
                 DispatchQueue.main.async {
                     self.imageView.image = image
+                    self.loadingActivityIndicator.stopAnimating()
                 }
             })
         }
-        self.loadingActivityIndicator.stopAnimating()
     }
 }

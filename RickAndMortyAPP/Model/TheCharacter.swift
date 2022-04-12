@@ -13,7 +13,7 @@ struct TheCharacter: Codable {
     var lastKnownLocation: [String: String]
     var url: URL
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id
         case status
         case name

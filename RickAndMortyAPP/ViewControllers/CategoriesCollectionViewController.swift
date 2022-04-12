@@ -28,7 +28,7 @@ class CategoriesCollectionViewController: UICollectionViewController, DataBaseAv
 
         return categories.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
         cell.configure(forCategoryAt: indexPath, categories)
@@ -46,5 +46,5 @@ class CategoriesCollectionViewController: UICollectionViewController, DataBaseAv
             performSegue(withIdentifier: "episodes", sender: nil)
         }
     }
-
+    
 }

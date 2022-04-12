@@ -77,6 +77,7 @@ class CharactersCollectionViewController: UICollectionViewController, UISearchRe
         return DetailCharacterViewController(coder: coder, character: character)
     }
     
+    
     @IBAction func unwindToCharactersCollectionViewController(unwindSegue : UIStoryboardSegue) {
         
     }

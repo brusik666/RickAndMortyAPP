@@ -9,16 +9,21 @@ import Foundation
 import UIKit
 
 class DataBase: NetworkManagerAvailable {
-    
-    var addingImgDataCount: Int = 0
-    
+
     static let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    static let archiveURL = documentsDirectory.appendingPathComponent("charactersImages").appendingPathExtension("plist")
+    static let imagesArchiveURL = documentsDirectory.appendingPathComponent("charactersImages").appendingPathExtension("plist")
+    static let charactersArchiveURL = documentsDirectory.appendingPathComponent("characters").appendingPathExtension("plist")
+    static let locationsArchiveURL = documentsDirectory.appendingPathComponent("locations").appendingPathExtension("plist")
+    static let episodesArchiveURL = documentsDirectory.appendingPathComponent("episodes").appendingPathExtension("plist")
     
     private(set) var allCharacters: [TheCharacter]!
     private(set) var allEpisodes: [Episode]!
     private(set) var allLocations: [Location]!
-    var allImages: [String: Data]? = [:]
+    lazy var allImages: [String: Data]? = loadImagesFromMemory() {
+        didSet {
+            saveDataToMemory(data: allImages, in: DataBase.imagesArchiveURL)
+        }
+    }
     lazy var filteredCharacters: [TheCharacter] = self.allCharacters
     lazy var episodesBySeasons: [[Episode]] = {
         
@@ -45,6 +50,8 @@ class DataBase: NetworkManagerAvailable {
         return allSeasons
     }()
     
+    private lazy var propertyListDecoder = PropertyListDecoder()
+    
     func loadAllData() {
         getAllcharacters()
         getAllEpisodes()
@@ -53,61 +60,92 @@ class DataBase: NetworkManagerAvailable {
     
     func addImageData(withName name: String, imageData: Data) {
         allImages?[name] = imageData
-        saveAllImagesDataToMemory()
     }
     
-    private func saveAllImagesDataToMemory() {
+    private func saveDataToMemory<T: Codable>(data: T, in path: URL) {
         let propertyListEncoder = PropertyListEncoder()
-        let codedImageData = try? propertyListEncoder.encode(allImages)
-        try? codedImageData?.write(to: DataBase.archiveURL, options: .noFileProtection)
+        let codedData = try? propertyListEncoder.encode(data)
+        try? codedData?.write(to: path, options: .noFileProtection)
     }
     
-    private func loadImages() -> Dictionary<String, Data>? {
-        guard let codedImagesData = try? Data(contentsOf: DataBase.archiveURL) else { return nil }
-        let propertyListDecoder = PropertyListDecoder()
+    private func loadImagesFromMemory() -> Dictionary<String, Data>? {
+        guard let codedImagesData = try? Data(contentsOf: DataBase.imagesArchiveURL) else { return nil }
         let allImagesDict = try? propertyListDecoder.decode(Dictionary<String, Data>.self , from: codedImagesData)
         return allImagesDict
     }
     
+    private func loadCharactersFromMemory() -> [TheCharacter]? {
+        guard let codedCharactersData = try? Data(contentsOf: DataBase.charactersArchiveURL),
+              let characters = try? propertyListDecoder.decode([TheCharacter].self , from: codedCharactersData) else { return nil }
+        return characters
+    }
+    
+    private func loadLocationsFromMemory() -> [Location]? {
+        guard let codedLocationsData = try? Data(contentsOf: DataBase.locationsArchiveURL) else { return nil }
+        let locations = try? propertyListDecoder.decode([Location].self , from: codedLocationsData)
+        return locations
+    }
+    
+    private func loadEpisodesFromMemory() -> [Episode]? {
+        guard let codedEpisodesData = try? Data(contentsOf: DataBase.episodesArchiveURL) else { return nil }
+        let episodes = try? propertyListDecoder.decode([Episode].self , from: codedEpisodesData)
+        return episodes
+    }
+
     private func getAllcharacters() {
-        allCharacters = [TheCharacter]()
-        networkManager?.fetchCharacters(completion: { result in
-            switch result {
-            case .success(let characters):
-                self.allCharacters.append(contentsOf: characters)
-                
-            case .failure(let error):
-                print(error)
-            }
-        })
+        if let savedCharacters = loadCharactersFromMemory() {
+            allCharacters = savedCharacters
+        } else {
+            allCharacters = [TheCharacter]()
+            networkManager?.fetchCharacters(completion: { result in
+                switch result {
+                case .success(let characters):
+                    self.allCharacters.append(contentsOf: characters)
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            })
+            //saveDataToMemory(data: allCharacters, in: DataBase.charactersArchiveURL)
+        }
     }
 
     
     private func getAllEpisodes() {
-        allEpisodes = [Episode]()
-        networkManager?.fetchEpisodes(completion: { result in
-            switch result {
-            case .success(let episodes):
-                self.allEpisodes.append(contentsOf: episodes)
-            case .failure(let error):
-                print(error)
-            }
-        })
+        if let savedEpisodes = loadEpisodesFromMemory() {
+            allEpisodes = savedEpisodes
+        } else {
+            allEpisodes = [Episode]()
+            networkManager?.fetchEpisodes(completion: { result in
+                switch result {
+                case .success(let episodes):
+                    self.allEpisodes.append(contentsOf: episodes)
+                case .failure(let error):
+                    print(error)
+                }
+            })
+            //saveDataToMemory(data: allEpisodes, in: DataBase.episodesArchiveURL)
+        }
     }
     
     private func getAllLocations() {
-        allLocations = [Location]()
-        defer {
-            allLocations.sort()
+        if let savedLocations = loadLocationsFromMemory() {
+            allLocations = savedLocations
+        } else {
+            allLocations = [Location]()
+     /*       defer {
+                allLocations.sort()
+            } */
+            networkManager?.fetchLocations(completion: { result in
+                switch result {
+                case .success(let locations):
+                    self.allLocations.append(contentsOf: locations)
+                case .failure(let error):
+                    print(error)
+                }
+            })
+            //saveDataToMemory(data: allLocations, in: DataBase.locationsArchiveURL)
         }
-        networkManager?.fetchLocations(completion: { result in
-            switch result {
-            case .success(let locations):
-                self.allLocations.append(contentsOf: locations)
-            case .failure(let error):
-                print(error)
-            }
-        })
     }
     
     func findCharactersWithAppropriateUrls(urls: [URL]) -> [TheCharacter] {

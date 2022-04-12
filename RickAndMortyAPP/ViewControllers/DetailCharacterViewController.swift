@@ -1,6 +1,6 @@
 import UIKit
 
-class DetailCharacterViewController: UIViewController {
+class DetailCharacterViewController: UIViewController, DataBaseAvailable {
     
     var character: TheCharacter
 
@@ -38,11 +38,9 @@ class DetailCharacterViewController: UIViewController {
         genderDetailLabel.text = character.gender
         locationDetailLabel.text = character.originLocation["name"]
         lastLocationDetail.text = character.lastKnownLocation["name"]
-        ApiRequestsController.shared.fetchCharactersImage(withURL: character.imageURL) { (image) in
-            guard let image = image else { return }
-            DispatchQueue.main.async {
-                self.imageView.image = image
-            }
-        }
+        guard let characterImageData =  dataBase.allImages?[character.imageURL.absoluteString] else { return }
+        let image = UIImage(data: characterImageData)
+        imageView.image = image
     }
+
 }

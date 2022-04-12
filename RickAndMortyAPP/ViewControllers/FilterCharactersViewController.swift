@@ -14,34 +14,21 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
     @IBOutlet weak var resetStatusButton: UIButton!
     @IBOutlet weak var resetGenderButton: UIButton!
     
-    enum Gender: String {
+    private enum Gender: String {
         case male = "male"
         case female = "female"
         case genderless = "genderless"
     }
     
-    enum Status: String {
+    private enum Status: String {
         case alive = "alive"
         case dead = "dead"
         case unknown = "unknown"
     }
     
-    var status1: [Status] = [] {
-        willSet {
-            
-        }
-    }
-    
-    var gender1: [Gender] = [] {
-        willSet {
-            
-        }
-    }
- 
-    
     //MARK: Variables
-    var status: [Status] = []
-    var gender: [Gender] = []
+    private var status: [Status] = []
+    private var gender: [Gender] = []
 
     
     //MARK: ViewDidLoad
@@ -125,47 +112,47 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
         configureButtonAnimation(sender: sender)
     }
     
-    func manageStatus(filterType: Status) {
+    private func manageStatus(filterType: Status) {
         if let index = status.firstIndex(of: filterType) {
             status.remove(at: index)
         } else { status.append(filterType) }
     }
     
-    func manageGender(filterType: Gender) {
+    private func manageGender(filterType: Gender) {
         if let index = gender.firstIndex(of: filterType) {
             gender.remove(at: index)
         } else { gender.append(filterType) }
     }
     
-    func configureButtonAnimation(sender: UIButton) {
+    private func configureButtonAnimation(sender: UIButton) {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: [], animations: {
             sender.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
             sender.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         }, completion: nil)
     }
     
-    func toggleButtonSelection(sender: UIButton) {
-        if sender.isSelected == true {
+    private func toggleButtonSelection(sender: UIButton) {
+        if sender.isSelected {
             sender.isSelected = false
         } else {
             sender.isSelected = true
         }
     }
     
-    func deselectAllStatusButtons() {
+    private func deselectAllStatusButtons() {
         aliveButton.isSelected = false
         deadButton.isSelected = false
         unknownStatusButton.isSelected = false
     }
     
-    func deselectAllGenderButtons() {
+    private func deselectAllGenderButtons() {
         femaleButton.isSelected = false
         maleButton.isSelected = false
         genderlessButton.isSelected = false
         unknownGenderButton.isSelected = false
     }
     
-    func configureButtonsColor(sender: [UIButton]) {
+    private func configureButtonsColor(sender: [UIButton]) {
         sender.forEach { button in
             switch button.isSelected {
             case true:
@@ -182,13 +169,20 @@ class FilterCharactersViewController: UIViewController, DataBaseAvailable {
         guard let charactersViewController = segue.destination as? CharactersCollectionViewController,
               !status.isEmpty && !gender.isEmpty else { return }
         var characterz: [TheCharacter] = []
-        if !status.isEmpty {
-            
+        for status in status {
+            let charactersToAppend = dataBase.filteredCharacters.filter { $0.status.lowercased() == status.rawValue.lowercased() }
+            characterz += charactersToAppend
+        }
+        
+        var characterzzz: [TheCharacter] = []
+        for gender in gender {
+            let charactersToAppend = characterz.filter { $0.gender.lowercased() == gender.rawValue.lowercased() }
+            characterzzz += charactersToAppend
         }
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, TheCharacter>()
         snapshot.appendSections([Section.main])
-        snapshot.appendItems(characterz)
+        snapshot.appendItems(characterzzz)
         
         charactersViewController.collectionViewDataSource.apply(snapshot, animatingDifferences: true, completion: nil)
     }

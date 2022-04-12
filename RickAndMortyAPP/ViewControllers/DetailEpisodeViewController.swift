@@ -95,7 +95,7 @@ class DetailEpisodeViewController: UIViewController, UICollectionViewDelegate, U
         return DetailCharacterViewController(coder: coder, character: character)
     }
     @IBAction func watchEpisodeButtonTapped(_ sender: UIButton) {
-        guard let url = URL(string: Episode.episodesURLStrings["season\(indexPathOfEpisode.section + 1)"]![indexPathOfEpisode.row]) else { return }
+        guard let url = URL(string: Episode.newEpisodesURLStrings["season\(indexPathOfEpisode.section + 1)"]![indexPathOfEpisode.row]) else { return }
         let safariViewController = SFSafariViewController(url: url)
         present(safariViewController, animated: true, completion: nil)
     }

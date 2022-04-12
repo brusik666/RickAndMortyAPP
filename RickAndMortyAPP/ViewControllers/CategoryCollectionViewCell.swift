@@ -5,7 +5,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
-    func configure(forCategoryAt indexPath: IndexPath,_ categories: [String]) {
+    func configure(forCategoryAt indexPath: IndexPath, _ categories: [String]) {
         self.layer.cornerRadius = CGFloat(15)
         self.layer.masksToBounds = true
         self.layer.borderWidth = 1

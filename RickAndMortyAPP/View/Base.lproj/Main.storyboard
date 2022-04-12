@@ -156,24 +156,24 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26A-R8-ng2">
-                                            <rect key="frame" x="0.0" y="0.0" width="112" height="117"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="112" height="93.666666666666671"/>
                                             <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oae-JB-XiQ">
-                                            <rect key="frame" x="0.0" y="99.333333333333329" width="112" height="17.666666666666671"/>
-                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <rect key="frame" x="0.0" y="93.666666666666671" width="112" height="23.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <color key="textColor" red="0.71372549019999998" green="0.8862745098" blue="0.054901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="26A-R8-ng2" secondAttribute="trailing" id="4Fh-kC-FSw"/>
-                                        <constraint firstItem="Oae-JB-XiQ" firstAttribute="height" secondItem="26A-R8-ng2" secondAttribute="height" multiplier="0.15" id="7Z4-LX-94b"/>
+                                        <constraint firstItem="Oae-JB-XiQ" firstAttribute="height" secondItem="26A-R8-ng2" secondAttribute="height" multiplier="0.25" id="7Z4-LX-94b"/>
                                         <constraint firstAttribute="trailing" secondItem="Oae-JB-XiQ" secondAttribute="trailing" id="8fD-Yn-FuQ"/>
-                                        <constraint firstItem="26A-R8-ng2" firstAttribute="bottom" secondItem="Oae-JB-XiQ" secondAttribute="bottom" id="LLz-of-wa6"/>
+                                        <constraint firstItem="26A-R8-ng2" firstAttribute="bottom" secondItem="Oae-JB-XiQ" secondAttribute="top" id="LLz-of-wa6"/>
                                         <constraint firstAttribute="bottom" secondItem="Oae-JB-XiQ" secondAttribute="bottom" id="e7Z-EZ-pQI"/>
                                         <constraint firstItem="26A-R8-ng2" firstAttribute="top" secondItem="kdp-Km-xzl" secondAttribute="top" id="mMb-kv-YmM"/>
                                         <constraint firstItem="26A-R8-ng2" firstAttribute="leading" secondItem="kdp-Km-xzl" secondAttribute="leading" id="oD3-4b-B84"/>
@@ -777,10 +777,10 @@
             </objects>
             <point key="canvasLocation" x="-446.37681159420293" y="-7.3660714285714279"/>
         </scene>
-        <!--No Internet Connection View Controller-->
+        <!--View Controller-->
         <scene sceneID="6x0-jn-HVj">
             <objects>
-                <viewController id="WqA-qb-kPy" customClass="NoInternetConnectionViewController" customModule="RickAndMortyAPP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WqA-qb-kPy" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cLL-sX-6iI">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -804,7 +804,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vxh-0p-NCf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-420" y="825"/>
+            <point key="canvasLocation" x="-447" y="698"/>
         </scene>
         <!--Detail Episode View Controller-->
         <scene sceneID="0sM-UX-7o1">

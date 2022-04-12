@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		EE08A24A26F606040058462E /* DetailLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE08A24926F606040058462E /* DetailLocationsViewController.swift */; };
 		EE0E4EDC26EADA3900CDCC3F /* ApiRequestsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E4EDB26EADA3900CDCC3F /* ApiRequestsController.swift */; };
-		EE139DB227B971DA00BFC5ED /* NoInternetConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE139DB127B971DA00BFC5ED /* NoInternetConnectionViewController.swift */; };
 		EE26493C2725820E00763EC0 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26493B2725820E00763EC0 /* HeaderView.swift */; };
 		EE41F55626F7FADC0001C31C /* EpisodesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41F55526F7FADC0001C31C /* EpisodesCollectionViewController.swift */; };
 		EE41F55826F7FC360001C31C /* EpisodesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41F55726F7FC360001C31C /* EpisodesCollectionViewCell.swift */; };
@@ -41,7 +40,6 @@
 /* Begin PBXFileReference section */
 		EE08A24926F606040058462E /* DetailLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLocationsViewController.swift; sourceTree = "<group>"; };
 		EE0E4EDB26EADA3900CDCC3F /* ApiRequestsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequestsController.swift; sourceTree = "<group>"; };
-		EE139DB127B971DA00BFC5ED /* NoInternetConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetConnectionViewController.swift; sourceTree = "<group>"; };
 		EE26493B2725820E00763EC0 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EE41F55526F7FADC0001C31C /* EpisodesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesCollectionViewController.swift; sourceTree = "<group>"; };
 		EE41F55726F7FC360001C31C /* EpisodesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 			children = (
 				EEDC0CC327452496006032E0 /* ExtensionUIColor.swift */,
 				EE92B6C126EA549400664CC2 /* Main.storyboard */,
-				EE139DB127B971DA00BFC5ED /* NoInternetConnectionViewController.swift */,
 				EE6226432702002F0023FC94 /* LaunchView.xib */,
 				EE26493B2725820E00763EC0 /* HeaderView.swift */,
 			);
@@ -268,7 +265,6 @@
 				EE08A24A26F606040058462E /* DetailLocationsViewController.swift in Sources */,
 				EEBF6EEC27725D9100C0EAE8 /* DataBaseAvailable.swift in Sources */,
 				EE92B6D826EA740D00664CC2 /* CharactersCollectionViewController.swift in Sources */,
-				EE139DB227B971DA00BFC5ED /* NoInternetConnectionViewController.swift in Sources */,
 				EE26493C2725820E00763EC0 /* HeaderView.swift in Sources */,
 				EE5F095B276A5EE900791B4F /* DataBase.swift in Sources */,
 				EEA8B7A226F1023F0008EB72 /* LocationsCollectionViewController.swift in Sources */,

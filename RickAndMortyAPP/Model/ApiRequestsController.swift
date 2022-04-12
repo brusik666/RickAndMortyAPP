@@ -45,12 +45,15 @@ class ApiRequestsController: DataBaseAvailable {
             charactersPageNumberQuery += 1
         }
     }
-        
+    
     func fetchCharactersImage(withURL url: URL, completion: @escaping (UIImage?) -> Void) -> Cancellable {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data,
                let image = UIImage(data: data) {
                 DispatchQueue.main.async {
+                    if self.dataBase.allImages == nil {
+                        self.dataBase.allImages = [String: Data]()
+                    }
                     self.dataBase.addImageData(withName: url.absoluteString, imageData: data)
                 }
                 completion(image)
@@ -61,8 +64,6 @@ class ApiRequestsController: DataBaseAvailable {
         task.resume()
         return task
     }
-    
-    
     
     func fetchLocations(completion: @escaping (Result<[Location], Error>) -> Void) {
         var locationsPageNumberQuery = 0
@@ -85,7 +86,6 @@ class ApiRequestsController: DataBaseAvailable {
             task.resume()
             locationsPageNumberQuery += 1
         }
-        
     }
     
     func fetchEpisodes(completion: @escaping (Result<[Episode], Error>) -> Void) {
@@ -109,7 +109,5 @@ class ApiRequestsController: DataBaseAvailable {
             task.resume()
             episodesPageNumberQuery += 1
         }
-        
     }
-    
 }
