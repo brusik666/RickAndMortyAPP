@@ -1,13 +1,14 @@
 import Foundation
 
 struct CharactersResponse: Codable {
-    let results: [TheCharacter]
+    var results: [TheCharacter]
 }
 
 struct LocationsResponse: Codable {
-    let results: [Location]
+    var results: [Location]
 }
 
 struct EpisodesResponse: Codable {
-    let results: [Episode]
+    var results: [Episode]
 }
+
