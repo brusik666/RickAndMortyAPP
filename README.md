@@ -12,12 +12,13 @@ All json data were used from http://rickandmortyapi.com/.
 - There are a "watch buttons" on every detailed episode screen for enjoying the movie.
 
 # Used stack of technologies
+- Swift
+- Foundation
 - MVC
 - UIKit(CollectionViews)
 - Diffable Datasource
 - Jsons
 - Internet requests(URLSession)
-- Protocols
 - Data persistence(plist)
 - Etc.
 
