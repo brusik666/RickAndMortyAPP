@@ -20,9 +20,6 @@ All json data were used from http://rickandmortyapi.com/.
 - Jsons
 - Internet requests(URLSession)
 - Data persistence(plist)
-- Etc.
 
-# Important!
-No commercial use of this app. It was created only because of loving this cartoon.
 
 
