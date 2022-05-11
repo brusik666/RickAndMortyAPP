@@ -105,8 +105,9 @@ class DataBase: NetworkManagerAvailable {
                 case .failure(let error):
                     print(error)
                 }
+                self.saveDataToMemory(data: self.allCharacters, in: DataBase.charactersArchiveURL)
             })
-            //saveDataToMemory(data: allCharacters, in: DataBase.charactersArchiveURL)
+            
         }
     }
 
@@ -123,8 +124,9 @@ class DataBase: NetworkManagerAvailable {
                 case .failure(let error):
                     print(error)
                 }
+                self.saveDataToMemory(data: self.allEpisodes, in: DataBase.episodesArchiveURL)
             })
-            //saveDataToMemory(data: allEpisodes, in: DataBase.episodesArchiveURL)
+            
         }
     }
     
@@ -143,8 +145,9 @@ class DataBase: NetworkManagerAvailable {
                 case .failure(let error):
                     print(error)
                 }
+                self.saveDataToMemory(data: self.allLocations, in: DataBase.locationsArchiveURL)
             })
-            //saveDataToMemory(data: allLocations, in: DataBase.locationsArchiveURL)
+            
         }
     }
     
